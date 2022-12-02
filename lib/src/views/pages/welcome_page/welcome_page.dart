@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_society/routes/routes.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
 import 'package:pet_society/src/views/widget/index_widgets.dart';
 
@@ -42,7 +43,7 @@ class WelcomePage extends StatelessWidget {
 
                 // Welcome Description
                 Text(
-                  "La comunidad dónde buscamos mejorar \n la calidad de vida de las mascotas",
+                  "La comunidad dónde buscamos mejorar\nla calidad de vida de las mascotas",
                   style: CustomTextStyle.paragraphStyle,
                   textAlign: TextAlign.center,
                 ),
@@ -50,23 +51,28 @@ class WelcomePage extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                // Login Buton
+                // Login Button
                 CustomButtonWidget(
                   text: 'Iniciar Sesión',
                   textStyle: CustomTextStyle.buttonStyleWhite,
                   colorButton: CustomColor.primary,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, MyRoutes.rLOGIN);
+                  },
                 ),
                 //
 
                 const SizedBox(height: 10),
 
-                // Register Buton
+                // Register Button
                 CustomButtonWidget(
-                  text: 'Registrarse',
+                  text: 'Crear cuenta',
                   textStyle: CustomTextStyle.buttonStylePurple,
                   colorButton: CustomColor.white,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(
+                        context, MyRoutes.rRESGISTER);
+                  },
                 ),
                 //
               ],

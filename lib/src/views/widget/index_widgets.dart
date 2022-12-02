@@ -1,9 +1,9 @@
 // INDEX WIDGETS
 
-// Button Primary (morado)
-export 'package:pet_society/src/views/widget/customButtonPurple_widget.dart';
+// Custom Button
+export 'package:pet_society/src/views/widget/custom_button_widget.dart';
 //
 
-// Button Secondary (blanco)
-export 'package:pet_society/src/views/widget/customButtonWhite_widget.dart';
+// Form Decoration Button
+export 'package:pet_society/src/views/widget/form_decoration_widget.dart';
 //

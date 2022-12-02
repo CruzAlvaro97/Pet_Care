@@ -9,14 +9,20 @@ class MyRoutes {
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      // Welcome route
       case ('/welcome'):
         return CupertinoPageRoute(builder: (_) => const WelcomePage());
+      //
 
-      // case ('/login'):
-      //   return CupertinoPageRoute(builder: (_) => const LoginPage());
+      // Login route
+      case ('/login'):
+        return CupertinoPageRoute(builder: (_) => const LoginPage());
+      //
 
-      // case ('/register'):
-      //   return CupertinoPageRoute(builder: (_) => const RegisterPage());
+      // Register route
+      case ('/register'):
+        return CupertinoPageRoute(builder: (_) => const RegisterPage());
+      //
 
       //
       // Agregar aquí los screens
