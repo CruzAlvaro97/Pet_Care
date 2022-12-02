@@ -35,7 +35,8 @@ class RegisterPage extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       "Crea una cuenta para unirte\na la comunidad.",
-                      style: CustomTextStyle.title,
+                      style: CustomTextStyle.title
+                          .copyWith(color: CustomColor.grey),
                     ),
                   ],
                 ),
@@ -49,7 +50,8 @@ class RegisterPage extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       "Nombre",
-                      style: CustomTextStyle.title,
+                      style: CustomTextStyle.title
+                          .copyWith(color: CustomColor.grey),
                     ),
                   ],
                 ),
@@ -68,7 +70,8 @@ class RegisterPage extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       "Email",
-                      style: CustomTextStyle.title,
+                      style: CustomTextStyle.title
+                          .copyWith(color: CustomColor.grey),
                     ),
                   ],
                 ),
@@ -86,8 +89,9 @@ class RegisterPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "Constraseña",
-                      style: CustomTextStyle.title,
+                      "Contraseña",
+                      style: CustomTextStyle.title
+                          .copyWith(color: CustomColor.grey),
                     ),
                   ],
                 ),
@@ -103,7 +107,8 @@ class RegisterPage extends StatelessWidget {
                 // Register Button
                 CustomButtonWidget(
                   text: 'Crear cuenta',
-                  textStyle: CustomTextStyle.title,
+                  textStyle:
+                      CustomTextStyle.title.copyWith(color: Colors.white),
                   colorButton: CustomColor.primary,
                   onPressed: () {},
                 ),
@@ -117,12 +122,14 @@ class RegisterPage extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       "¿Ya tienes una cuenta?",
-                      style: CustomTextStyle.title,
+                      style: CustomTextStyle.title
+                          .copyWith(color: CustomColor.grey),
                     ),
-                    const SizedBox(width: 10),
+                    const SizedBox(width: 5),
                     Text(
                       "Iniciar Sesión",
-                      style: CustomTextStyle.title,
+                      style: CustomTextStyle.title
+                          .copyWith(color: CustomColor.primary),
                     ),
                   ],
                 ),

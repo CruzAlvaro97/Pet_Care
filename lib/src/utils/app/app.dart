@@ -1,5 +1,5 @@
 class App {
-  static String name = 'Pet Care';
+  static String name = 'PetCare';
 
   // Aquí se modifica el nombre de la app.
 }

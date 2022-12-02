@@ -5,7 +5,7 @@ import 'package:pet_society/src/utils/index_utils.dart';
 class CustomTextStyle {
   static TextStyle welcome = GoogleFonts.poppins(
     fontSize: 36,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w800,
     color: CustomColor.primary,
   );
 
@@ -35,7 +35,7 @@ class CustomTextStyle {
 
   static TextStyle title = GoogleFonts.poppins(
     fontSize: 16,
-    // fontWeight: FontWeight.w,
+    fontWeight: FontWeight.bold,
   );
 
   static TextStyle text = GoogleFonts.poppins(

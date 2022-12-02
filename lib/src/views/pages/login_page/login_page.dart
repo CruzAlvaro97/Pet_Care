@@ -13,7 +13,7 @@ class LoginPage extends StatelessWidget {
       appBar: AppBar(
         toolbarHeight: 55,
         elevation: 0,
-        backgroundColor: CustomColor.white2,
+        backgroundColor: CustomColor.white,
         // Back Button
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
@@ -120,7 +120,7 @@ class LoginPage extends StatelessWidget {
                   children: <Widget>[
                     Text("¿No tienes una cuenta?",
                         style: CustomTextStyle.textGrey),
-                    const SizedBox(width: 10),
+                    const SizedBox(width: 5),
                     Text("Crear cuenta", style: CustomTextStyle.textPrimary),
                   ],
                 ),
