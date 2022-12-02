@@ -51,9 +51,10 @@ class WelcomePage extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 // Login Buton
-                CustomButtonPurpleWidget(
+                CustomButtonWidget(
                   text: 'Iniciar Sesión',
                   textStyle: CustomTextStyle.buttonStyleWhite,
+                  colorButton: CustomColor.primary,
                   onPressed: () {},
                 ),
                 //
@@ -61,9 +62,10 @@ class WelcomePage extends StatelessWidget {
                 const SizedBox(height: 10),
 
                 // Register Buton
-                CustomButtonWhiteWidget(
+                CustomButtonWidget(
                   text: 'Registrarse',
                   textStyle: CustomTextStyle.buttonStylePurple,
+                  colorButton: CustomColor.white,
                   onPressed: () {},
                 ),
                 //
