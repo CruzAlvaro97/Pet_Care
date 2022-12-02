@@ -8,5 +8,5 @@ export 'package:pet_society/src/utils/color/custom_color.dart';
 //
 
 // Custom Text Style
-export 'package:pet_society/src/utils/style/customtext_style.dart';
+export 'package:pet_society/src/utils/style/custom_text_style.dart';
 //

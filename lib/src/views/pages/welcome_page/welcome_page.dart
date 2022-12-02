@@ -18,19 +18,15 @@ class WelcomePage extends StatelessWidget {
             child: Column(
               children: [
                 // Welcome Header
-                Text(
-                  App.name,
-                  style: CustomTextStyle.headerStyle,
-                ),
+                Text(App.name, style: CustomTextStyle.welcome),
                 //
 
-                const SizedBox(height: 10),
+                const SizedBox(height: 23),
 
                 // Welcome Image
                 const SizedBox(
                   width: double.infinity,
-                  height: 250,
-                  // child: Text('Imagen'),
+                  height: 268,
                   child: Expanded(
                       child: Image(
                     image: AssetImage('assets/images/welcome.png'),
@@ -39,22 +35,22 @@ class WelcomePage extends StatelessWidget {
                 ),
                 //
 
-                const SizedBox(height: 10),
+                const SizedBox(height: 23),
 
                 // Welcome Description
                 Text(
                   "La comunidad dónde buscamos mejorar\nla calidad de vida de las mascotas",
-                  style: CustomTextStyle.paragraphStyle,
+                  style: CustomTextStyle.text,
                   textAlign: TextAlign.center,
                 ),
                 //
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 48),
 
                 // Login Button
                 CustomButtonWidget(
                   text: 'Iniciar Sesión',
-                  textStyle: CustomTextStyle.buttonStyleWhite,
+                  textStyle: CustomTextStyle.text2White,
                   colorButton: CustomColor.primary,
                   onPressed: () {
                     Navigator.pushReplacementNamed(context, MyRoutes.rLOGIN);
@@ -67,7 +63,7 @@ class WelcomePage extends StatelessWidget {
                 // Register Button
                 CustomButtonWidget(
                   text: 'Crear cuenta',
-                  textStyle: CustomTextStyle.buttonStylePurple,
+                  textStyle: CustomTextStyle.text2Primary,
                   colorButton: CustomColor.white,
                   onPressed: () {
                     Navigator.pushReplacementNamed(

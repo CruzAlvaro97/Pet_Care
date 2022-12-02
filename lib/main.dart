@@ -16,10 +16,10 @@ class MyApp extends StatelessWidget {
       title: App.name,
       onGenerateRoute: MyRoutes.generateRoute,
       initialRoute: MyRoutes.rWELCOME,
-      color: CustomColor.primary,
-      theme: ThemeData(useMaterial3: true),
       // scaffoldMessengerKey: CustomSnackbar.msgkey, // SnackBar
       // theme: Provider.of<ThemeProvider>(context).currentTheme, // Modo oscuro
+      color: CustomColor.primary,
+      theme: ThemeData(useMaterial3: true, backgroundColor: CustomColor.white2),
     );
   }
 }

@@ -21,7 +21,7 @@ class RegisterPage extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       'Crear cuenta',
-                      style: CustomTextStyle.headerStyle,
+                      style: CustomTextStyle.headline2,
                     ),
                   ],
                 ),
@@ -35,7 +35,7 @@ class RegisterPage extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       "Crea una cuenta para unirte\na la comunidad.",
-                      style: CustomTextStyle.paragraphStyle,
+                      style: CustomTextStyle.title,
                     ),
                   ],
                 ),
@@ -49,7 +49,7 @@ class RegisterPage extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       "Nombre",
-                      style: CustomTextStyle.paragraphStyle,
+                      style: CustomTextStyle.title,
                     ),
                   ],
                 ),
@@ -68,7 +68,7 @@ class RegisterPage extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       "Email",
-                      style: CustomTextStyle.paragraphStyle,
+                      style: CustomTextStyle.title,
                     ),
                   ],
                 ),
@@ -87,7 +87,7 @@ class RegisterPage extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       "Constraseña",
-                      style: CustomTextStyle.paragraphStyle,
+                      style: CustomTextStyle.title,
                     ),
                   ],
                 ),
@@ -103,7 +103,7 @@ class RegisterPage extends StatelessWidget {
                 // Register Button
                 CustomButtonWidget(
                   text: 'Crear cuenta',
-                  textStyle: CustomTextStyle.buttonStyleWhite,
+                  textStyle: CustomTextStyle.title,
                   colorButton: CustomColor.primary,
                   onPressed: () {},
                 ),
@@ -117,12 +117,12 @@ class RegisterPage extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       "¿Ya tienes una cuenta?",
-                      style: CustomTextStyle.paragraphStyle,
+                      style: CustomTextStyle.title,
                     ),
                     const SizedBox(width: 10),
                     Text(
                       "Iniciar Sesión",
-                      style: CustomTextStyle.paragraphStyle,
+                      style: CustomTextStyle.title,
                     ),
                   ],
                 ),

@@ -16,11 +16,11 @@ class CustomButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      height: 50,
+      height: 60,
       minWidth: double.infinity,
       elevation: 5,
       color: colorButton!,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Text(
         text!,
         style: textStyle!,
