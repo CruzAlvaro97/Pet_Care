@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
+import 'package:pet_society/src/views/widget/index_widgets.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -12,7 +13,7 @@ class WelcomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
                 // Welcome Header
@@ -28,8 +29,12 @@ class WelcomePage extends StatelessWidget {
                 const SizedBox(
                   width: double.infinity,
                   height: 250,
-                  child: Text('Imagen'),
-                  // child: Expanded(child: Image(image: NetworkImage('url'))),
+                  // child: Text('Imagen'),
+                  child: Expanded(
+                      child: Image(
+                    image: AssetImage('assets/images/welcome.png'),
+                    fit: BoxFit.fitWidth,
+                  )),
                 ),
                 //
 
@@ -43,12 +48,24 @@ class WelcomePage extends StatelessWidget {
                 ),
                 //
 
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
 
                 // Login Buton
+                CustomButtonPurpleWidget(
+                  text: 'Iniciar Sesión',
+                  textStyle: CustomTextStyle.buttonStyleWhite,
+                  onPressed: () {},
+                ),
                 //
 
+                const SizedBox(height: 10),
+
                 // Register Buton
+                CustomButtonWhiteWidget(
+                  text: 'Registrarse',
+                  textStyle: CustomTextStyle.buttonStylePurple,
+                  onPressed: () {},
+                ),
                 //
               ],
             ),

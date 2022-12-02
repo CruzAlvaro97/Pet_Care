@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: MyRoutes.generateRoute,
       initialRoute: MyRoutes.rWELCOME,
       color: CustomColor.primary,
-
+      theme: ThemeData(useMaterial3: true),
       // scaffoldMessengerKey: CustomSnackbar.msgkey, // SnackBar
       // theme: Provider.of<ThemeProvider>(context).currentTheme, // Modo oscuro
     );
