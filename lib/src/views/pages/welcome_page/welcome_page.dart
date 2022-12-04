@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_society/routes/routes.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
-import 'package:pet_society/src/views/pages/index_pages.dart';
 import 'package:pet_society/src/views/widget/index_widgets.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -11,6 +9,7 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //Body
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -20,12 +19,15 @@ class WelcomePage extends StatelessWidget {
             child: Column(
               children: [
                 // Welcome Header
-                Text(App.name, style: CustomTextStyle.welcome.copyWith()),
+                Text(App.name,
+                    style: CustomTextStyle.welcome
+                        .copyWith(color: CustomColor.primary)),
                 //
 
                 const SizedBox(height: 23),
 
                 // Welcome Image
+                Image.asset('assets/images/welcome.png'),
                 // const SizedBox(
                 //   width: double.infinity,
                 //   height: 268,
@@ -36,7 +38,6 @@ class WelcomePage extends StatelessWidget {
                 //   )),
                 // ),
 
-                Image.asset('assets/images/welcome.png'),
                 //
 
                 const SizedBox(height: 23),
@@ -54,10 +55,11 @@ class WelcomePage extends StatelessWidget {
                 // Login Button
                 CustomButtonWidget(
                   text: 'Iniciar Sesión',
-                  textStyle: CustomTextStyle.text2White,
+                  textStyle:
+                      CustomTextStyle.text2.copyWith(color: CustomColor.white),
                   colorButton: CustomColor.primary,
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, MyRoutes.rLOGIN);
+                    Navigator.pushNamed(context, MyRoutes.rLOGIN);
                   },
                 ),
                 //
@@ -67,16 +69,16 @@ class WelcomePage extends StatelessWidget {
                 // Register Button
                 CustomButtonWidget(
                   text: 'Crear cuenta',
-                  textStyle: CustomTextStyle.text2Primary,
+                  textStyle: CustomTextStyle.text2
+                      .copyWith(color: CustomColor.primary),
                   colorButton: CustomColor.white,
                   onPressed: () {
-                    // Navigator.pushReplacementNamed(
-                    //     context, MyRoutes.rRESGISTER);
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => const RegisterPage(),
-                        ));
+                    Navigator.pushNamed(context, MyRoutes.rRESGISTER);
+                    // Navigator.push(
+                    //     context,
+                    //     CupertinoPageRoute(
+                    //       builder: (context) => const RegisterPage(),
+                    //     ));
                   },
                 ),
                 //

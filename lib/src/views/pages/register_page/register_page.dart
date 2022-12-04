@@ -3,8 +3,8 @@ import 'package:pet_society/routes/routes.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
 import 'package:pet_society/src/views/widget/index_widgets.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,31 +26,31 @@ class LoginPage extends StatelessWidget {
       //
 
       //Body
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
               children: <Widget>[
-                // Login Header
+                // Register Header
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
+                  children: <Widget>[
                     Text(
-                      'Iniciar Sesión',
+                      'Crear cuenta',
                       style: CustomTextStyle.headline2,
                     ),
                   ],
                 ),
                 //
 
-                // Login Description
+                // Register Description
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "Ingresa sus credenciales para acceder a su cuenta.",
+                      "Crea una cuenta para unirte a la comunidad.",
                       style: CustomTextStyle.text
                           .copyWith(color: CustomColor.grey),
                     ),
@@ -60,13 +60,13 @@ class LoginPage extends StatelessWidget {
 
                 const SizedBox(height: 45),
 
-                // Login Form
-                const LoginForm(),
+                //
+                const RegisterForm(),
                 //
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       //
 
@@ -75,19 +75,23 @@ class LoginPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 20),
         height: 80,
         child:
-            // Register Option
+            // Login Option
             Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("¿No tienes una cuenta?",
-                style: CustomTextStyle.text.copyWith(color: CustomColor.grey)),
+            Text(
+              "¿Ya tienes una cuenta?",
+              style: CustomTextStyle.text.copyWith(color: CustomColor.grey),
+            ),
             const SizedBox(width: 5),
             TextButton(
               style: textButtonDecorationWidget(),
-              onPressed: (() {}),
-              child: Text("Crear cuenta",
-                  style: CustomTextStyle.text
-                      .copyWith(color: CustomColor.primary)),
+              onPressed: () {},
+              child: Text(
+                "Iniciar Sesión",
+                style:
+                    CustomTextStyle.text.copyWith(color: CustomColor.primary),
+              ),
             ),
           ],
         ),
@@ -99,9 +103,9 @@ class LoginPage extends StatelessWidget {
 }
 //
 
-// Login form
-class LoginForm extends StatelessWidget {
-  const LoginForm({
+// Register form
+class RegisterForm extends StatelessWidget {
+  const RegisterForm({
     Key? key,
   }) : super(key: key);
 
@@ -110,20 +114,48 @@ class LoginForm extends StatelessWidget {
     return Form(
       child: Column(
         children: [
-          // Email header form
+          // Name header form
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Text("Correo electrónico",
-                  style:
-                      CustomTextStyle.text2.copyWith(color: CustomColor.grey)),
+              Text(
+                "Nombre",
+                style: CustomTextStyle.text2.copyWith(color: CustomColor.grey),
+              ),
             ],
           ),
           //
 
           const SizedBox(height: 5),
 
-          // Login email form
+          // Register name form
+          TextFormField(
+            style: TextStyle(color: CustomColor.black),
+            autocorrect: false,
+            keyboardType: TextInputType.text,
+            decoration: formDecorationWidget(
+              hintText: 'Ingrese su nombre',
+            ),
+          ),
+          //
+
+          const SizedBox(height: 25),
+
+          // Email header form
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "Correo Electrónico",
+                style: CustomTextStyle.text2.copyWith(color: CustomColor.grey),
+              ),
+            ],
+          ),
+          //
+
+          const SizedBox(height: 5),
+
+          // Register email form
           TextFormField(
             style: TextStyle(color: CustomColor.black),
             autocorrect: false,
@@ -140,46 +172,33 @@ class LoginForm extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Text("Constraseña",
-                  style:
-                      CustomTextStyle.text2.copyWith(color: CustomColor.grey)),
+              Text(
+                "Contraseña",
+                style: CustomTextStyle.text2.copyWith(color: CustomColor.grey),
+              ),
             ],
           ),
           //
 
           const SizedBox(height: 5),
 
-          // Login password form
+          // Register password form
           TextFormField(
             style: TextStyle(color: CustomColor.black),
             autocorrect: false,
-            obscureText: true,
             keyboardType: TextInputType.text,
             decoration: formDecorationWidget(
-              hintText: 'Ingrese su contraseña',
+              hintText: 'Ingrese una contraseña',
             ),
           ),
           //
 
-          const SizedBox(height: 20),
+          const SizedBox(height: 64),
 
-          // Forgot password?
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Text("¿Olvidaste tu constraseña?",
-                  style:
-                      CustomTextStyle.text.copyWith(color: CustomColor.primary))
-            ],
-          ),
-          //
-
-          const SizedBox(height: 89),
-
-          // Login Button
+          // Register Button
           CustomButtonWidget(
-            text: 'Iniciar Sesión',
-            textStyle: CustomTextStyle.text2.copyWith(color: CustomColor.white),
+            text: 'Crear cuenta',
+            textStyle: CustomTextStyle.text2.copyWith(color: Colors.white),
             colorButton: CustomColor.primary,
             onPressed: () {},
           ),
@@ -190,3 +209,4 @@ class LoginForm extends StatelessWidget {
   }
 }
 //
+

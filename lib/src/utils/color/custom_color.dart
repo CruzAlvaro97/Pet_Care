@@ -10,6 +10,7 @@ class CustomColor {
   static Color grey = const Color(0xFF8E8E8E);
   static Color success = const Color(0xFF55D85A);
   static Color error = const Color(0xFFFF2424);
+  static Color formField = const Color(0xFFEAEAEA);
 
   // Aquí se definirán los colores
 }

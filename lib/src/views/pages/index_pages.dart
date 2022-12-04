@@ -9,6 +9,6 @@ export 'package:pet_society/src/views/pages/login_page/login_page.dart';
 //
 
 // Register Page
-export 'package:pet_society/src/views/pages/register_page/register_name.dart';
+export 'package:pet_society/src/views/pages/register_page/register_page.dart';
 //
 
