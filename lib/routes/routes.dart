@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_society/src/views/pages/index_pages.dart';
+import 'package:pet_society/src/views/pages/onboarding_page/onboarding_page.dart';
 
 class MyRoutes {
   static const String rWELCOME = '/welcome';
   static const String rLOGIN = '/login';
   static const String rRESGISTER = '/register';
+  static const String rONBOARDING = '/onboarding';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -22,6 +24,11 @@ class MyRoutes {
       // Register route
       case ('/register'):
         return CupertinoPageRoute(builder: (_) => const RegisterPage());
+      //
+
+      // Register route
+      case ('/onboarding'):
+        return CupertinoPageRoute(builder: (_) => const OnboardingPage());
       //
 
       //
