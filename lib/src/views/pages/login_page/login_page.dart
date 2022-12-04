@@ -27,45 +27,48 @@ class LoginPage extends StatelessWidget {
 
       //Body
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                // Login Header
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Iniciar Sesión',
-                      style: CustomTextStyle.headline2,
-                    ),
-                  ],
-                ),
-                //
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  // Login Header
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Iniciar Sesión',
+                        style: CustomTextStyle.headline2,
+                      ),
+                    ],
+                  ),
+                  //
 
-                // Login Description
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      "Ingresa sus credenciales para acceder a su cuenta.",
-                      style: CustomTextStyle.text
-                          .copyWith(color: CustomColor.grey),
-                    ),
-                  ],
-                ),
-                //
+                  // Login Description
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Ingresa sus credenciales para acceder a su cuenta.",
+                        style: CustomTextStyle.text
+                            .copyWith(color: CustomColor.grey),
+                      ),
+                    ],
+                  ),
+                  //
 
-                const SizedBox(height: 45),
+                  const SizedBox(height: 45),
 
-                // Login Form
-                const LoginForm(),
-                //
-              ],
-            ),
-          ],
+                  // Login Form
+                  const LoginForm(),
+                  //
+                ],
+              ),
+            ],
+          ),
         ),
       ),
       //

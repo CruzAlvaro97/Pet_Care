@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_society/routes/routes.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -76,7 +77,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       },
                       child: Text(
                         'Saltar',
-                        style: CustomTextStyle.textGrey,
+                        style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            color: CustomColor.grey,
+                            fontWeight: FontWeight.w700),
                       )),
                 ),
                 Visibility(
@@ -88,7 +92,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       },
                       child: Text(
                         'Empezar',
-                        style: CustomTextStyle.textPrimary,
+                        style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            color: CustomColor.primary,
+                            fontWeight: FontWeight.w700),
                       )),
                 ),
                 Visibility(
@@ -101,7 +108,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       },
                       child: Text(
                         'Siguiente',
-                        style: CustomTextStyle.textPrimary,
+                        style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            color: CustomColor.primary,
+                            fontWeight: FontWeight.w700),
                       )),
                 ),
               ],
@@ -145,7 +155,10 @@ class OnboardingModal extends StatelessWidget {
               ),
               Text(
                 descrip,
-                style: CustomTextStyle.textGrey,
+                style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    color: CustomColor.grey,
+                    fontWeight: FontWeight.w700),
                 textAlign: TextAlign.center,
               ),
             ],

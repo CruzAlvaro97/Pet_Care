@@ -26,47 +26,53 @@ class RegisterPage extends StatelessWidget {
       //
 
       //Body
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              children: <Widget>[
-                // Register Header
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Crear cuenta',
-                      style: CustomTextStyle.headline2,
-                    ),
-                  ],
-                ),
-                //
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: <Widget>[
+                  // Register Header
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'Crear cuenta',
+                        style: CustomTextStyle.headline2,
+                      ),
+                    ],
+                  ),
+                  //
 
-                // Register Description
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      "Crea una cuenta para unirte a la comunidad.",
-                      style: CustomTextStyle.text
-                          .copyWith(color: CustomColor.grey),
-                    ),
-                  ],
-                ),
-                //
+                  // Register Description
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          "Crea una cuenta para unirte a la comunidad.",
+                          style: CustomTextStyle.text
+                              .copyWith(color: CustomColor.grey),
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                    ],
+                  ),
+                  //
 
-                const SizedBox(height: 45),
+                  const SizedBox(height: 45),
 
-                //
-                const RegisterForm(),
-                //
-              ],
+                  //
+                  const RegisterForm(),
+                  //
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       //
 
