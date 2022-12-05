@@ -87,7 +87,9 @@ class LoginPage extends StatelessWidget {
             const SizedBox(width: 5),
             TextButton(
               style: textButtonDecorationWidget(),
-              onPressed: (() {}),
+              onPressed: (() {
+                Navigator.pushNamed(context, MyRoutes.rRESGISTER);
+              }),
               child: Text("Crear cuenta",
                   style: CustomTextStyle.text
                       .copyWith(color: CustomColor.primary)),
@@ -184,7 +186,9 @@ class LoginForm extends StatelessWidget {
             text: 'Iniciar Sesión',
             textStyle: CustomTextStyle.text2.copyWith(color: CustomColor.white),
             colorButton: CustomColor.primary,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, MyRoutes.rHOME);
+            },
           ),
           //
         ],
