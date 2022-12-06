@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
+import 'package:pet_society/src/views/pages/home_page/home_subpages/perfil_subpage.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,7 +17,7 @@ class _HomePageState extends State<HomePage> {
     Text('Inicio'),
     Text('En adopción'),
     Text('Apoyo'),
-    Text('Perfil'),
+    PerfilPage(),
   ];
   void _seletedOption(int index) {
     setState(() {

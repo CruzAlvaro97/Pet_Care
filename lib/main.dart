@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_society/routes/routes.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
+import 'package:pet_society/src/views/pages/home_page/home_subpages/perfil_subpage.dart';
 
 void main() {
   runApp(const MyApp());
