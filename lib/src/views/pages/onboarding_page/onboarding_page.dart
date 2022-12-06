@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_society/routes/routes.dart';
@@ -38,7 +36,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 });
               },
               controller: controller,
-              children: <Widget>[
+              children: const <Widget>[
                 OnboardingModal(
                     titulo: 'Ayudanos a ayudar',
                     descrip:
@@ -92,10 +90,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       },
                       child: Text(
                         'Empezar',
-                        style: GoogleFonts.poppins(
-                            fontSize: 14,
-                            color: CustomColor.primary,
-                            fontWeight: FontWeight.w700),
+                        style: CustomTextStyle.text
+                            .copyWith(color: CustomColor.primary),
                       )),
                 ),
                 Visibility(
@@ -103,15 +99,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   child: TextButton(
                       onPressed: () {
                         controller.nextPage(
-                            duration: Duration(seconds: 1),
+                            duration: const Duration(seconds: 1),
                             curve: Curves.easeInOut);
                       },
                       child: Text(
                         'Siguiente',
-                        style: GoogleFonts.poppins(
-                            fontSize: 14,
-                            color: CustomColor.primary,
-                            fontWeight: FontWeight.w700),
+                        style: CustomTextStyle.text
+                            .copyWith(color: CustomColor.primary),
                       )),
                 ),
               ],
@@ -150,15 +144,12 @@ class OnboardingModal extends StatelessWidget {
                 titulo,
                 style: CustomTextStyle.headline,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               Text(
                 descrip,
-                style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    color: CustomColor.grey,
-                    fontWeight: FontWeight.w700),
+                style: CustomTextStyle.text.copyWith(color: CustomColor.grey),
                 textAlign: TextAlign.center,
               ),
             ],

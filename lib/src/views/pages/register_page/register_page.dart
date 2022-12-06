@@ -92,7 +92,9 @@ class RegisterPage extends StatelessWidget {
             const SizedBox(width: 5),
             TextButton(
               style: textButtonDecorationWidget(),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, MyRoutes.rLOGIN);
+              },
               child: Text(
                 "Iniciar Sesión",
                 style:
@@ -206,7 +208,9 @@ class RegisterForm extends StatelessWidget {
             text: 'Crear cuenta',
             textStyle: CustomTextStyle.text2.copyWith(color: Colors.white),
             colorButton: CustomColor.primary,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, MyRoutes.rHOME);
+            },
           ),
           //
         ],
