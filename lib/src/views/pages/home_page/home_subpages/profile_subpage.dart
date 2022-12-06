@@ -2,10 +2,12 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
+import 'package:pet_society/src/views/pages/help_page/help_page.dart';
 
-class PerfilPage extends StatelessWidget {
-  const PerfilPage({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +20,12 @@ class PerfilPage extends StatelessWidget {
               Container(
                 height: MediaQuery.of(context).size.height * 0.30,
                 decoration: BoxDecoration(
-                    color: CustomColor.white,
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20))),
+                  color: CustomColor.white,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
+                ),
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -52,7 +56,7 @@ class PerfilPage extends StatelessWidget {
                         children: [
                           Text(
                             'Jorge Moreno',
-                            style: CustomTextStyle.text.copyWith(fontSize: 20),
+                            style: CustomTextStyle.text.copyWith(fontSize: 16),
                           ),
                           SizedBox(
                             width: 5,
@@ -64,16 +68,16 @@ class PerfilPage extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        '@jorgeo2r2_',
+                        '@jormg_',
                         style: CustomTextStyle.text
-                            .copyWith(fontSize: 18, color: CustomColor.grey),
+                            .copyWith(fontSize: 14, color: CustomColor.grey),
                       ),
                     ],
                   ),
                 ),
               ),
               SizedBox(
-                height: 30,
+                height: 20,
               ),
               Container(
                 width: double.infinity,
@@ -81,39 +85,44 @@ class PerfilPage extends StatelessWidget {
                   color: CustomColor.white,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding:
+                      const EdgeInsets.only(left: 20.0, right: 20.0, top: 15.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Cuenta',
-                        style: CustomTextStyle.text.copyWith(fontSize: 22),
+                        style: CustomTextStyle.text.copyWith(fontSize: 16),
                       ),
+                      const SizedBox(height: 5.0),
                       _CustomListTile(
                         tile: 'Datos',
                         prefix: Icon(
                           Icons.person_outline,
                           color: Colors.black,
-                          size: 32,
+                          size: 20,
                         ),
                         suffix: Icon(
                           Icons.arrow_forward_ios_outlined,
                           color: Colors.black,
+                          size: 20,
                         ),
                       ),
                       _CustomListTile(
-                        tile: 'Cambir contraseña',
+                        tile: 'Cambiar contraseña',
                         prefix: Icon(
                           Icons.lock_outline_rounded,
                           color: Colors.black,
-                          size: 32,
+                          size: 20,
                         ),
                         suffix: Icon(
                           Icons.arrow_forward_ios_outlined,
                           color: Colors.black,
+                          size: 20,
                         ),
                       ),
+                      const SizedBox(height: 5.0),
                     ],
                   ),
                 ),
@@ -127,21 +136,23 @@ class PerfilPage extends StatelessWidget {
                   color: CustomColor.white,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding:
+                      const EdgeInsets.only(left: 20.0, right: 20.0, top: 15.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Preferencias',
-                        style: CustomTextStyle.text.copyWith(fontSize: 22),
+                        style: CustomTextStyle.text.copyWith(fontSize: 16),
                       ),
+                      const SizedBox(height: 5.0),
                       _CustomListTile(
                         tile: 'Notificaciones',
                         prefix: Icon(
                           Icons.messenger_outline_sharp,
                           color: Colors.black,
-                          size: 32,
+                          size: 20,
                         ),
                         suffix: CupertinoSwitch(
                           value: false,
@@ -155,7 +166,7 @@ class PerfilPage extends StatelessWidget {
                         prefix: Icon(
                           Icons.dark_mode_outlined,
                           color: Colors.black,
-                          size: 32,
+                          size: 20,
                         ),
                         suffix: CupertinoSwitch(
                           value: false,
@@ -164,6 +175,7 @@ class PerfilPage extends StatelessWidget {
                           },
                         ),
                       ),
+                      const SizedBox(height: 5.0),
                     ],
                   ),
                 ),
@@ -177,39 +189,52 @@ class PerfilPage extends StatelessWidget {
                   color: CustomColor.white,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding:
+                      const EdgeInsets.only(left: 20.0, right: 20.0, top: 15.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Ayuda y soporte',
-                        style: CustomTextStyle.text.copyWith(fontSize: 22),
+                        style: CustomTextStyle.text.copyWith(fontSize: 16),
                       ),
+                      const SizedBox(height: 5.0),
                       _CustomListTile(
                         tile: 'Ayuda',
                         prefix: Icon(
                           Icons.messenger_outline_sharp,
                           color: Colors.black,
-                          size: 32,
+                          size: 20,
                         ),
                         suffix: Icon(
                           Icons.arrow_forward_ios_outlined,
                           color: Colors.black,
+                          size: 20,
                         ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => const HelpPage(),
+                            ),
+                          );
+                        },
                       ),
                       _CustomListTile(
                         tile: 'Politicas de privacidad',
                         prefix: Icon(
                           Icons.dark_mode_outlined,
                           color: Colors.black,
-                          size: 32,
+                          size: 20,
                         ),
                         suffix: Icon(
                           Icons.arrow_forward_ios_outlined,
                           color: Colors.black,
+                          size: 20,
                         ),
                       ),
+                      const SizedBox(height: 5.0),
                     ],
                   ),
                 ),
@@ -218,13 +243,13 @@ class PerfilPage extends StatelessWidget {
                 height: 13,
               ),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 20),
+                padding: EdgeInsets.symmetric(vertical: 10),
                 width: double.infinity,
                 color: Colors.white,
                 child: TextButton(
                   child: Text('Cerrar Sesión',
                       style: CustomTextStyle.text.copyWith(
-                        fontSize: 20,
+                        fontSize: 16,
                         color: CustomColor.error,
                       )),
                   onPressed: () {},
@@ -242,22 +267,31 @@ class PerfilPage extends StatelessWidget {
 }
 
 class _CustomListTile extends StatelessWidget {
+  final Widget prefix;
+  final String tile;
+  final Widget suffix;
+  final Function()? onTap;
+
   const _CustomListTile({
     Key? key,
     required this.prefix,
     required this.tile,
     required this.suffix,
+    this.onTap,
   }) : super(key: key);
-  final Widget prefix;
-  final String tile;
-  final Widget suffix;
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: onTap,
+      contentPadding: const EdgeInsets.only(left: 10, right: 10),
       leading: prefix,
       title: Text(
         tile,
-        style: CustomTextStyle.text2.copyWith(fontSize: 20),
+        style: GoogleFonts.poppins(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
       ),
       trailing: suffix,
     );

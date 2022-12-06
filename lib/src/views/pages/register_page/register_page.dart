@@ -16,7 +16,10 @@ class RegisterPage extends StatelessWidget {
         backgroundColor: CustomColor.white,
         // Back Button
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.black,
+          ),
           onPressed: (() {
             Navigator.pushNamed(context, MyRoutes.rWELCOME); // Preguntar
           }),
@@ -89,7 +92,6 @@ class RegisterPage extends StatelessWidget {
               "¿Ya tienes una cuenta?",
               style: CustomTextStyle.text.copyWith(color: CustomColor.grey),
             ),
-            const SizedBox(width: 5),
             TextButton(
               style: textButtonDecorationWidget(),
               onPressed: () {

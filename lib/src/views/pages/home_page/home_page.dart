@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
-import 'package:pet_society/src/views/pages/home_page/home_subpages/perfil_subpage.dart';
+import 'package:pet_society/src/views/pages/home_page/home_subpages/profile_subpage.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
     Text('Inicio'),
     Text('En adopción'),
     Text('Apoyo'),
-    PerfilPage(),
+    ProfilePage(),
   ];
   void _seletedOption(int index) {
     setState(() {
@@ -36,53 +36,56 @@ class _HomePageState extends State<HomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
       // BottomBar Salomon
-      bottomNavigationBar: SalomonBottomBar(
-        selectedColorOpacity: 0.3,
-        selectedItemColor: CustomColor.primary,
-        unselectedItemColor: CustomColor.grey,
-        currentIndex: _selectIndex,
-        onTap: _seletedOption,
-        items: [
-          /// Inicio
-          SalomonBottomBarItem(
-            icon: const Icon(Icons.home),
-            title: Text(
-              "Inicio",
-              style: CustomTextStyle.text,
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        child: SalomonBottomBar(
+          selectedColorOpacity: 0.3,
+          selectedItemColor: CustomColor.primary,
+          unselectedItemColor: CustomColor.grey,
+          currentIndex: _selectIndex,
+          onTap: _seletedOption,
+          items: [
+            /// Inicio
+            SalomonBottomBarItem(
+              icon: const Icon(Icons.home),
+              title: Text(
+                "Inicio",
+                style: CustomTextStyle.text,
+              ),
+              selectedColor: CustomColor.primary,
             ),
-            selectedColor: CustomColor.primary,
-          ),
 
-          /// En Adopción
-          SalomonBottomBarItem(
-            icon: const Icon(Icons.pets),
-            title: Text(
-              "En Adopción",
-              style: CustomTextStyle.text,
+            /// En Adopción
+            SalomonBottomBarItem(
+              icon: const Icon(Icons.pets),
+              title: Text(
+                "En Adopción",
+                style: CustomTextStyle.text,
+              ),
+              selectedColor: CustomColor.primary,
             ),
-            selectedColor: CustomColor.primary,
-          ),
 
-          /// Apoyo
-          SalomonBottomBarItem(
-            icon: const Icon(Icons.medical_services),
-            title: Text(
-              "Apoyo",
-              style: CustomTextStyle.text,
+            /// Apoyo
+            SalomonBottomBarItem(
+              icon: const Icon(Icons.medical_services),
+              title: Text(
+                "Apoyo",
+                style: CustomTextStyle.text,
+              ),
+              selectedColor: CustomColor.primary,
             ),
-            selectedColor: CustomColor.primary,
-          ),
 
-          /// Perfil
-          SalomonBottomBarItem(
-            icon: const Icon(Icons.person),
-            title: Text(
-              "Perfil",
-              style: CustomTextStyle.text,
+            /// Perfil
+            SalomonBottomBarItem(
+              icon: const Icon(Icons.person),
+              title: Text(
+                "Perfil",
+                style: CustomTextStyle.text,
+              ),
+              selectedColor: CustomColor.primary,
             ),
-            selectedColor: CustomColor.primary,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

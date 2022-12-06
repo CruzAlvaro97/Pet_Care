@@ -16,7 +16,10 @@ class LoginPage extends StatelessWidget {
         backgroundColor: CustomColor.white,
         // Back Button
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.black,
+          ),
           onPressed: (() {
             Navigator.pushNamed(context, MyRoutes.rWELCOME); // Preguntar
           }),
@@ -84,7 +87,6 @@ class LoginPage extends StatelessWidget {
           children: <Widget>[
             Text("¿No tienes una cuenta?",
                 style: CustomTextStyle.text.copyWith(color: CustomColor.grey)),
-            const SizedBox(width: 5),
             TextButton(
               style: textButtonDecorationWidget(),
               onPressed: (() {
@@ -179,7 +181,7 @@ class LoginForm extends StatelessWidget {
           ),
           //
 
-          const SizedBox(height: 89),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.05),
 
           // Login Button
           CustomButtonWidget(

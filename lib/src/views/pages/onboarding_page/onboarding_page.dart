@@ -26,9 +26,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       backgroundColor: CustomColor.white2,
       body: Column(
         children: [
-          SizedBox(
-            width: double.infinity,
-            height: 650,
+          Flexible(
             child: PageView(
               onPageChanged: (int index) {
                 setState(() {
@@ -134,25 +132,28 @@ class OnboardingModal extends StatelessWidget {
         Image.asset(
           'assets/images/fondoonboarding.jpeg',
           width: double.infinity,
-          fit: BoxFit.cover,
+          height: MediaQuery.of(context).size.height * 0.6,
+          fit: BoxFit.fill,
         ),
         Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              Text(
-                titulo,
-                style: CustomTextStyle.headline,
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              Text(
-                descrip,
-                style: CustomTextStyle.text.copyWith(color: CustomColor.grey),
-                textAlign: TextAlign.center,
-              ),
-            ],
+          padding: const EdgeInsets.all(20.0),
+          child: Center(
+            child: Column(
+              children: [
+                Text(
+                  titulo,
+                  style: CustomTextStyle.headline,
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Text(
+                  descrip,
+                  style: CustomTextStyle.text.copyWith(color: CustomColor.grey),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           ),
         ),
       ],
