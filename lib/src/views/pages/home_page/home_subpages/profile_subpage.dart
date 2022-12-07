@@ -6,8 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
 import 'package:pet_society/src/views/pages/help_page/help_page.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+class ProfileSubPage extends StatelessWidget {
+  const ProfileSubPage({super.key});
 
   @override
   Widget build(BuildContext context) {

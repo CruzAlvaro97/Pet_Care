@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
+import 'package:pet_society/src/views/pages/home_page/home_subpages/home_subpage.dart';
 import 'package:pet_society/src/views/pages/home_page/home_subpages/profile_subpage.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
@@ -13,11 +14,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectIndex = 0;
 
-  static List<Widget> widgetOption = const [
-    Text('Inicio'),
+  static const List<Widget> _widgetOptions = [
+    HomeSubPage(),
     Text('En adopción'),
     Text('Apoyo'),
-    ProfilePage(),
+    ProfileSubPage(),
   ];
   void _seletedOption(int index) {
     setState(() {
@@ -30,10 +31,10 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       // SubPaginas
       body: Center(
-        child: widgetOption.elementAt(_selectIndex),
+        child: _widgetOptions.elementAt(_selectIndex),
       ),
       //
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
       // BottomBar Salomon
       bottomNavigationBar: Container(
