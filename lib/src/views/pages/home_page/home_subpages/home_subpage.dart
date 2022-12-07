@@ -1,6 +1,7 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_society/src/models/pets_adoption_model.dart';
 import 'package:pet_society/src/models/publication_model.dart';
 import 'package:pet_society/src/utils/color/custom_color.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
@@ -50,14 +51,23 @@ class HomeSubPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             _PhotoAndSearchInput(),
             Divider(
               thickness: 0.8,
             ),
             _AdContainer(),
-            _TitleCarrouselCards(),
-            _CarrouselPublication()
+            _TitleCarrouselCards(
+              titleCarrousel: 'Publicaciones recientes',
+            ),
+            _CarrouselPublication(itemCount: 3),
+            _TitleCarrouselCards(
+              titleCarrousel: 'Adopciones recientes',
+              isMoreText: false, //<- is true
+            ),
+            _CarrouselAdoptPets(),
+            SizedBox(height: 30.0),
+            _CarrouselPublication(itemCount: publications.length - 3),
           ],
         ),
       ),
@@ -65,15 +75,67 @@ class HomeSubPage extends StatelessWidget {
   }
 }
 
-class _CarrouselPublication extends StatelessWidget {
-  const _CarrouselPublication({
+class _CarrouselAdoptPets extends StatelessWidget {
+  const _CarrouselAdoptPets({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return Container(
+      height: 180,
+      child: ListView.builder(
+        itemCount: petsAdoption.length,
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.only(left: 20.0, right: 10.0),
+        itemBuilder: (context, index) {
+          final dataAdopt = petsAdoption[index];
+
+          return Container(
+            width: 160,
+            height: 180,
+            margin: const EdgeInsets.only(right: 10.0, bottom: 10.0),
+            decoration: containerDecoration().copyWith(color: Colors.white),
+            child: Column(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20.0),
+                    topRight: Radius.circular(20.0),
+                  ),
+                  child: Image.network(
+                    dataAdopt.photoPet,
+                    height: 135,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      dataAdopt.namePet,
+                      style: CustomTextStyle.text,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _CarrouselPublication extends StatelessWidget {
+  final int? itemCount;
+
+  const _CarrouselPublication({super.key, this.itemCount = 3});
+
+  @override
+  Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: publications.length,
+      itemCount: itemCount,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
@@ -244,17 +306,42 @@ class _CarrouselPublication extends StatelessWidget {
 }
 
 class _TitleCarrouselCards extends StatelessWidget {
+  final String titleCarrousel;
+  final bool? isMoreText;
+
   const _TitleCarrouselCards({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+    required this.titleCarrousel,
+    this.isMoreText = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-      child: Text(
-        'Publicaciones recientes',
-        style: CustomTextStyle.titleSlider,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            titleCarrousel,
+            style: CustomTextStyle.titleSlider,
+          ),
+          Visibility(
+            visible: isMoreText!,
+            child: TextButton(
+              onPressed: () {
+                print('Navegar sgte. pg.');
+              },
+              style: ButtonStyle(),
+              child: Text(
+                'Ver mas',
+                style: CustomTextStyle.seeMoreText.copyWith(
+                  color: CustomColor.primary,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
