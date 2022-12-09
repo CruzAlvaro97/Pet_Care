@@ -106,7 +106,7 @@ class EnAdopcionSubPage extends StatelessWidget {
             //
 
             // Filtro Animales
-            // const _CarrouselPetsFilter(),
+            const _CarrouselPetsFilter(),
             //
           ],
         ),
@@ -115,62 +115,63 @@ class EnAdopcionSubPage extends StatelessWidget {
   }
 }
 
-// class _CarrouselPetsFilter extends StatelessWidget {
-//   const _CarrouselPetsFilter({
-//     Key? key,
-//   }) : super(key: key);
+class _CarrouselPetsFilter extends StatelessWidget {
+  const _CarrouselPetsFilter({
+    Key? key,
+  }) : super(key: key);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       height: 106,
-//       child: ListView.builder(
-//         itemCount: petsFilter.length,
-//         scrollDirection: Axis.horizontal,
-//         padding: const EdgeInsets.only(left: 20.0, right: 10.0),
-//         itemBuilder: (context, index) {
-//           final PetsFilter = petsFilter[index];
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 106,
+      child: ListView.builder(
+        itemCount: petsFilter.length,
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.only(left: 20.0, right: 10.0),
+        itemBuilder: (context, index) {
+          //final PetsFilter = petsFilter[index];
+          final dataPets = petsFilter[index];
 
-//           return Container(
-//             width: 80,
-//             height: 106,
-//             margin: const EdgeInsets.only(right: 10.0, bottom: 10.0),
-//             decoration:
-//                 containerDecoration().copyWith(color: CustomColor.white2),
-//             child: Column(
-//               children: [
-//                 ClipRRect(
-//                   borderRadius: const BorderRadius.all(Radius.circular(20)),
-//                   child: MaterialButton(
-//                     height: 80,
-//                     minWidth: 80,
-//                     color: CustomColor.secondary,
-//                     disabledColor: CustomColor.white,
-//                     onPressed: () {},
-//                     child: SizedBox(
-//                       width: 50,
-//                       height: 50,
-//                       child: Image(
-//                         image: AssetImage(PetsFilter.iconPet),
-//                         fit: BoxFit.cover,
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//                 Expanded(
-//                   child: Container(
-//                     alignment: Alignment.center,
-//                     child: Text(
-//                       PetsFilter.typePet,
-//                       style: CustomTextStyle.text,
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
+          return Container(
+            width: 80,
+            height: 106,
+            margin: const EdgeInsets.only(right: 10.0, bottom: 10.0),
+            decoration:
+                containerDecoration().copyWith(color: CustomColor.white2),
+            child: Column(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
+                  child: MaterialButton(
+                    height: 80,
+                    minWidth: 80,
+                    color: CustomColor.secondary,
+                    disabledColor: CustomColor.white,
+                    onPressed: () {},
+                    child: SizedBox(
+                      width: 30,
+                      height: 30,
+                      child: Image(
+                        image: AssetImage(dataPets.iconPet),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      dataPets.typePet,
+                      style: CustomTextStyle.text,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
