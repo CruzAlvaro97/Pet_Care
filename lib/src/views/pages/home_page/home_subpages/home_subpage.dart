@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_society/src/models/pets_adoption_model.dart';
 import 'package:pet_society/src/models/publication_model.dart';
-import 'package:pet_society/src/utils/color/custom_color.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
 import 'package:pet_society/src/views/widget/decoration_widget/container_decoration_widget.dart';
 
@@ -52,21 +51,21 @@ class HomeSubPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _PhotoAndSearchInput(),
-            Divider(
+            const _PhotoAndSearchInput(),
+            const Divider(
               thickness: 0.8,
             ),
-            _AdContainer(),
-            _TitleCarrouselCards(
+            const _AdContainer(),
+            const _TitleCarrouselCards(
               titleCarrousel: 'Publicaciones recientes',
             ),
-            _CarrouselPublication(itemCount: 3),
-            _TitleCarrouselCards(
+            const _CarrouselPublication(itemCount: 3),
+            const _TitleCarrouselCards(
               titleCarrousel: 'Adopciones recientes',
               isMoreText: false, //<- is true
             ),
-            _CarrouselAdoptPets(),
-            SizedBox(height: 30.0),
+            const _CarrouselAdoptPets(),
+            const SizedBox(height: 30.0),
             _CarrouselPublication(itemCount: publications.length - 3),
           ],
         ),
@@ -82,7 +81,7 @@ class _CarrouselAdoptPets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 180,
       child: ListView.builder(
         itemCount: petsAdoption.length,
@@ -136,7 +135,7 @@ class _CarrouselPublication extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: itemCount,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
         final dataPost = publications[index];

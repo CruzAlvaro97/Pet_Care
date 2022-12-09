@@ -11,3 +11,7 @@ export 'package:pet_society/src/views/widget/decoration_widget/form_decoration_w
 // Text Button Decoration
 export 'package:pet_society/src/views/widget/decoration_widget/text_button_decoration_widget.dart';
 //
+
+// Container Decoration
+export 'package:pet_society/src/views/widget/decoration_widget/container_decoration_widget.dart';
+//

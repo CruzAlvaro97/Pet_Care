@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -268,7 +266,7 @@ class _ExpansionDatos extends StatelessWidget {
           title: Row(
             children: [
               Image.asset('assets/images/IconleadTile.png'),
-              SizedBox(
+              const SizedBox(
                 width: 17,
               ),
               Text('Datos',
@@ -291,7 +289,7 @@ class _ExpansionDatos extends StatelessWidget {
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w500),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Text(
@@ -299,7 +297,7 @@ class _ExpansionDatos extends StatelessWidget {
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w500),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Text(
@@ -307,7 +305,7 @@ class _ExpansionDatos extends StatelessWidget {
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w500),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Text(
@@ -315,7 +313,7 @@ class _ExpansionDatos extends StatelessWidget {
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w500),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Text(
@@ -323,7 +321,7 @@ class _ExpansionDatos extends StatelessWidget {
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w500),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Text(
@@ -331,7 +329,7 @@ class _ExpansionDatos extends StatelessWidget {
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w500),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                     ],
@@ -344,7 +342,7 @@ class _ExpansionDatos extends StatelessWidget {
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w700),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Text(
@@ -352,7 +350,7 @@ class _ExpansionDatos extends StatelessWidget {
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w700),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Text(
@@ -360,7 +358,7 @@ class _ExpansionDatos extends StatelessWidget {
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w700),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Text(
@@ -368,7 +366,7 @@ class _ExpansionDatos extends StatelessWidget {
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w700),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Text(
@@ -376,7 +374,7 @@ class _ExpansionDatos extends StatelessWidget {
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w700),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Text(
@@ -384,7 +382,7 @@ class _ExpansionDatos extends StatelessWidget {
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w700),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                     ],
@@ -414,7 +412,7 @@ class _CaracteriscaSlider extends StatelessWidget {
               right: 5,
             ),
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               height: 25,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
@@ -430,7 +428,7 @@ class _CaracteriscaSlider extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 5.0),
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               height: 25,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
@@ -446,7 +444,7 @@ class _CaracteriscaSlider extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 5),
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               height: 25,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
@@ -460,9 +458,9 @@ class _CaracteriscaSlider extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(right: 5),
+            padding: const EdgeInsets.only(right: 5),
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               height: 25,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
@@ -489,7 +487,7 @@ class _DescripcionMascota extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       child: ExpandableText(
         'Se da en adopción a Simón, es un perro mestizo pastor alemán, tiene 2 años y fue rescatado. Tiene caracter muy dosil y es amigable con todos los perros.',
         textAlign: TextAlign.justify,
