@@ -1,4 +1,8 @@
+// ignore_for_file: avoid_print
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pet_society/src/views/pages/help_page/sugestion_page.dart/suggestion_page.dart';
 
 class HelpPage extends StatelessWidget {
   const HelpPage({Key? key}) : super(key: key);
@@ -19,7 +23,10 @@ class HelpPage extends StatelessWidget {
         ),
         centerTitle: true,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context,
+                CupertinoPageRoute(builder: (context) => const HelpPage()));
+          },
           icon: const Icon(
             Icons.arrow_back_ios,
             color: Colors.black,
@@ -48,10 +55,10 @@ class HelpPage extends StatelessWidget {
                 imgPath: 'assets/images/sugerencia.png',
                 text: 'Tu opinión es importante, y\nmejorará tu experiencia.',
                 onTap: () {
-                  // Navigator.push(
-                  //     context,
-                  //     CupertinoPageRoute(
-                  //         builder: (context) => const SuggestionPage()));
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                          builder: (context) => const SuggestionPage()));
                 },
               ),
               _CardTypePublication(
@@ -130,7 +137,7 @@ class _CardTypePublication extends StatelessWidget {
                     color: Color(0xFF6444E7),
                   ),
                 ),
-                SizedBox(height: 2.0),
+                const SizedBox(height: 2.0),
                 Text(
                   text,
                   style: const TextStyle(

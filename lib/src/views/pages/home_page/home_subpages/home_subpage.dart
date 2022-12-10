@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -174,11 +176,13 @@ class _CarrouselPublication extends StatelessWidget {
                             ),
                             Text(
                               dataPost.usernameUser,
-                              style: CustomTextStyle.helperText2,
+                              style: CustomTextStyle.helperText2
+                                  .copyWith(color: CustomColor.grey),
                             ),
                             Text(
                               'Hace 30 min.',
-                              style: CustomTextStyle.helperText2,
+                              style: CustomTextStyle.helperText2
+                                  .copyWith(color: CustomColor.grey),
                             ),
                           ],
                         ),
@@ -206,7 +210,7 @@ class _CarrouselPublication extends StatelessWidget {
               const SizedBox(height: 10.0),
               Stack(
                 children: [
-                  Container(
+                  SizedBox(
                     height: 250,
                     child: ClipRRect(
                       borderRadius: const BorderRadius.only(
@@ -331,7 +335,7 @@ class _TitleCarrouselCards extends StatelessWidget {
               onPressed: () {
                 print('Navegar sgte. pg.');
               },
-              style: ButtonStyle(),
+              style: const ButtonStyle(),
               child: Text(
                 'Ver mas',
                 style: CustomTextStyle.seeMoreText.copyWith(
@@ -428,7 +432,8 @@ class _PhotoAndSearchInput extends StatelessWidget {
               decoration: containerDecoration(),
               child: Text(
                 '¿Deseas publicar?',
-                style: CustomTextStyle.helperText,
+                style: CustomTextStyle.helperText
+                    .copyWith(color: CustomColor.grey),
               ),
             ),
           ),

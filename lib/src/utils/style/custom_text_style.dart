@@ -36,7 +36,6 @@ class CustomTextStyle {
   static TextStyle text2 = GoogleFonts.poppins(
     fontSize: 16,
     fontWeight: FontWeight.w700,
-    // color: CustomColor.white,
   );
 
   static TextStyle paragraph = GoogleFonts.poppins(
@@ -48,13 +47,11 @@ class CustomTextStyle {
   static TextStyle helperText = GoogleFonts.poppins(
     fontSize: 12,
     fontWeight: FontWeight.w500,
-    color: CustomColor.grey,
   );
 
   static TextStyle helperText2 = GoogleFonts.poppins(
     fontSize: 10,
     fontWeight: FontWeight.w500,
-    color: CustomColor.grey,
   );
 
   // Aquí se definirán los estilos de fuente

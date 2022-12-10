@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:pet_society/src/models/pets_adoption_model.dart';
 import 'package:pet_society/src/models/pets_filter_model.dart';
 import 'package:pet_society/src/utils/color/custom_color.dart';
 import 'package:pet_society/src/utils/style/custom_text_style.dart';
@@ -17,11 +18,11 @@ class EnAdopcionSubPage extends StatelessWidget {
         backgroundColor: CustomColor.white2,
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          children: [
-            Row(
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 // Parte superior izquierda
@@ -84,11 +85,14 @@ class EnAdopcionSubPage extends StatelessWidget {
                 //
               ],
             ),
+          ),
 
-            const SizedBox(height: 8),
+          const SizedBox(height: 8),
 
-            // Search form
-            TextFormField(
+          // Search form
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: TextFormField(
               style: CustomTextStyle.text,
               autocorrect: true,
               keyboardType: TextInputType.text,
@@ -103,18 +107,45 @@ class EnAdopcionSubPage extends StatelessWidget {
                 ),
               ).copyWith(fillColor: CustomColor.white),
             ),
-            //
+          ),
+          //
 
-            // Filtro Animales
-            const _CarrouselPetsFilter(),
-            //
-          ],
-        ),
+          const SizedBox(height: 25),
+
+          // Filtro Animales
+          const _CarrouselPetsFilter(),
+          //
+
+          const SizedBox(height: 25),
+
+          // Texto: resultados
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  "Resultados encontrados 'número'",
+                  style: CustomTextStyle.helperText2
+                      .copyWith(color: CustomColor.grey),
+                ),
+              ],
+            ),
+          ),
+          //
+
+          const SizedBox(height: 16),
+
+          // Resultados de filtros
+          const _CarrouselResultsAdoption(),
+          //
+        ],
       ),
     );
   }
 }
 
+// Carrussel de Filtro de Mascotas
 class _CarrouselPetsFilter extends StatelessWidget {
   const _CarrouselPetsFilter({
     Key? key,
@@ -122,14 +153,14 @@ class _CarrouselPetsFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: 106,
+      color: CustomColor.white2,
       child: ListView.builder(
         itemCount: petsFilter.length,
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.only(left: 20.0, right: 10.0),
         itemBuilder: (context, index) {
-          //final PetsFilter = petsFilter[index];
           final dataPets = petsFilter[index];
 
           return Container(
@@ -145,15 +176,14 @@ class _CarrouselPetsFilter extends StatelessWidget {
                   child: MaterialButton(
                     height: 80,
                     minWidth: 80,
-                    color: CustomColor.secondary,
-                    disabledColor: CustomColor.white,
+                    color: CustomColor.white,
                     onPressed: () {},
                     child: SizedBox(
-                      width: 30,
-                      height: 30,
+                      width: 38,
+                      height: 38,
                       child: Image(
                         image: AssetImage(dataPets.iconPet),
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),
@@ -175,3 +205,77 @@ class _CarrouselPetsFilter extends StatelessWidget {
     );
   }
 }
+//
+
+// Carrusel de resultado de filtro de mascotas
+class _CarrouselResultsAdoption extends StatelessWidget {
+  const _CarrouselResultsAdoption({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: GridView.builder(
+        itemCount: petsAdoption.length,
+        padding: const EdgeInsets.all(13.5),
+        gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        itemBuilder: (context, index) {
+          final dataPets = petsAdoption[index];
+
+          return Container(
+            margin: const EdgeInsets.only(right: 6.5, left: 6.5, bottom: 13),
+            decoration:
+                containerDecoration().copyWith(color: CustomColor.white),
+            child: MaterialButton(
+              onPressed: () {},
+              child: Column(children: [
+                Expanded(
+                  flex: 3,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Image(
+                      image: NetworkImage(dataPets.photoPet),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+
+                // Descripción
+                Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 11),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              dataPets.namePet,
+                              style: CustomTextStyle.text.copyWith(
+                                color: CustomColor.primary,
+                              ),
+                            ),
+                            Text(
+                              dataPets.typePet,
+                              style: CustomTextStyle.helperText,
+                            ),
+                          ],
+                        ),
+                        const Icon(Icons.male),
+                      ],
+                    ),
+                  ),
+                ),
+              ]),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+//

@@ -11,11 +11,11 @@ class PetsFilter {
 List<PetsFilter> petsFilter = [
   PetsFilter(
     typePet: 'Todos',
-    iconPet: 'assets/icons/todosIcon_enAdocion.png',
+    iconPet: 'assets/icons/todosIcon_enAdopcion.png',
   ),
   PetsFilter(
     typePet: 'Perros',
-    iconPet: 'assets/icons/perrosIcon_enAdocion.png',
+    iconPet: 'assets/icons/perrosIcon_enAdopcion.png',
   ),
   PetsFilter(
     typePet: 'Gatos',
