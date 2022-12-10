@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pet_society/src/models/pets_adoption_model.dart';
-import 'package:pet_society/src/models/pets_help_model.dart';
 
 // Gestores de estado: Provider
 
-class CambioProviderAdopcion extends ChangeNotifier {
+class CambioProvider extends ChangeNotifier {
   String especie = 'Todos';
   int resultado = petsAdoption.length;
 
@@ -25,21 +24,4 @@ class CambioProviderAdopcion extends ChangeNotifier {
   //   // si el dato es falso, cambiar a true, si no, mantener en falso
   //   notifyListeners();
   // }
-}
-
-class CambioProviderHelp extends ChangeNotifier {
-  String status = 'Perdido';
-  int resultado = petsHelp.length;
-
-  String get isCambio => status;
-
-  filtroAyuda(String value) {
-    status = value;
-    notifyListeners();
-  }
-
-  totalAyuda(int value) {
-    resultado = value;
-    notifyListeners();
-  }
 }
