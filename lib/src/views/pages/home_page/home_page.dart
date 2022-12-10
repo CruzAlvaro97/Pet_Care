@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
+import 'package:pet_society/src/views/pages/home_page/home_subpages/ayuda_subpage.dart';
 import 'package:pet_society/src/views/pages/home_page/home_subpages/en_adopcion_subpage.dart';
 import 'package:pet_society/src/views/pages/home_page/home_subpages/home_subpage.dart';
 import 'package:pet_society/src/views/pages/home_page/home_subpages/profile_subpage.dart';
@@ -18,7 +19,8 @@ class _HomePageState extends State<HomePage> {
   static const List<Widget> _widgetOptions = [
     HomeSubPage(),
     EnAdopcionSubPage(),
-    Text('Apoyo'),
+    //Text('Apoyo'),
+    AyudaSubPage(),
     ProfileSubPage(),
   ];
   void _seletedOption(int index) {
