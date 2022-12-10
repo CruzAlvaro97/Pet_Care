@@ -180,10 +180,16 @@ class _CarrouselResultsHelp extends StatelessWidget {
                       flex: 5,
                       child: SizedBox(
                         width: double.infinity,
-                        child: Image(
-                          image: NetworkImage(dataPets.photoPet),
-                          fit: BoxFit.cover,
-                        ),
+                        child: (dataPets.namePet == 'MinPao' ||
+                                dataPets.namePet == 'Mango')
+                            ? Image(
+                                image: AssetImage(dataPets.photoPet),
+                                fit: BoxFit.cover,
+                              )
+                            : Image(
+                                image: NetworkImage(dataPets.photoPet),
+                                fit: BoxFit.cover,
+                              ),
                       ),
                     ),
 
