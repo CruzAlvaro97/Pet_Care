@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:pet_society/src/models/pets_adoption_model.dart';
 
 // Gestores de estado: Provider
 
 class CambioProvider extends ChangeNotifier {
-  bool dato = false;
-  bool dato1 = false;
+  String especie = 'Todos';
+  int resultado = petsAdoption.length;
 
-  bool get isCambio => dato;
+  String get isCambio => especie;
 
-  cambio(bool value) {
-    dato = value;
+  filtroAdopcion(String value) {
+    especie = value;
     notifyListeners();
   }
 
-  bttncambiar() {
-    (dato1 == false) ? (dato1 = true) : (dato1 = false);
-    // si el dato es falso, cambiar a true, si no, mantener en falso
+  totalAdopcion(int value) {
+    resultado = value;
     notifyListeners();
   }
+
+  // bttncambiar() {
+  //   (dato1 == false) ? (dato1 = true) : (dato1 = false);
+  //   // si el dato es falso, cambiar a true, si no, mantener en falso
+  //   notifyListeners();
+  // }
 }
