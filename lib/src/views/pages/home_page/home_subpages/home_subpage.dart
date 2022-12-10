@@ -1,11 +1,13 @@
 // ignore_for_file: avoid_print
 
 import 'package:expandable_text/expandable_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_society/src/models/pets_adoption_model.dart';
 import 'package:pet_society/src/models/publication_model.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
+import 'package:pet_society/src/views/pages/create_publication_page/create_publication_page.dart';
 import 'package:pet_society/src/views/widget/decoration_widget/container_decoration_widget.dart';
 
 class HomeSubPage extends StatelessWidget {
@@ -425,15 +427,24 @@ class _PhotoAndSearchInput extends StatelessWidget {
           ),
           const SizedBox(width: 10.0),
           Expanded(
-            child: Container(
-              height: 60,
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.only(left: 20.0),
-              decoration: containerDecoration(),
-              child: Text(
-                '¿Deseas publicar?',
-                style: CustomTextStyle.helperText
-                    .copyWith(color: CustomColor.grey),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => const CreatePublicationPage(),
+                    ));
+              },
+              child: Container(
+                height: 60,
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.only(left: 20.0),
+                decoration: containerDecoration(),
+                child: Text(
+                  '¿Deseas publicar?',
+                  style: CustomTextStyle.helperText
+                      .copyWith(color: CustomColor.grey),
+                ),
               ),
             ),
           ),
