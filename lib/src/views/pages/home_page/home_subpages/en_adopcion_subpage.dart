@@ -120,7 +120,7 @@ class EnAdopcionSubPage extends StatelessWidget {
           const _CarrouselPetsFilter(),
           //
 
-          const SizedBox(height: 25),
+          const SizedBox(height: 15),
 
           // Texto: resultados
           Padding(
@@ -160,7 +160,7 @@ class _CarrouselPetsFilter extends StatelessWidget {
     //final cambio = Provider.of<CambioProvider>(context);
     final cambio = Provider.of<CambioProviderAdopcion>(context);
     return Container(
-      height: 106,
+      height: 115,
       color: CustomColor.white2,
       child: ListView.builder(
         itemCount: petsFilter.length,
@@ -171,7 +171,7 @@ class _CarrouselPetsFilter extends StatelessWidget {
 
           return Container(
             width: 80,
-            height: 106,
+            height: 115,
             margin: const EdgeInsets.only(right: 10.0, bottom: 10.0),
             decoration:
                 containerDecoration().copyWith(color: CustomColor.white2),

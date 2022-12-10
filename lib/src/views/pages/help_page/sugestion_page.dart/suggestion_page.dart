@@ -130,7 +130,7 @@ InputDecoration customInputDecoration({
     filled: true,
     fillColor: Colors.white,
     hintText: hintText,
-    hintStyle: TextStyle(color: Colors.grey),
+    hintStyle: const TextStyle(color: Colors.grey),
     prefixIcon: prefixIcon,
     suffixIcon: suffixIcon,
     contentPadding: const EdgeInsets.all(20.0),

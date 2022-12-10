@@ -25,7 +25,7 @@ class _AdoptationPageState extends State<AdoptationPage> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.share),
+            icon: const Icon(Icons.share),
           )
         ],
       ),

@@ -41,7 +41,13 @@ class _HomePageState extends State<HomePage> {
 
       // BottomBar Salomon
       bottomNavigationBar: Container(
-        color: Colors.white,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
+          ),
+          color: Colors.white,
+        ),
         child: SalomonBottomBar(
           selectedColorOpacity: 0.3,
           selectedItemColor: CustomColor.primary,
