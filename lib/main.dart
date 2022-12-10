@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:pet_society/providers/switch_provider.dart';
 import 'package:pet_society/routes/routes.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => CambioProvider()),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

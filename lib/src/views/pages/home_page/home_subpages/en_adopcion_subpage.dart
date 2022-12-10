@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:pet_society/providers/switch_provider.dart';
 import 'package:pet_society/src/models/pets_adoption_model.dart';
 import 'package:pet_society/src/models/pets_filter_model.dart';
 import 'package:pet_society/src/utils/color/custom_color.dart';
 import 'package:pet_society/src/utils/style/custom_text_style.dart';
 import 'package:pet_society/src/views/widget/index_widgets.dart';
+import 'package:provider/provider.dart';
 
 class EnAdopcionSubPage extends StatelessWidget {
   const EnAdopcionSubPage({super.key});
@@ -21,7 +23,7 @@ class EnAdopcionSubPage extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            padding: const EdgeInsets.only(left: 20.0, right: 20, top: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -134,7 +136,7 @@ class EnAdopcionSubPage extends StatelessWidget {
           ),
           //
 
-          const SizedBox(height: 16),
+          const SizedBox(height: 2.5),
 
           // Resultados de filtros
           const _CarrouselResultsAdoption(),
@@ -217,6 +219,7 @@ class _CarrouselResultsAdoption extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: GridView.builder(
+        physics: const BouncingScrollPhysics(),
         itemCount: petsAdoption.length,
         padding: const EdgeInsets.all(13.5),
         gridDelegate:
@@ -228,11 +231,12 @@ class _CarrouselResultsAdoption extends StatelessWidget {
             margin: const EdgeInsets.only(right: 6.5, left: 6.5, bottom: 13),
             decoration:
                 containerDecoration().copyWith(color: CustomColor.white),
-            child: MaterialButton(
-              onPressed: () {},
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20), topRight: Radius.circular(20)),
               child: Column(children: [
                 Expanded(
-                  flex: 3,
+                  flex: 5,
                   child: SizedBox(
                     width: double.infinity,
                     child: Image(
@@ -244,28 +248,51 @@ class _CarrouselResultsAdoption extends StatelessWidget {
 
                 // Descripción
                 Expanded(
-                  flex: 1,
+                  flex: 3,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 11),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            // Nombre de mascota
                             Text(
                               dataPets.namePet,
                               style: CustomTextStyle.text.copyWith(
                                 color: CustomColor.primary,
                               ),
                             ),
-                            Text(
-                              dataPets.typePet,
-                              style: CustomTextStyle.helperText,
+                            //
+
+                            // Genero
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(5)),
+                                color: (dataPets.genderPet == 'Macho'
+                                    ? CustomColor.male
+                                    : CustomColor.female),
+                              ),
+                              width: 18,
+                              height: 18,
+                              child: Icon(
+                                dataPets.genderPet == 'Macho'
+                                    ? Icons.male
+                                    : Icons.female,
+                                size: 15,
+                                color: CustomColor.white,
+                              ),
                             ),
+                            //
                           ],
                         ),
-                        const Icon(Icons.male),
+                        Text(
+                          dataPets.typePet,
+                          style: CustomTextStyle.helperText,
+                        ),
                       ],
                     ),
                   ),
