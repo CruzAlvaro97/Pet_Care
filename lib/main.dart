@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
+    //ChangeNotifierProvider(create: (_) => CambioProvider()),
     ChangeNotifierProvider(create: (_) => CambioProviderAdopcion()),
     ChangeNotifierProvider(create: (_) => CambioProviderHelp()),
   ], child: const MyApp()));

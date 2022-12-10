@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
   static const List<Widget> _widgetOptions = [
     HomeSubPage(),
     EnAdopcionSubPage(),
+    //Text('Apoyo'),
     AyudaSubPage(),
     ProfileSubPage(),
   ];

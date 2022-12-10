@@ -13,6 +13,7 @@ class EnAdopcionSubPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //final cambio = Provider.of<CambioProvider>(context);
     final cambio = Provider.of<CambioProviderAdopcion>(context);
     return Scaffold(
       appBar: AppBar(
@@ -156,6 +157,7 @@ class _CarrouselPetsFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //final cambio = Provider.of<CambioProvider>(context);
     final cambio = Provider.of<CambioProviderAdopcion>(context);
     return Container(
       height: 106,
@@ -225,6 +227,7 @@ class _CarrouselResultsAdoption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //final cambio = Provider.of<CambioProvider>(context);
     final cambio = Provider.of<CambioProviderAdopcion>(context);
     List<PetsAdoption> petsAdoption2 = petsAdoption;
 
