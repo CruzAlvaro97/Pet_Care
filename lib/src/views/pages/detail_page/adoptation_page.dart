@@ -1,11 +1,14 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_society/src/models/publication2_model.dart';
+import 'package:pet_society/src/models/publication_model.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
 import 'package:pet_society/src/views/widget/button_widget/custom_button_widget.dart';
 
 class AdoptationPage extends StatefulWidget {
-  const AdoptationPage({super.key});
+  final Publication2 publication2;
+  const AdoptationPage({super.key, required this.publication2});
 
   @override
   State<AdoptationPage> createState() => _AdoptationPageState();
@@ -19,13 +22,38 @@ class _AdoptationPageState extends State<AdoptationPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       backgroundColor: CustomColor.white2,
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.white,
-        title: const Text('Caso de adopción'),
+        title: Text(
+          widget.publication2.isPublicationAdoption == true
+              ? 'En adopción'
+              : widget.publication2.isPublicationSupport == true
+                  ? 'Apoyo'
+                  : 'Se busca',
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 16.0,
+          ),
+        ),
         centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+            size: 20,
+          ),
+        ),
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.share),
+            padding: const EdgeInsets.only(right: 10.0),
+            icon: const Icon(
+              Icons.share_outlined,
+              color: Colors.black,
+            ),
           )
         ],
       ),
@@ -34,14 +62,38 @@ class _AdoptationPageState extends State<AdoptationPage> {
           padding: const EdgeInsets.only(bottom: 82),
           child: Column(
             children: [
-              _FotoSlider(),
+              //_FotoSlider(),
+              const SizedBox(height: 10.0),
+              Container(
+                height: 280,
+                child: ListView.builder(
+                  itemCount: widget.publication2.photo.length,
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.only(left: 20.0),
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      //height: 280,
+                      margin: const EdgeInsets.only(right: 10.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20.0),
+                        image: DecorationImage(
+                          image: NetworkImage(widget.publication2.photo),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Simon',
+                      widget.publication2.namePet,
                       style: CustomTextStyle.headline,
                     ),
                     IconButton(
@@ -65,18 +117,29 @@ class _AdoptationPageState extends State<AdoptationPage> {
                   ],
                 ),
               ),
-              _Autor(),
-              _DescripcionMascota(),
-              _CaracteriscaSlider(),
+              _Autor(
+                publication2: widget.publication2,
+              ),
+              _DescripcionMascota(publication2: widget.publication2),
+              const _CaracteriscaSlider(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Column(
                   children: [
-                    _ExpansionDatos(),
-                    SizedBox(
+                    _ExpansionDatos(
+                      publication2: widget.publication2,
+                    ),
+                    const SizedBox(
                       height: 15,
                     ),
-                    _ExpansionEntregaron()
+                    Visibility(
+                        visible: widget.publication2.isPublicationAdoption ==
+                                true
+                            ? true
+                            : widget.publication2.isPublicationSupport == true
+                                ? false
+                                : false,
+                        child: _ExpansionEntregaron())
                   ],
                 ),
               )
@@ -123,7 +186,7 @@ class _ExpansionEntregaron extends StatelessWidget {
               SizedBox(
                 width: 17,
               ),
-              Text('Me entregaron',
+              Text('Me entregan',
                   style: CustomTextStyle.text2.copyWith(
                     color: CustomColor.primary,
                   )),
@@ -244,9 +307,9 @@ class _ExpansionEntregaron extends StatelessWidget {
 }
 
 class _ExpansionDatos extends StatelessWidget {
-  const _ExpansionDatos({
-    Key? key,
-  }) : super(key: key);
+  final Publication2 publication2;
+
+  const _ExpansionDatos({super.key, required this.publication2});
 
   @override
   Widget build(BuildContext context) {
@@ -269,7 +332,7 @@ class _ExpansionDatos extends StatelessWidget {
               const SizedBox(
                 width: 17,
               ),
-              Text('Datos',
+              Text('Mis datos',
                   style: CustomTextStyle.text2.copyWith(
                     color: CustomColor.primary,
                   )),
@@ -301,7 +364,7 @@ class _ExpansionDatos extends StatelessWidget {
                         height: 15,
                       ),
                       Text(
-                        'Nacimiento',
+                        'Edad',
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w500),
                       ),
@@ -338,7 +401,7 @@ class _ExpansionDatos extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        'Perro',
+                        publication2.speciesPet,
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w700),
                       ),
@@ -346,7 +409,7 @@ class _ExpansionDatos extends StatelessWidget {
                         height: 15,
                       ),
                       Text(
-                        'Mestizo',
+                        publication2.breedPet,
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w700),
                       ),
@@ -354,7 +417,7 @@ class _ExpansionDatos extends StatelessWidget {
                         height: 15,
                       ),
                       Text(
-                        '04/12/20',
+                        '${publication2.agePet} año(s)',
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w700),
                       ),
@@ -362,7 +425,7 @@ class _ExpansionDatos extends StatelessWidget {
                         height: 15,
                       ),
                       Text(
-                        'Macho',
+                        publication2.sexPet,
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w700),
                       ),
@@ -370,7 +433,7 @@ class _ExpansionDatos extends StatelessWidget {
                         height: 15,
                       ),
                       Text(
-                        '24Kg',
+                        '${publication2.weigthPet} Kg',
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w700),
                       ),
@@ -378,7 +441,7 @@ class _ExpansionDatos extends StatelessWidget {
                         height: 15,
                       ),
                       Text(
-                        'Mediano',
+                        publication2.sizePet,
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w700),
                       ),
@@ -480,18 +543,17 @@ class _CaracteriscaSlider extends StatelessWidget {
 }
 
 class _DescripcionMascota extends StatelessWidget {
-  const _DescripcionMascota({
-    Key? key,
-  }) : super(key: key);
+  final Publication2 publication2;
+
+  const _DescripcionMascota({super.key, required this.publication2});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       child: ExpandableText(
-        'Se da en adopción a Simón, es un perro mestizo pastor alemán, tiene 2 años y fue rescatado. Tiene caracter muy dosil y es amigable con todos los perros.',
-        textAlign: TextAlign.justify,
-        style: CustomTextStyle.text,
+        publication2.description,
+        style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w500),
         expandText: 'Ver más',
         collapseText: 'Ocultar',
         expandOnTextTap: true,
@@ -504,9 +566,9 @@ class _DescripcionMascota extends StatelessWidget {
 }
 
 class _Autor extends StatelessWidget {
-  const _Autor({
-    Key? key,
-  }) : super(key: key);
+  final Publication2 publication2;
+
+  const _Autor({super.key, required this.publication2});
 
   @override
   Widget build(BuildContext context) {
@@ -516,15 +578,16 @@ class _Autor extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Publicado por: Asociación Huellitas Chimbote',
+            'Publicado por: ${publication2.nameUser} ${publication2.lastnameUser}',
             style: CustomTextStyle.paragraph.copyWith(color: Colors.grey),
           ),
           Row(
             children: [
               Text(
-                '@huellitas.chimbote ',
+                publication2.usernameUser,
                 style: CustomTextStyle.paragraph.copyWith(color: Colors.grey),
               ),
+              const SizedBox(width: 5),
               Image.asset('assets/images/Vectorverified.png')
             ],
           ),

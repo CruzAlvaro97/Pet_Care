@@ -4,11 +4,16 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_society/providers/favorite_provider.dart';
 import 'package:pet_society/src/models/pets_adoption_model.dart';
+import 'package:pet_society/src/models/publication2_model.dart';
 import 'package:pet_society/src/models/publication_model.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
 import 'package:pet_society/src/views/pages/create_publication_page/create_publication_page.dart';
+import 'package:pet_society/src/views/pages/detail_page/adoptation_page.dart';
+import 'package:pet_society/src/views/pages/home_page/home_subpages/en_adopcion_subpage.dart';
 import 'package:pet_society/src/views/widget/decoration_widget/container_decoration_widget.dart';
+import 'package:provider/provider.dart';
 
 class HomeSubPage extends StatelessWidget {
   const HomeSubPage({Key? key}) : super(key: key);
@@ -70,7 +75,7 @@ class HomeSubPage extends StatelessWidget {
             ),
             const _CarrouselAdoptPets(),
             const SizedBox(height: 30.0),
-            _CarrouselPublication(itemCount: publications.length - 3),
+            _CarrouselPublication2(),
           ],
         ),
       ),
@@ -137,12 +142,14 @@ class _CarrouselPublication extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final fav = Provider.of<FavoriteProvider>(context);
+    print('hola');
     return ListView.builder(
       itemCount: itemCount,
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        final dataPost = publications[index];
+        final dataPost = publications2[index];
 
         return Container(
           width: double.infinity,
@@ -213,6 +220,202 @@ class _CarrouselPublication extends StatelessWidget {
               Stack(
                 children: [
                   SizedBox(
+                    width: double.infinity,
+                    height: 250,
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20.0),
+                        topRight: Radius.circular(20.0),
+                      ),
+                      child: Image.network(
+                        dataPost.photo,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0,
+                      vertical: 10.0,
+                    ),
+                    child: Column(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            fav.changeStatusFavorite(fav.isFavorite);
+                          },
+                          icon: Icon(
+                            fav.isFavorite
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_border_rounded,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                          padding: EdgeInsets.zero,
+                        ),
+                        Text(
+                          dataPost.likes.toString(),
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                            height: 1,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5.0,
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.messenger_outline_rounded,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                          padding: EdgeInsets.zero,
+                        ),
+                        Text(
+                          dataPost.commentary.toString(),
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                            height: 1,
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              GestureDetector(
+                onTap: (() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AdoptationPage(
+                        publication2: dataPost,
+                      ),
+                    ),
+                  );
+                }),
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(20.0),
+                      bottomRight: Radius.circular(20.0),
+                    ),
+                    color: CustomColor.primary,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Conoce más',
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(width: 5.0),
+                      const Icon(
+                        Icons.arrow_right_alt,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _CarrouselPublication2 extends StatelessWidget {
+  const _CarrouselPublication2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: publications.length - 3,
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        final dataPost = publications2[index + 3];
+
+        return Container(
+          width: double.infinity,
+          margin: const EdgeInsets.only(
+            bottom: 10.0,
+            right: 20.0,
+            left: 20.0,
+          ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20.0,
+            vertical: 20.0,
+          ),
+          decoration: containerDecoration(),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 55 / 2,
+                    backgroundImage: NetworkImage(dataPost.photoUser),
+                  ),
+                  const SizedBox(width: 10.0),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${dataPost.nameUser} ${dataPost.lastnameUser}',
+                              style: CustomTextStyle.text,
+                            ),
+                            Text(
+                              dataPost.usernameUser,
+                              style: CustomTextStyle.helperText2
+                                  .copyWith(color: CustomColor.grey),
+                            ),
+                            Text(
+                              'Hace 30 min.',
+                              style: CustomTextStyle.helperText2
+                                  .copyWith(color: CustomColor.grey),
+                            ),
+                          ],
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.more_horiz_rounded),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10.0),
+              ExpandableText(
+                dataPost.description,
+                textAlign: TextAlign.left,
+                style: CustomTextStyle.paragraph,
+                expandText: 'Ver más',
+                collapseText: 'Ocultar',
+                expandOnTextTap: true,
+                collapseOnTextTap: true,
+                maxLines: 2,
+                linkColor: Colors.grey,
+              ),
+              const SizedBox(height: 10.0),
+              Stack(
+                children: [
+                  SizedBox(
+                    width: double.infinity,
                     height: 250,
                     child: ClipRRect(
                       borderRadius: const BorderRadius.only(
@@ -274,32 +477,44 @@ class _CarrouselPublication extends StatelessWidget {
                   )
                 ],
               ),
-              Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(20.0),
-                    bottomRight: Radius.circular(20.0),
-                  ),
-                  color: CustomColor.primary,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Conoce más',
-                      style: GoogleFonts.poppins(
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
+              GestureDetector(
+                onTap: (() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AdoptationPage(
+                        publication2: dataPost,
                       ),
                     ),
-                    const SizedBox(width: 5.0),
-                    const Icon(
-                      Icons.arrow_right_alt,
-                      color: Colors.white,
+                  );
+                }),
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(20.0),
+                      bottomRight: Radius.circular(20.0),
                     ),
-                  ],
+                    color: CustomColor.primary,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Conoce más',
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(width: 5.0),
+                      const Icon(
+                        Icons.arrow_right_alt,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

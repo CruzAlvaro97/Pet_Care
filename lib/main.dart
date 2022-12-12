@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_society/providers/favorite_provider.dart';
 import 'package:pet_society/providers/switch_provider.dart';
 import 'package:pet_society/routes/routes.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
@@ -9,6 +10,7 @@ void main() {
     //ChangeNotifierProvider(create: (_) => CambioProvider()),
     ChangeNotifierProvider(create: (_) => CambioProviderAdopcion()),
     ChangeNotifierProvider(create: (_) => CambioProviderHelp()),
+    ChangeNotifierProvider(create: (_) => FavoriteProvider()),
   ], child: const MyApp()));
 }
 

@@ -3,6 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:pet_society/providers/switch_provider.dart';
 import 'package:pet_society/src/models/pets_adoption_model.dart';
 import 'package:pet_society/src/models/pets_filter_model.dart';
+import 'package:pet_society/src/models/publication_model.dart';
 import 'package:pet_society/src/utils/color/custom_color.dart';
 import 'package:pet_society/src/utils/style/custom_text_style.dart';
 import 'package:pet_society/src/views/widget/index_widgets.dart';
@@ -238,6 +239,8 @@ class _CarrouselResultsAdoption extends StatelessWidget {
         filtrados.add(i);
       } else {}
     }
+
+    //print(filtrados.length);
 
     // {
     // cambio.totalAdopcion(filtrados.length);
