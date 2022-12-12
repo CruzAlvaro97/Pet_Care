@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 
 class FavoriteProvider with ChangeNotifier {
-  bool _isFavorite = false;
+  List<int> _selectedItem = [];
 
-  bool get isFavorite => _isFavorite;
+  List<int> get selectedItem => _selectedItem;
 
-  void changeStatusFavorite(bool value) {
-    _isFavorite = !value;
+  void addItem(int value) {
+    _selectedItem.add(value);
+    notifyListeners();
+  }
+
+  void removeItem(int value) {
+    _selectedItem.remove(value);
+    notifyListeners();
   }
 }

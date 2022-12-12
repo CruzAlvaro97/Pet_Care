@@ -25,6 +25,8 @@ class Publication2 {
   bool isPublicationSupport;
   bool isPublicationSearch;
 
+  List<String> pics;
+
   Publication2({
     //post
     required this.id,
@@ -52,6 +54,8 @@ class Publication2 {
     required this.isPublicationSearch,
 
     //pet
+
+    required this.pics,
   });
 }
 
@@ -84,20 +88,27 @@ List<Publication2> publications2 = [
     isPublicationAdoption: true,
     isPublicationSupport: false,
     isPublicationSearch: false,
+    //
+    pics: [
+      'https://images.unsplash.com/photo-1573865526739-10659fec78a5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=715&q=80',
+      "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      'https://images.unsplash.com/photo-1574063413132-354db9f190fd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80',
+      'https://images.unsplash.com/photo-1596854407944-bf87f6fdd49e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
+    ],
   ),
   Publication2(
     id: 2,
     description:
         "¡AYÚDENME A ENCONTRAR A KEYLOR! Amigos de Facebook, mi cachorro salió hace 3 semanas de mi casa y no pudo volver, tiene 7 meses de edad, su manto es de color plomo-negro y el trébol en su rostro es bastante pronunciado. Mi familia y sobretodo yo lo extrañamos mucho, si alguien lo reconoce, les pido que por favor se comuniquen con los números en la imagen (el primero es mi número personal). Se reconocerá una recompensa 🙏",
     photo:
-        'https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',
+        'https://cdn.pixabay.com/photo/2019/04/13/13/58/pit-bull-4124677__340.jpg',
     likes: 53,
     commentary: 22,
     idUser: 2,
     nameUser: 'Julio',
     lastnameUser: 'Torres',
     photoUser:
-        'https://images.unsplash.com/photo-1442328166075-47fe7153c128?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        'https://images.unsplash.com/photo-1615109398623-88346a601842?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
     usernameUser: '@julio_to',
 
     ///
@@ -113,20 +124,26 @@ List<Publication2> publications2 = [
     isPublicationAdoption: false,
     isPublicationSupport: true,
     isPublicationSearch: false,
+
+    pics: [
+      'https://cdn.pixabay.com/photo/2019/04/13/13/58/pit-bull-4124677__340.jpg',
+      'https://cdn.pixabay.com/photo/2019/06/04/20/33/dog-4252274__340.jpg',
+      'https://cdn.pixabay.com/photo/2019/04/26/21/50/dog-4158784__340.jpg',
+    ],
   ),
   Publication2(
     id: 3,
     description:
         'Hola , hago esta publicación porque aún tengo esperanza de que aparezca mi perrito , se perdió el día miércoles 30 de noviembre , ayer se cumplió una semana de su desaparición. Mi perro se llama Braco y se perdió en Nv.Chimbote - Urb.Bellamar 2da etapa Referencia frente al hotel Afrodita.',
     photo:
-        'https://images.unsplash.com/photo-1612389258858-b1da33e68ae0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
+        'https://cdn.pixabay.com/photo/2016/01/13/08/16/cute-1137375__340.jpg',
     likes: 23,
     commentary: 11,
     idUser: 3,
     nameUser: 'Lorena',
     lastnameUser: 'Matta',
     photoUser:
-        'https://images.unsplash.com/photo-1628015081036-0747ec8f077a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+        'https://images.unsplash.com/photo-1599842057874-37393e9342df?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
     usernameUser: '@lorenam',
 
     ///
@@ -142,14 +159,20 @@ List<Publication2> publications2 = [
     isPublicationAdoption: false,
     isPublicationSupport: false,
     isPublicationSearch: true,
+
+    pics: [
+      'https://cdn.pixabay.com/photo/2016/01/13/08/16/cute-1137375__340.jpg',
+      'https://cdn.pixabay.com/photo/2022/05/04/09/41/shitzu-7173610__340.jpg',
+      'https://cdn.pixabay.com/photo/2022/03/02/09/36/shitzu-7042735__340.jpg',
+    ],
   ),
   Publication2(
     id: 4,
     description:
         '💕🦮Pequeños en Busca de una familia responsable que les brinde mucho amor y buena calidad de vida💕',
     photo:
-        'https://images.unsplash.com/photo-1564087040905-670d5e551bac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80',
-    likes: 55,
+        'https://cdn.pixabay.com/photo/2017/09/15/19/49/dog-2753369__340.jpg',
+    likes: 57,
     commentary: 51,
     idUser: 4,
     nameUser: 'Marco',
@@ -171,20 +194,26 @@ List<Publication2> publications2 = [
     isPublicationAdoption: true,
     isPublicationSupport: false,
     isPublicationSearch: false,
+
+    pics: [
+      'https://cdn.pixabay.com/photo/2017/09/15/19/49/dog-2753369__340.jpg',
+      'https://cdn.pixabay.com/photo/2022/11/07/02/12/golden-retriever-7575400__340.jpg',
+      'https://cdn.pixabay.com/photo/2018/11/13/16/09/puppy-3813379__340.jpg',
+    ],
   ),
   Publication2(
     id: 5,
     description:
         'ADOPCION RESPONSABLE❤️🐶\nCACHORRITOS DE UN MES  , CRIOLLITOS DE RAZA PEQUEÑA .NECESITAN DUEÑOS QUE PUEDAN CUIDARLOS CORRECTAMENTE. Ayudenme a encontrar hogar  a estos angelitos..',
     photo:
-        'https://images.unsplash.com/photo-1588022274210-7aab7c55c631?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-    likes: 72,
+        'https://cdn.pixabay.com/photo/2017/03/29/10/35/animal-2184791__340.jpg',
+    likes: 49,
     commentary: 54,
     idUser: 5,
     nameUser: 'Paola',
     lastnameUser: 'Fernandez',
     photoUser:
-        'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        'https://images.unsplash.com/photo-1558499932-9609acb6f443?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
     usernameUser: '@paof',
 
     ///
@@ -200,6 +229,12 @@ List<Publication2> publications2 = [
     isPublicationAdoption: true,
     isPublicationSupport: false,
     isPublicationSearch: false,
+
+    pics: [
+      'https://cdn.pixabay.com/photo/2017/03/29/10/35/animal-2184791__340.jpg',
+      'https://cdn.pixabay.com/photo/2014/11/28/08/23/dog-548611__340.jpg',
+      'https://cdn.pixabay.com/photo/2018/12/17/07/43/labrador-3879893__340.jpg',
+    ],
   ),
   Publication2(
     id: 6,
@@ -213,7 +248,7 @@ List<Publication2> publications2 = [
     nameUser: 'Patty',
     lastnameUser: 'Wong',
     photoUser:
-        'https://images.unsplash.com/photo-1506901437675-cde80ff9c746?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        'https://cdn.pixabay.com/photo/2014/03/20/23/48/siberian-husky-291721__340.jpg',
     usernameUser: '@pattyw',
 
     ///
@@ -229,13 +264,19 @@ List<Publication2> publications2 = [
     isPublicationAdoption: true,
     isPublicationSupport: false,
     isPublicationSearch: false,
+
+    pics: [
+      'https://cdn.pixabay.com/photo/2014/03/20/23/48/siberian-husky-291721__340.jpg',
+      'https://cdn.pixabay.com/photo/2016/10/26/14/47/siberian-husky-1771667__340.jpg',
+      'https://cdn.pixabay.com/photo/2017/06/26/12/39/husky-2443664__340.jpg',
+    ],
   ),
   Publication2(
     id: 7,
     description:
         'Bns. tardes, se solicita apoyo para Luna, es una gatita que encontré por el mercado 21 de Abril, necesita apoyo ya que se encontró herida y con varias fracturas. Ayudenme por favor, pueden llamar al siguiente numero o contactarnos por aquí 992 323 232. Espero su apoyo 🙏🙏🙏🙏',
     photo:
-        'https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80',
+        'https://cdn.pixabay.com/photo/2017/01/20/21/22/kitten-asleep-in-a-pot-1995961__340.jpg',
     likes: 47,
     commentary: 24,
     idUser: 7,
@@ -258,5 +299,11 @@ List<Publication2> publications2 = [
     isPublicationAdoption: false,
     isPublicationSupport: true,
     isPublicationSearch: false,
+
+    pics: [
+      'https://cdn.pixabay.com/photo/2017/01/20/21/22/kitten-asleep-in-a-pot-1995961__340.jpg',
+      'https://cdn.pixabay.com/photo/2018/03/27/17/25/cat-3266671__340.jpg',
+      'https://cdn.pixabay.com/photo/2016/11/21/14/47/adorable-1845790__340.jpg',
+    ],
   ),
 ];

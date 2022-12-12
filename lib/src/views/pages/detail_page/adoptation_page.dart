@@ -67,7 +67,7 @@ class _AdoptationPageState extends State<AdoptationPage> {
               Container(
                 height: 280,
                 child: ListView.builder(
-                  itemCount: widget.publication2.photo.length,
+                  itemCount: widget.publication2.pics.length,
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.only(left: 20.0),
                   physics: const BouncingScrollPhysics(),
@@ -79,7 +79,7 @@ class _AdoptationPageState extends State<AdoptationPage> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.0),
                         image: DecorationImage(
-                          image: NetworkImage(widget.publication2.photo),
+                          image: NetworkImage(widget.publication2.pics[index]),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -553,7 +553,7 @@ class _DescripcionMascota extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       child: ExpandableText(
         publication2.description,
-        style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w500),
+        style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w500),
         expandText: 'Ver más',
         collapseText: 'Ocultar',
         expandOnTextTap: true,

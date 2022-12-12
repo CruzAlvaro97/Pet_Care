@@ -143,7 +143,7 @@ class _CarrouselPublication extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fav = Provider.of<FavoriteProvider>(context);
-    print('hola');
+
     return ListView.builder(
       itemCount: itemCount,
       physics: const NeverScrollableScrollPhysics(),
@@ -219,17 +219,34 @@ class _CarrouselPublication extends StatelessWidget {
               const SizedBox(height: 10.0),
               Stack(
                 children: [
-                  SizedBox(
-                    width: double.infinity,
-                    height: 250,
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(20.0),
-                        topRight: Radius.circular(20.0),
-                      ),
-                      child: Image.network(
-                        dataPost.photo,
-                        fit: BoxFit.cover,
+                  GestureDetector(
+                    onDoubleTap: () {
+                      if (fav.selectedItem.contains(index)) {
+                        fav.removeItem(index);
+                        publications2
+                            .where((x) => x.id == index + 1)
+                            .first
+                            .likes = publications2[index].likes - 1;
+                      } else {
+                        fav.addItem(index);
+                        publications2
+                            .where((x) => x.id == index + 1)
+                            .first
+                            .likes = publications2[index].likes + 1;
+                      }
+                    },
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 250,
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20.0),
+                          topRight: Radius.circular(20.0),
+                        ),
+                        child: Image.network(
+                          dataPost.photo,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -242,13 +259,27 @@ class _CarrouselPublication extends StatelessWidget {
                       children: [
                         IconButton(
                           onPressed: () {
-                            fav.changeStatusFavorite(fav.isFavorite);
+                            if (fav.selectedItem.contains(index)) {
+                              fav.removeItem(index);
+                              publications2
+                                  .where((x) => x.id == index + 1)
+                                  .first
+                                  .likes = publications2[index].likes - 1;
+                            } else {
+                              fav.addItem(index);
+                              publications2
+                                  .where((x) => x.id == index + 1)
+                                  .first
+                                  .likes = publications2[index].likes + 1;
+                            }
                           },
                           icon: Icon(
-                            fav.isFavorite
+                            fav.selectedItem.contains(index)
                                 ? Icons.favorite_rounded
                                 : Icons.favorite_border_rounded,
-                            color: Colors.white,
+                            color: fav.selectedItem.contains(index)
+                                ? Colors.red
+                                : Colors.white,
                             size: 30,
                           ),
                           padding: EdgeInsets.zero,
@@ -339,6 +370,7 @@ class _CarrouselPublication2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final fav = Provider.of<FavoriteProvider>(context);
     return ListView.builder(
       itemCount: publications.length - 3,
       physics: const NeverScrollableScrollPhysics(),
@@ -414,17 +446,34 @@ class _CarrouselPublication2 extends StatelessWidget {
               const SizedBox(height: 10.0),
               Stack(
                 children: [
-                  SizedBox(
-                    width: double.infinity,
-                    height: 250,
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(20.0),
-                        topRight: Radius.circular(20.0),
-                      ),
-                      child: Image.network(
-                        dataPost.photo,
-                        fit: BoxFit.cover,
+                  GestureDetector(
+                    onDoubleTap: () {
+                      if (fav.selectedItem.contains(index + 3)) {
+                        fav.removeItem(index + 3);
+                        publications2
+                            .where((x) => x.id == index + 4)
+                            .first
+                            .likes = publications2[index + 3].likes - 1;
+                      } else {
+                        fav.addItem(index + 3);
+                        publications2
+                            .where((x) => x.id == index + 4)
+                            .first
+                            .likes = publications2[index + 3].likes + 1;
+                      }
+                    },
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 250,
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20.0),
+                          topRight: Radius.circular(20.0),
+                        ),
+                        child: Image.network(
+                          dataPost.photo,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -436,10 +485,28 @@ class _CarrouselPublication2 extends StatelessWidget {
                     child: Column(
                       children: [
                         IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.favorite_border_rounded,
-                            color: Colors.white,
+                          onPressed: () {
+                            if (fav.selectedItem.contains(index + 3)) {
+                              fav.removeItem(index + 3);
+                              publications2
+                                  .where((x) => x.id == index + 4)
+                                  .first
+                                  .likes = publications2[index + 3].likes - 1;
+                            } else {
+                              fav.addItem(index + 3);
+                              publications2
+                                  .where((x) => x.id == index + 4)
+                                  .first
+                                  .likes = publications2[index + 3].likes + 1;
+                            }
+                          },
+                          icon: Icon(
+                            fav.selectedItem.contains(index + 3)
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_border_rounded,
+                            color: fav.selectedItem.contains(index + 3)
+                                ? Colors.red
+                                : Colors.white,
                             size: 30,
                           ),
                           padding: EdgeInsets.zero,
