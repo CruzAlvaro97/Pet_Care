@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pet_society/src/views/pages/help_page/preguntas_frecuentes/preguntas_frecuentes.dart';
 import 'package:pet_society/src/views/pages/help_page/sugestion_page.dart/suggestion_page.dart';
 
 class HelpPage extends StatelessWidget {
@@ -75,7 +76,10 @@ class HelpPage extends StatelessWidget {
                 imgPath: 'assets/images/preguntas.png',
                 text: 'Lorem Ipsum is simply\ntext of the printing.',
                 onTap: () {
-                  print('FAQ');
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                          builder: (context) => const PreguntasFrecuentes()));
                 },
               ),
             ],
