@@ -9,9 +9,11 @@ class Preferences {
   static String _city = '';
   static String _country = '';
   static int _gender = 1;
+  static String _age = '';
   static String _number = '';
   static String _email = '';
   static String _role = '';
+  static String _description = '';
   static bool _theme = false;
 
   static Future init() async {
@@ -84,6 +86,16 @@ class Preferences {
     _prefs.setInt('gender', gender);
   }
 
+  //Age
+  static String get age {
+    return _prefs.getString('age') ?? _age;
+  }
+
+  static set age(String age) {
+    _age = age;
+    _prefs.setString('age', age);
+  }
+
   //Number
   static String get number {
     return _prefs.getString('number') ?? _number;
@@ -112,6 +124,16 @@ class Preferences {
   static set role(String role) {
     _role = role;
     _prefs.setString('role', role);
+  }
+
+  //Description
+  static String get description {
+    return _prefs.getString('description') ?? _description;
+  }
+
+  static set description(String description) {
+    _description = description;
+    _prefs.setString('description', description);
   }
 
   //Theme

@@ -13,7 +13,7 @@ class EspecieProvider with ChangeNotifier {
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdtbHFjZWxlbHZpZHNrcHR0a3RtIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzEyMDc4NzksImV4cCI6MTk4Njc4Mzg3OX0.NMVaxzs5yYxn4HKslYG1Wy3fi2y_eZhnzkmPJXmg2Pk',
   };
 
-  String _especieSelected = '--';
+  String _especieSelected = '';
 
   String get especieSelected => _especieSelected;
 
@@ -87,7 +87,7 @@ class EspecieProvider with ChangeNotifier {
       _listaEspecies.add(especie);
     });
 
-    print('PeticiÃ³n HTTP Especies');
+    print('Peticion HTTP Especies');
     notifyListeners();
   }
 }

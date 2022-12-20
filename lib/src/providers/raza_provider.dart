@@ -17,7 +17,7 @@ class RazaProvider with ChangeNotifier {
   List<Raza> _listaRazas = [];
   List<Raza> _listaRazasFiltradas = [];
 
-  String _razaSelected = '--';
+  String _razaSelected = '';
 
   String get razaSelected => _razaSelected;
 
@@ -60,7 +60,7 @@ class RazaProvider with ChangeNotifier {
       _listaRazas.add(raza);
     });
 
-    print('PeticiÃ³n HTTP Razas');
+    print('Peticion HTTP Razas');
     notifyListeners();
   }
 }

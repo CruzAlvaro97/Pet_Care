@@ -4,10 +4,12 @@ import 'dart:io';
 
 import 'package:another_stepper/another_stepper.dart';
 import 'package:dropdown_plus/dropdown_plus.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:group_button/group_button.dart';
 import 'package:list_picker/list_picker.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pet_society/src/models/especie_model.dart';
 import 'package:pet_society/src/models/raza_model.dart';
 import 'package:pet_society/src/preferences/formadoptation_preferences.dart';
@@ -15,6 +17,7 @@ import 'package:pet_society/src/providers/especie_provider.dart';
 import 'package:pet_society/src/providers/raza_provider.dart';
 import 'package:pet_society/src/providers/storage_list_images_provider.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
+import 'package:pet_society/src/views/pages/form_adoption_pet/prev/previsualizacion_post_page.dart';
 import 'package:pet_society/src/views/widget/index_widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -26,66 +29,71 @@ class FormAdoptationPage extends StatefulWidget {
 }
 
 class _FormAdoptationPageState extends State<FormAdoptationPage> {
+  Map<String, bool> estado_mascota_map = Map.fromIterable(
+      ['vacunado', 'desparasitado', 'sano', 'esterilizado', 'otras'],
+      value: (item) => false);
+
   bool statusVacunado = false;
   bool statusDesparasitado = false;
   bool statusSano = false;
   bool statusEsterelizado = false;
   bool statusOtrasOperaciones = false;
-  late TextEditingController _controller;
-  late TextEditingController _controller2;
-  late TextEditingController _controllerEdad;
-  late TextEditingController _controllerNombre;
-  late TextEditingController _controllerDesc;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _controller = TextEditingController(text: '');
-    _controller2 = TextEditingController(text: '');
-    _controllerDesc = TextEditingController(text: '');
-    _controllerEdad = TextEditingController(text: '');
-    _controllerNombre = TextEditingController(text: '');
-  }
 
-  bool isChecked = false;
+  bool isCheckedMale = false;
+  bool isCheckedFemale = false;
   int currentIndex = 0;
   List<StepperData> stepperData = [
     StepperData(
-        iconWidget: Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
+      iconWidget: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
           color: CustomColor.primary.withOpacity(0.3),
-          borderRadius: BorderRadius.all(Radius.circular(30))),
-      child: Center(
+          borderRadius: BorderRadius.all(
+            Radius.circular(30),
+          ),
+        ),
+        child: Center(
           child: Text(
-        '1',
-        style: CustomTextStyle.text,
-      )),
-    )),
+            '1',
+            style: CustomTextStyle.text.copyWith(fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    ),
     StepperData(
-        iconWidget: Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
+      iconWidget: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
           color: CustomColor.primary.withOpacity(0.3),
-          borderRadius: BorderRadius.all(Radius.circular(30))),
-      child: Center(
+          borderRadius: BorderRadius.all(
+            Radius.circular(30),
+          ),
+        ),
+        child: Center(
           child: Text(
-        '2',
-        style: CustomTextStyle.text,
-      )),
-    )),
+            '2',
+            style: CustomTextStyle.text.copyWith(fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    ),
     StepperData(
-        iconWidget: Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
+      iconWidget: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
           color: CustomColor.primary.withOpacity(0.3),
-          borderRadius: BorderRadius.all(Radius.circular(30))),
-      child: Center(
+          borderRadius: BorderRadius.all(
+            Radius.circular(30),
+          ),
+        ),
+        child: Center(
           child: Text(
-        '3',
-        style: CustomTextStyle.text,
-      )),
-    )),
+            '3',
+            style: CustomTextStyle.text.copyWith(fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    ),
   ];
 
   @override
@@ -107,6 +115,7 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
         backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -134,7 +143,7 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                         Text(
                           'Nombre',
                           style: CustomTextStyle.text2
-                              .copyWith(color: CustomColor.grey, fontSize: 20),
+                              .copyWith(color: CustomColor.grey, fontSize: 18),
                           textAlign: TextAlign.start,
                         ),
                         SizedBox(
@@ -148,7 +157,7 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                               print(Preferences.name);
                             });
                           },
-                          style: TextStyle(color: Colors.black),
+                          style: GoogleFonts.poppins(color: Colors.black),
                           autocorrect: false,
                           keyboardType: TextInputType.text,
                           decoration: formDecorationWidget(
@@ -161,7 +170,7 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                         Text(
                           'Especie',
                           style: CustomTextStyle.text2
-                              .copyWith(color: CustomColor.grey, fontSize: 20),
+                              .copyWith(color: CustomColor.grey, fontSize: 18),
                           textAlign: TextAlign.start,
                         ),
                         SizedBox(
@@ -171,13 +180,13 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedBox(
-                              width: 300,
+                              width: 280,
                               child: TextFormField(
+                                keyboardType: TextInputType.none,
                                 controller: TextEditingController(
                                     text: serviceProvider2.especieSelected),
-                                style: TextStyle(color: Colors.black),
+                                style: GoogleFonts.poppins(color: Colors.black),
                                 autocorrect: false,
-                                keyboardType: TextInputType.text,
                                 decoration: formDecorationWidget(
                                   hintText: 'Selecciona una especie',
                                 ),
@@ -251,7 +260,7 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                         Text(
                           'Raza',
                           style: CustomTextStyle.text2
-                              .copyWith(color: CustomColor.grey, fontSize: 20),
+                              .copyWith(color: CustomColor.grey, fontSize: 18),
                           textAlign: TextAlign.start,
                         ),
                         SizedBox(
@@ -261,13 +270,13 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedBox(
-                              width: 300,
+                              width: 280,
                               child: TextFormField(
-                                style: TextStyle(color: Colors.black),
+                                style: GoogleFonts.poppins(color: Colors.black),
                                 controller: TextEditingController(
                                     text: razaProvider2.razaSelected),
                                 autocorrect: false,
-                                keyboardType: TextInputType.text,
+                                keyboardType: TextInputType.none,
                                 decoration: formDecorationWidget(
                                   hintText: 'Selecciona una raza',
                                 ),
@@ -313,7 +322,7 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                         Text(
                           'Sexo:',
                           style: CustomTextStyle.text2
-                              .copyWith(color: CustomColor.grey, fontSize: 20),
+                              .copyWith(color: CustomColor.grey, fontSize: 18),
                           textAlign: TextAlign.start,
                         ),
                         SizedBox(
@@ -332,16 +341,21 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(10)),
-                                      value: isChecked,
+                                      value: isCheckedMale,
                                       activeColor: CustomColor.primary,
                                       checkColor: CustomColor.primary,
                                       onChanged: (value) {
                                         setState(() {
-                                          isChecked = !isChecked;
+                                          isCheckedMale = !isCheckedMale;
+                                          isCheckedFemale = false;
+                                          Preferences.gender = 1;
                                         });
                                       },
                                     ),
-                                    Text('Masculino'),
+                                    Text(
+                                      'Macho',
+                                      style: GoogleFonts.poppins(),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -354,16 +368,21 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(10)),
-                                      value: isChecked,
+                                      value: isCheckedFemale,
                                       activeColor: CustomColor.primary,
                                       checkColor: CustomColor.primary,
                                       onChanged: (value) {
                                         setState(() {
-                                          isChecked = !isChecked;
+                                          isCheckedFemale = !isCheckedFemale;
+                                          isCheckedMale = false;
+                                          Preferences.gender = 2;
                                         });
                                       },
                                     ),
-                                    Text('Femenino'),
+                                    Text(
+                                      'Hembra',
+                                      style: GoogleFonts.poppins(),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -376,20 +395,26 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                         Text(
                           'Edad',
                           style: CustomTextStyle.text2
-                              .copyWith(color: CustomColor.grey, fontSize: 20),
+                              .copyWith(color: CustomColor.grey, fontSize: 18),
                           textAlign: TextAlign.start,
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         TextFormField(
-                          controller: TextEditingController(text: ''),
-                          style: TextStyle(color: Colors.black),
+                          initialValue: Preferences.age,
+                          style: GoogleFonts.poppins(color: Colors.black),
                           autocorrect: false,
                           keyboardType: TextInputType.number,
                           decoration: formDecorationWidget(
                             hintText: 'Ingrese su edad',
                           ),
+                          onChanged: (value) {
+                            Preferences.age = value;
+                            setState(() {
+                              print(Preferences.age);
+                            });
+                          },
                         ),
                         SizedBox(
                           height: 32,
@@ -398,6 +423,7 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                     ))
                 : (currentIndex == 1)
                     ? Container(
+                        key: Key('2'),
                         padding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                         width: double.infinity,
@@ -407,21 +433,25 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                             Text(
                               'Descripción del post',
                               style: CustomTextStyle.text2.copyWith(
-                                  color: CustomColor.grey, fontSize: 20),
+                                  color: CustomColor.grey, fontSize: 18),
                               textAlign: TextAlign.start,
                             ),
                             SizedBox(
                               height: 10,
                             ),
                             TextFormField(
-                              controller: TextEditingController(text: ''),
+                              initialValue: Preferences.description,
+                              onChanged: (value) {
+                                Preferences.description = value;
+                                setState(() {});
+                              },
                               maxLines: null,
                               maxLength: 600,
-                              style: TextStyle(color: Colors.black),
+                              style: GoogleFonts.poppins(color: Colors.black),
                               autocorrect: false,
                               keyboardType: TextInputType.text,
                               decoration: formDecorationWidget(
-                                hintText: 'Ingrese un nombre',
+                                hintText: 'Ingrese la descripción del post',
                               ),
                             ),
                             SizedBox(
@@ -430,7 +460,7 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                             Text(
                               '¿Cómo lo entregan a la mascota?',
                               style: CustomTextStyle.text2.copyWith(
-                                  color: CustomColor.grey, fontSize: 20),
+                                  color: CustomColor.grey, fontSize: 18),
                               textAlign: TextAlign.start,
                             ),
                             SizedBox(
@@ -456,6 +486,8 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                               onChanged: (value) {
                                 setState(() {
                                   statusVacunado = value!;
+                                  estado_mascota_map['vacunado'] = value;
+                                  print(estado_mascota_map);
                                 });
                               },
                             ),
@@ -479,6 +511,8 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                               onChanged: (value) {
                                 setState(() {
                                   statusDesparasitado = value!;
+                                  estado_mascota_map['desparasitado'] = value;
+                                  print(estado_mascota_map);
                                 });
                               },
                             ),
@@ -502,6 +536,8 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                               onChanged: (value) {
                                 setState(() {
                                   statusSano = value!;
+                                  estado_mascota_map['sano'] = value;
+                                  print(estado_mascota_map);
                                 });
                               },
                             ),
@@ -525,6 +561,8 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                               onChanged: (value) {
                                 setState(() {
                                   statusEsterelizado = value!;
+                                  estado_mascota_map['esterilizado'] = value;
+                                  print(estado_mascota_map);
                                 });
                               },
                             ),
@@ -548,6 +586,8 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                               onChanged: (value) {
                                 setState(() {
                                   statusOtrasOperaciones = value!;
+                                  estado_mascota_map['otras'] = value;
+                                  print(estado_mascota_map);
                                 });
                               },
                             ),
@@ -565,35 +605,24 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                                           .activeGalleryAll();
                                     },
                                     child: Container(
-                                      height: 100,
+                                      height: 150,
                                       width: double.infinity,
                                       margin: const EdgeInsets.symmetric(
                                           horizontal: 20.0, vertical: 20.0),
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                        color: Colors.grey[200],
+                                      decoration:
+                                          containerDecoration().copyWith(
                                         border: Border.all(
-                                          color: Colors.black26,
+                                          color: CustomColor.grey
+                                              .withOpacity(0.15),
+                                          width: 2,
                                         ),
                                       ),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            height: 30,
-                                            child: Image.network(
-                                              'https://www.pngall.com/wp-content/uploads/2/Upload-PNG-Image-File.png',
-                                            ),
-                                          ),
-                                          const SizedBox(height: 7),
-                                          const Text(
-                                            'Buscar imagen en galería',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ],
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        child: Lottie.asset(
+                                          'assets/images/upload.json',
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
                                   )
@@ -623,33 +652,20 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                                             width: 300,
                                             margin: const EdgeInsets.only(
                                                 top: 10.0, bottom: 10.0),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20.0),
-                                              color: Colors.grey[200],
+                                            decoration:
+                                                containerDecoration().copyWith(
                                               border: Border.all(
-                                                color: Colors.black26,
+                                                color: CustomColor.grey
+                                                    .withOpacity(0.15),
+                                                width: 2,
                                               ),
                                             ),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Container(
-                                                  height: 30,
-                                                  child: Image.network(
-                                                    'https://www.pngall.com/wp-content/uploads/2/Upload-PNG-Image-File.png',
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 7),
-                                                const Text(
-                                                  'Agregas otra imagen',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ],
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              child: Lottie.asset(
+                                                'assets/images/upload.json',
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           ),
                                         );
@@ -680,13 +696,17 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               20.0),
-                                                      child: Image.file(
-                                                        File(
-                                                            storageListImageProvider
-                                                                .listImage![
-                                                                    index - 1]
-                                                                .path),
-                                                        fit: BoxFit.cover,
+                                                      child: Container(
+                                                        decoration:
+                                                            containerDecoration(),
+                                                        child: Image.file(
+                                                          File(
+                                                              storageListImageProvider
+                                                                  .listImage![
+                                                                      index - 1]
+                                                                  .path),
+                                                          fit: BoxFit.cover,
+                                                        ),
                                                       ),
                                                     )
                                                   : const Icon(
@@ -823,18 +843,13 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
-              child: MaterialButton(
-                height: 60,
-                minWidth: 150,
-                elevation: 0.5,
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                child: Text(
-                  'Atrás',
-                  style: CustomTextStyle.text.copyWith(color: Colors.black),
-                ),
+              child: // Login Button
+                  CustomButtonWidget(
+                text: 'Atrás',
+                textStyle: CustomTextStyle.text2.copyWith(color: Colors.black),
+                colorButton: CustomColor.white,
                 onPressed: () {
+                  //Navigator.pushNamed(context, MyRoutes.rHOME);
                   setState(() {
                     if (currentIndex >= 1) {
                       currentIndex--;
@@ -848,21 +863,38 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
               width: 12,
             ),
             Expanded(
-              child: MaterialButton(
-                height: 60,
-                minWidth: 150,
-                elevation: 0.5,
-                color: CustomColor.primary,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                child: Text(
-                  'Siguiente',
-                  style: CustomTextStyle.text.copyWith(color: Colors.white),
-                ),
+              child: // Login Button
+                  CustomButtonWidget(
+                text: currentIndex == 2 ? 'Previsualizar' : 'Siguiente',
+                textStyle:
+                    CustomTextStyle.text2.copyWith(color: CustomColor.white),
+                colorButton: CustomColor.primary,
                 onPressed: () {
+                  //Navigator.pushNamed(context, MyRoutes.rHOME);
                   setState(() {
+                    if (currentIndex == 2) {
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => PrevisualizacionPostPage(
+                              imagenes: storageListImageProvider.listPathImages,
+                              nombreMascota: Preferences.name,
+                              descripcion: Preferences.description,
+                              especie: serviceProvider2.especieSelected,
+                              raza: razaProvider2.razaSelected,
+                              sexo:
+                                  Preferences.gender == 1 ? 'Macho' : 'Hembra',
+                              edad: Preferences.age,
+                              peso: '3',
+                              tamano: 'Mediano',
+                            ),
+                          ));
+                    }
                     if (currentIndex <= 1) {
                       currentIndex++;
+                      print(
+                        'Nombre mascota => ${Preferences.name} \nEspecie => ${serviceProvider2.especieSelected} \nRaza => ${razaProvider2.razaSelected} \nSexo => ${Preferences.gender} \nEdad => ${Preferences.age} \nDescripción => ${Preferences.description}',
+                      );
                     }
                     return;
                   });
