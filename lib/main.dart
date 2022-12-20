@@ -1,10 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:pet_society/routes/routes.dart';
+import 'package:pet_society/src/preferences/formadoptation_preferences.dart';
+import 'package:pet_society/src/providers/especie_provider.dart';
+import 'package:pet_society/src/providers/raza_provider.dart';
+import 'package:pet_society/src/providers/storage_list_images_provider.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
-import 'package:pet_society/src/views/pages/home_page/home_subpages/profile_subpage.dart';
+import 'package:pet_society/src/views/pages/form_adoption_pet/paso3.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'src/views/pages/form_adoption_pet/form_adoptation_page.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Preferences.init();
+  runApp(const AppState());
+}
+
+class AppState extends StatelessWidget {
+  const AppState({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => EspecieProvider(),
+          lazy: false,
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RazaProvider(),
+          lazy: false,
+        ),
+        ChangeNotifierProvider(
+          create: (context) => StorageListImagesProvider(),
+        ),
+      ],
+      child: const MyApp(),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +50,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: App.name,
       onGenerateRoute: MyRoutes.generateRoute,
-      initialRoute: MyRoutes.rHOME,
+      /* initialRoute: MyRoutes.rHOME, */
+      home: FormAdoptationPage(),
       // scaffoldMessengerKey: CustomSnackbar.msgkey, // SnackBar
       // theme: Provider.of<ThemeProvider>(context).currentTheme, // Modo oscuro
       color: CustomColor.primary,
