@@ -137,6 +137,8 @@ class LoginForm extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             decoration: formDecorationWidget(
               hintText: 'Ingrese su correo electrónico',
+              hintStyle:
+                  CustomTextStyle.seeMoreText.copyWith(color: CustomColor.grey),
             ),
           ),
           //
@@ -164,6 +166,8 @@ class LoginForm extends StatelessWidget {
             keyboardType: TextInputType.text,
             decoration: formDecorationWidget(
               hintText: 'Ingrese su contraseña',
+              hintStyle:
+                  CustomTextStyle.seeMoreText.copyWith(color: CustomColor.grey),
             ),
           ),
           //

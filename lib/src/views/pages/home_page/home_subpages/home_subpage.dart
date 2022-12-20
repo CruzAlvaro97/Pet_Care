@@ -1,11 +1,19 @@
+// ignore_for_file: avoid_print
+
 import 'package:expandable_text/expandable_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_society/providers/favorite_provider.dart';
 import 'package:pet_society/src/models/pets_adoption_model.dart';
+import 'package:pet_society/src/models/publication2_model.dart';
 import 'package:pet_society/src/models/publication_model.dart';
-import 'package:pet_society/src/utils/color/custom_color.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
+import 'package:pet_society/src/views/pages/create_publication_page/create_publication_page.dart';
+import 'package:pet_society/src/views/pages/detail_page/adoptation_page.dart';
+import 'package:pet_society/src/views/pages/home_page/home_subpages/en_adopcion_subpage.dart';
 import 'package:pet_society/src/views/widget/decoration_widget/container_decoration_widget.dart';
+import 'package:provider/provider.dart';
 
 class HomeSubPage extends StatelessWidget {
   const HomeSubPage({Key? key}) : super(key: key);
@@ -52,22 +60,22 @@ class HomeSubPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _PhotoAndSearchInput(),
-            Divider(
+            const _PhotoAndSearchInput(),
+            const Divider(
               thickness: 0.8,
             ),
-            _AdContainer(),
-            _TitleCarrouselCards(
+            const _AdContainer(),
+            const _TitleCarrouselCards(
               titleCarrousel: 'Publicaciones recientes',
             ),
-            _CarrouselPublication(itemCount: 3),
-            _TitleCarrouselCards(
+            const _CarrouselPublication(itemCount: 3),
+            const _TitleCarrouselCards(
               titleCarrousel: 'Adopciones recientes',
               isMoreText: false, //<- is true
             ),
-            _CarrouselAdoptPets(),
-            SizedBox(height: 30.0),
-            _CarrouselPublication(itemCount: publications.length - 3),
+            const _CarrouselAdoptPets(),
+            const SizedBox(height: 30.0),
+            _CarrouselPublication2(),
           ],
         ),
       ),
@@ -82,7 +90,7 @@ class _CarrouselAdoptPets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 180,
       child: ListView.builder(
         itemCount: petsAdoption.length,
@@ -134,12 +142,14 @@ class _CarrouselPublication extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final fav = Provider.of<FavoriteProvider>(context);
+
     return ListView.builder(
       itemCount: itemCount,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        final dataPost = publications[index];
+        final dataPost = publications2[index];
 
         return Container(
           width: double.infinity,
@@ -175,11 +185,13 @@ class _CarrouselPublication extends StatelessWidget {
                             ),
                             Text(
                               dataPost.usernameUser,
-                              style: CustomTextStyle.helperText2,
+                              style: CustomTextStyle.helperText2
+                                  .copyWith(color: CustomColor.grey),
                             ),
                             Text(
                               'Hace 30 min.',
-                              style: CustomTextStyle.helperText2,
+                              style: CustomTextStyle.helperText2
+                                  .copyWith(color: CustomColor.grey),
                             ),
                           ],
                         ),
@@ -207,16 +219,34 @@ class _CarrouselPublication extends StatelessWidget {
               const SizedBox(height: 10.0),
               Stack(
                 children: [
-                  Container(
-                    height: 250,
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(20.0),
-                        topRight: Radius.circular(20.0),
-                      ),
-                      child: Image.network(
-                        dataPost.photo,
-                        fit: BoxFit.cover,
+                  GestureDetector(
+                    onDoubleTap: () {
+                      if (fav.selectedItem.contains(index)) {
+                        fav.removeItem(index);
+                        publications2
+                            .where((x) => x.id == index + 1)
+                            .first
+                            .likes = publications2[index].likes - 1;
+                      } else {
+                        fav.addItem(index);
+                        publications2
+                            .where((x) => x.id == index + 1)
+                            .first
+                            .likes = publications2[index].likes + 1;
+                      }
+                    },
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 250,
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20.0),
+                          topRight: Radius.circular(20.0),
+                        ),
+                        child: Image.network(
+                          dataPost.photo,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -228,10 +258,28 @@ class _CarrouselPublication extends StatelessWidget {
                     child: Column(
                       children: [
                         IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.favorite_border_rounded,
-                            color: Colors.white,
+                          onPressed: () {
+                            if (fav.selectedItem.contains(index)) {
+                              fav.removeItem(index);
+                              publications2
+                                  .where((x) => x.id == index + 1)
+                                  .first
+                                  .likes = publications2[index].likes - 1;
+                            } else {
+                              fav.addItem(index);
+                              publications2
+                                  .where((x) => x.id == index + 1)
+                                  .first
+                                  .likes = publications2[index].likes + 1;
+                            }
+                          },
+                          icon: Icon(
+                            fav.selectedItem.contains(index)
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_border_rounded,
+                            color: fav.selectedItem.contains(index)
+                                ? Colors.red
+                                : Colors.white,
                             size: 30,
                           ),
                           padding: EdgeInsets.zero,
@@ -269,32 +317,271 @@ class _CarrouselPublication extends StatelessWidget {
                   )
                 ],
               ),
-              Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(20.0),
-                    bottomRight: Radius.circular(20.0),
-                  ),
-                  color: CustomColor.primary,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Conoce más',
-                      style: GoogleFonts.poppins(
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
+              GestureDetector(
+                onTap: (() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AdoptationPage(
+                        publication2: dataPost,
                       ),
                     ),
-                    const SizedBox(width: 5.0),
-                    const Icon(
-                      Icons.arrow_right_alt,
-                      color: Colors.white,
+                  );
+                }),
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(20.0),
+                      bottomRight: Radius.circular(20.0),
                     ),
-                  ],
+                    color: CustomColor.primary,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Conoce más',
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(width: 5.0),
+                      const Icon(
+                        Icons.arrow_right_alt,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _CarrouselPublication2 extends StatelessWidget {
+  const _CarrouselPublication2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final fav = Provider.of<FavoriteProvider>(context);
+    return ListView.builder(
+      itemCount: publications.length - 3,
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        final dataPost = publications2[index + 3];
+
+        return Container(
+          width: double.infinity,
+          margin: const EdgeInsets.only(
+            bottom: 10.0,
+            right: 20.0,
+            left: 20.0,
+          ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20.0,
+            vertical: 20.0,
+          ),
+          decoration: containerDecoration(),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 55 / 2,
+                    backgroundImage: NetworkImage(dataPost.photoUser),
+                  ),
+                  const SizedBox(width: 10.0),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${dataPost.nameUser} ${dataPost.lastnameUser}',
+                              style: CustomTextStyle.text,
+                            ),
+                            Text(
+                              dataPost.usernameUser,
+                              style: CustomTextStyle.helperText2
+                                  .copyWith(color: CustomColor.grey),
+                            ),
+                            Text(
+                              'Hace 30 min.',
+                              style: CustomTextStyle.helperText2
+                                  .copyWith(color: CustomColor.grey),
+                            ),
+                          ],
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.more_horiz_rounded),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10.0),
+              ExpandableText(
+                dataPost.description,
+                textAlign: TextAlign.left,
+                style: CustomTextStyle.paragraph,
+                expandText: 'Ver más',
+                collapseText: 'Ocultar',
+                expandOnTextTap: true,
+                collapseOnTextTap: true,
+                maxLines: 2,
+                linkColor: Colors.grey,
+              ),
+              const SizedBox(height: 10.0),
+              Stack(
+                children: [
+                  GestureDetector(
+                    onDoubleTap: () {
+                      if (fav.selectedItem.contains(index + 3)) {
+                        fav.removeItem(index + 3);
+                        publications2
+                            .where((x) => x.id == index + 4)
+                            .first
+                            .likes = publications2[index + 3].likes - 1;
+                      } else {
+                        fav.addItem(index + 3);
+                        publications2
+                            .where((x) => x.id == index + 4)
+                            .first
+                            .likes = publications2[index + 3].likes + 1;
+                      }
+                    },
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 250,
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20.0),
+                          topRight: Radius.circular(20.0),
+                        ),
+                        child: Image.network(
+                          dataPost.photo,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0,
+                      vertical: 10.0,
+                    ),
+                    child: Column(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            if (fav.selectedItem.contains(index + 3)) {
+                              fav.removeItem(index + 3);
+                              publications2
+                                  .where((x) => x.id == index + 4)
+                                  .first
+                                  .likes = publications2[index + 3].likes - 1;
+                            } else {
+                              fav.addItem(index + 3);
+                              publications2
+                                  .where((x) => x.id == index + 4)
+                                  .first
+                                  .likes = publications2[index + 3].likes + 1;
+                            }
+                          },
+                          icon: Icon(
+                            fav.selectedItem.contains(index + 3)
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_border_rounded,
+                            color: fav.selectedItem.contains(index + 3)
+                                ? Colors.red
+                                : Colors.white,
+                            size: 30,
+                          ),
+                          padding: EdgeInsets.zero,
+                        ),
+                        Text(
+                          dataPost.likes.toString(),
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                            height: 1,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5.0,
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.messenger_outline_rounded,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                          padding: EdgeInsets.zero,
+                        ),
+                        Text(
+                          dataPost.commentary.toString(),
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                            height: 1,
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              GestureDetector(
+                onTap: (() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AdoptationPage(
+                        publication2: dataPost,
+                      ),
+                    ),
+                  );
+                }),
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(20.0),
+                      bottomRight: Radius.circular(20.0),
+                    ),
+                    color: CustomColor.primary,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Conoce más',
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(width: 5.0),
+                      const Icon(
+                        Icons.arrow_right_alt,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -332,7 +619,7 @@ class _TitleCarrouselCards extends StatelessWidget {
               onPressed: () {
                 print('Navegar sgte. pg.');
               },
-              style: ButtonStyle(),
+              style: const ButtonStyle(),
               child: Text(
                 'Ver mas',
                 style: CustomTextStyle.seeMoreText.copyWith(
@@ -422,14 +709,24 @@ class _PhotoAndSearchInput extends StatelessWidget {
           ),
           const SizedBox(width: 10.0),
           Expanded(
-            child: Container(
-              height: 60,
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.only(left: 20.0),
-              decoration: containerDecoration(),
-              child: Text(
-                '¿Deseas publicar?',
-                style: CustomTextStyle.helperText,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => const CreatePublicationPage(),
+                    ));
+              },
+              child: Container(
+                height: 60,
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.only(left: 20.0),
+                decoration: containerDecoration(),
+                child: Text(
+                  '¿Deseas publicar?',
+                  style: CustomTextStyle.helperText
+                      .copyWith(color: CustomColor.grey),
+                ),
               ),
             ),
           ),

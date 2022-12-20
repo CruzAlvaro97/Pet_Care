@@ -4,6 +4,8 @@ import 'package:pet_society/src/utils/index_utils.dart';
 InputDecoration formDecorationWidget({
   final String? hintText,
   final Widget? suffixIcon,
+  final Widget? prefixIcon,
+  final TextStyle? hintStyle,
 }) {
   return InputDecoration(
     // Bordes
@@ -27,8 +29,9 @@ InputDecoration formDecorationWidget({
     filled: true,
     fillColor: CustomColor.formField,
     hintText: hintText,
-    hintStyle: CustomTextStyle.seeMoreText.copyWith(color: CustomColor.grey),
+    hintStyle: hintStyle,
     suffixIcon: suffixIcon,
+    prefixIcon: prefixIcon,
     contentPadding: const EdgeInsets.all(15),
   );
 }

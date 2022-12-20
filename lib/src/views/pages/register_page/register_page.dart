@@ -145,6 +145,8 @@ class RegisterForm extends StatelessWidget {
             keyboardType: TextInputType.text,
             decoration: formDecorationWidget(
               hintText: 'Ingrese su nombre',
+              hintStyle:
+                  CustomTextStyle.seeMoreText.copyWith(color: CustomColor.grey),
             ),
           ),
           //
@@ -172,6 +174,8 @@ class RegisterForm extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             decoration: formDecorationWidget(
               hintText: 'Ingrese su correo electrónico',
+              hintStyle:
+                  CustomTextStyle.seeMoreText.copyWith(color: CustomColor.grey),
             ),
           ),
           //
@@ -199,6 +203,8 @@ class RegisterForm extends StatelessWidget {
             keyboardType: TextInputType.text,
             decoration: formDecorationWidget(
               hintText: 'Ingrese una contraseña',
+              hintStyle:
+                  CustomTextStyle.seeMoreText.copyWith(color: CustomColor.grey),
             ),
           ),
           //

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pet_society/providers/favorite_provider.dart';
+import 'package:pet_society/providers/switch_provider.dart';
 import 'package:pet_society/routes/routes.dart';
 import 'package:pet_society/src/preferences/formadoptation_preferences.dart';
 import 'package:pet_society/src/providers/especie_provider.dart';

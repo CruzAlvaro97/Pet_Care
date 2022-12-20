@@ -43,7 +43,7 @@ List<Publication> publications = [
   Publication(
     id: 2,
     description:
-        'Buenas tardes amigos, este gatito lo recogi y lo tenía tan lindo con nosotros, pero como hace sol le gustaba salir a abrigarse  en las bancas del.ovalo la familia. El sabado 03 cerca de las 6 de la tarde estaba afuera y fue acariciado por un chico que se lo llevó, dejandonos tristes por ser un compañerito muy cariñoso y engreído. Si  lo ven por ahi perdido, o tal vez quien se lo llevó nos lo devuelva, estaré agradecida. Su colita es bien esponjosa',
+        "¡AYÚDENME A ENCONTRAR A KEYLOR! Amigos de Facebook, mi cachorro salió hace 3 semanas de mi casa y no pudo volver, tiene 7 meses de edad, su manto es de color plomo-negro y el trébol en su rostro es bastante pronunciado. Mi familia y sobretodo yo lo extrañamos mucho, si alguien lo reconoce, les pido que por favor se comuniquen con los números en la imagen (el primero es mi número personal). Se reconocerá una recompensa 🙏",
     photo:
         'https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',
     likes: 53,
@@ -58,7 +58,7 @@ List<Publication> publications = [
   Publication(
     id: 3,
     description:
-        'Buenas tardes amigos, este gatito lo recogi y lo tenía tan lindo con nosotros, pero como hace sol le gustaba salir a abrigarse  en las bancas del.ovalo la familia. El sabado 03 cerca de las 6 de la tarde estaba afuera y fue acariciado por un chico que se lo llevó, dejandonos tristes por ser un compañerito muy cariñoso y engreído. Si  lo ven por ahi perdido, o tal vez quien se lo llevó nos lo devuelva, estaré agradecida. Su colita es bien esponjosa',
+        'Hola , hago esta publicación porque aún tengo esperanza de que aparezca mi perrito , se perdió el día miércoles 30 de noviembre , ayer se cumplió una semana de su desaparición. Mi perro se llama Braco y se perdió en Nv.Chimbote - Urb.Bellamar 2da etapa Referencia frente al hotel Afrodita.',
     photo:
         'https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     likes: 23,
@@ -73,7 +73,7 @@ List<Publication> publications = [
   Publication(
     id: 4,
     description:
-        'Buenas tardes amigos, este gatito lo recogi y lo tenía tan lindo con nosotros, pero como hace sol le gustaba salir a abrigarse  en las bancas del.ovalo la familia. El sabado 03 cerca de las 6 de la tarde estaba afuera y fue acariciado por un chico que se lo llevó, dejandonos tristes por ser un compañerito muy cariñoso y engreído. Si  lo ven por ahi perdido, o tal vez quien se lo llevó nos lo devuelva, estaré agradecida. Su colita es bien esponjosa',
+        '💕🦮Pequeños en Busca de una familia responsable que les brinde mucho amor y buena calidad de vida💕',
     photo:
         'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     likes: 55,
@@ -88,7 +88,7 @@ List<Publication> publications = [
   Publication(
     id: 5,
     description:
-        'Buenas tardes amigos, este gatito lo recogi y lo tenía tan lindo con nosotros, pero como hace sol le gustaba salir a abrigarse  en las bancas del.ovalo la familia. El sabado 03 cerca de las 6 de la tarde estaba afuera y fue acariciado por un chico que se lo llevó, dejandonos tristes por ser un compañerito muy cariñoso y engreído. Si  lo ven por ahi perdido, o tal vez quien se lo llevó nos lo devuelva, estaré agradecida. Su colita es bien esponjosa',
+        'ADOPCION RESPONSABLE❤️🐶\nCACHORRITOS DE UN MES  , CRIOLLITOS DE RAZA PEQUEÑA .NECESITAN DUEÑOS QUE PUEDAN CUIDARLOS CORRECTAMENTE. Ayudenme a encontrar hogar  a estos angelitos..',
     photo:
         'https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     likes: 72,
