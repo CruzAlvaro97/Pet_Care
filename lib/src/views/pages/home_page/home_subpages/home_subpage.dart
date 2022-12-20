@@ -1,18 +1,20 @@
 // ignore_for_file: avoid_print
-
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pet_society/providers/favorite_provider.dart';
 import 'package:pet_society/src/models/pets_adoption_model.dart';
 import 'package:pet_society/src/models/publication2_model.dart';
 import 'package:pet_society/src/models/publication_model.dart';
+import 'package:pet_society/src/providers/publicacion_provider.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
 import 'package:pet_society/src/views/pages/create_publication_page/create_publication_page.dart';
 import 'package:pet_society/src/views/pages/detail_page/adoptation_page.dart';
 import 'package:pet_society/src/views/pages/home_page/home_subpages/en_adopcion_subpage.dart';
 import 'package:pet_society/src/views/widget/decoration_widget/container_decoration_widget.dart';
+import 'package:pet_society/src/views/widget/skeleton/card_post_skeleton_widget.dart';
 import 'package:provider/provider.dart';
 
 class HomeSubPage extends StatelessWidget {
@@ -20,6 +22,8 @@ class HomeSubPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final publicacionProvider = Provider.of<PublicacionProvider>(context);
+
     return Scaffold(
       backgroundColor: const Color(0xFFF9F9F9),
       appBar: AppBar(
@@ -68,14 +72,22 @@ class HomeSubPage extends StatelessWidget {
             const _TitleCarrouselCards(
               titleCarrousel: 'Publicaciones recientes',
             ),
-            const _CarrouselPublication(itemCount: 3),
-            const _TitleCarrouselCards(
-              titleCarrousel: 'Adopciones recientes',
-              isMoreText: false, //<- is true
-            ),
-            const _CarrouselAdoptPets(),
-            const SizedBox(height: 30.0),
-            _CarrouselPublication2(),
+            SizedBox(
+              child: publicacionProvider.isLoading
+                  ? const CardPostSkeletonWidget()
+                  : Column(
+                      children: const [
+                        _CarrouselPublication(itemCount: 3),
+                        _TitleCarrouselCards(
+                          titleCarrousel: 'Adopciones recientes',
+                          isMoreText: false, //<- is true
+                        ),
+                        _CarrouselAdoptPets(),
+                        SizedBox(height: 30.0),
+                      ],
+                    ),
+            )
+            //_CarrouselPublication2(),
           ],
         ),
       ),
@@ -143,13 +155,14 @@ class _CarrouselPublication extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fav = Provider.of<FavoriteProvider>(context);
+    final publicacionProvider = Provider.of<PublicacionProvider>(context);
 
     return ListView.builder(
-      itemCount: itemCount,
+      itemCount: publicacionProvider.listaPublicacion3.length,
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        final dataPost = publications2[index];
+        final dataPublicacion = publicacionProvider.listaPublicacion3[index];
 
         return Container(
           width: double.infinity,
@@ -169,7 +182,8 @@ class _CarrouselPublication extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 55 / 2,
-                    backgroundImage: NetworkImage(dataPost.photoUser),
+                    backgroundImage: NetworkImage(
+                        'https://gmlqcelelvidskpttktm.supabase.co/storage/v1/object/public/imgs/IMG/${dataPublicacion.imagesPet[0]}'),
                   ),
                   const SizedBox(width: 10.0),
                   Expanded(
@@ -180,16 +194,16 @@ class _CarrouselPublication extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${dataPost.nameUser} ${dataPost.lastnameUser}',
+                              'No tiene',
                               style: CustomTextStyle.text,
                             ),
                             Text(
-                              dataPost.usernameUser,
+                              'No tiene',
                               style: CustomTextStyle.helperText2
                                   .copyWith(color: CustomColor.grey),
                             ),
                             Text(
-                              'Hace 30 min.',
+                              dataPublicacion.createdAt.hour.toString(),
                               style: CustomTextStyle.helperText2
                                   .copyWith(color: CustomColor.grey),
                             ),
@@ -206,7 +220,7 @@ class _CarrouselPublication extends StatelessWidget {
               ),
               const SizedBox(height: 10.0),
               ExpandableText(
-                dataPost.description,
+                dataPublicacion.descriptionPost,
                 textAlign: TextAlign.left,
                 style: CustomTextStyle.paragraph,
                 expandText: 'Ver más',
@@ -243,8 +257,12 @@ class _CarrouselPublication extends StatelessWidget {
                           topLeft: Radius.circular(20.0),
                           topRight: Radius.circular(20.0),
                         ),
-                        child: Image.network(
-                          dataPost.photo,
+                        child: FadeInImage(
+                          placeholder:
+                              AssetImage('assets/images/picture-loading2.gif'),
+                          image: NetworkImage(
+                            'https://gmlqcelelvidskpttktm.supabase.co/storage/v1/object/public/imgs/IMG/${dataPublicacion.imagesPet[0]}',
+                          ),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -285,7 +303,7 @@ class _CarrouselPublication extends StatelessWidget {
                           padding: EdgeInsets.zero,
                         ),
                         Text(
-                          dataPost.likes.toString(),
+                          '00',
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w500,
                             color: Colors.white,
@@ -305,7 +323,7 @@ class _CarrouselPublication extends StatelessWidget {
                           padding: EdgeInsets.zero,
                         ),
                         Text(
-                          dataPost.commentary.toString(),
+                          '00',
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w500,
                             color: Colors.white,
@@ -323,7 +341,8 @@ class _CarrouselPublication extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => AdoptationPage(
-                        publication2: dataPost,
+                        publication3:
+                            publicacionProvider.listaPublicacion3[index],
                       ),
                     ),
                   );
@@ -370,13 +389,16 @@ class _CarrouselPublication2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fav = Provider.of<FavoriteProvider>(context);
+    final fav = Provider.of<FavoriteProvider>(context, listen: false);
+    final publicacionProvider = Provider.of<PublicacionProvider>(context);
+
     return ListView.builder(
-      itemCount: publications.length - 3,
+      itemCount: publicacionProvider.listaPublicacion3.length - 3,
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        final dataPost = publications2[index + 3];
+        final dataPublicacion =
+            publicacionProvider.listaPublicacion3[index + 3];
 
         return Container(
           width: double.infinity,
@@ -396,7 +418,7 @@ class _CarrouselPublication2 extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 55 / 2,
-                    backgroundImage: NetworkImage(dataPost.photoUser),
+                    backgroundImage: NetworkImage(dataPublicacion.imagesPet[0]),
                   ),
                   const SizedBox(width: 10.0),
                   Expanded(
@@ -407,16 +429,16 @@ class _CarrouselPublication2 extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${dataPost.nameUser} ${dataPost.lastnameUser}',
+                              'Sin datos',
                               style: CustomTextStyle.text,
                             ),
                             Text(
-                              dataPost.usernameUser,
+                              'Sin datos',
                               style: CustomTextStyle.helperText2
                                   .copyWith(color: CustomColor.grey),
                             ),
                             Text(
-                              'Hace 30 min.',
+                              dataPublicacion.createdAt.hour.toString(),
                               style: CustomTextStyle.helperText2
                                   .copyWith(color: CustomColor.grey),
                             ),
@@ -433,7 +455,7 @@ class _CarrouselPublication2 extends StatelessWidget {
               ),
               const SizedBox(height: 10.0),
               ExpandableText(
-                dataPost.description,
+                dataPublicacion.descriptionPost,
                 textAlign: TextAlign.left,
                 style: CustomTextStyle.paragraph,
                 expandText: 'Ver más',
@@ -471,7 +493,7 @@ class _CarrouselPublication2 extends StatelessWidget {
                           topRight: Radius.circular(20.0),
                         ),
                         child: Image.network(
-                          dataPost.photo,
+                          dataPublicacion.imagesPet[0],
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -512,7 +534,7 @@ class _CarrouselPublication2 extends StatelessWidget {
                           padding: EdgeInsets.zero,
                         ),
                         Text(
-                          dataPost.likes.toString(),
+                          '00',
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w500,
                             color: Colors.white,
@@ -532,7 +554,7 @@ class _CarrouselPublication2 extends StatelessWidget {
                           padding: EdgeInsets.zero,
                         ),
                         Text(
-                          dataPost.commentary.toString(),
+                          '00',
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w500,
                             color: Colors.white,
@@ -550,7 +572,8 @@ class _CarrouselPublication2 extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => AdoptationPage(
-                        publication2: dataPost,
+                        publication3:
+                            publicacionProvider.listaPublicacion3[index],
                       ),
                     ),
                   );

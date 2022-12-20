@@ -6,13 +6,15 @@ class Preferences {
   static String _img = '';
   static String _name = '';
   static String _lastname = '';
-  static String _city = '';
+  static String _size = '';
   static String _country = '';
   static int _gender = 1;
+  static String _weigth = '';
   static String _age = '';
   static String _number = '';
   static String _email = '';
   static String _role = '';
+  static int _breed = 0;
   static String _description = '';
   static bool _theme = false;
 
@@ -54,14 +56,14 @@ class Preferences {
   }
   //
 
-  //City
-  static String get city {
-    return _prefs.getString('city') ?? _city;
+  //Size
+  static String get size {
+    return _prefs.getString('size') ?? _size;
   }
 
-  static set city(String city) {
-    _city = city;
-    _prefs.setString('city', city);
+  static set size(String size) {
+    _size = size;
+    _prefs.setString('size', size);
   }
   //
 
@@ -84,6 +86,26 @@ class Preferences {
   static set gender(int gender) {
     _gender = gender;
     _prefs.setInt('gender', gender);
+  }
+
+  //Breed
+  static int get breed {
+    return _prefs.getInt('breed') ?? _breed;
+  }
+
+  static set breed(int breed) {
+    _breed = breed;
+    _prefs.setInt('breed', breed);
+  }
+
+  //Weigth
+  static String get weigth {
+    return _prefs.getString('weigth') ?? _weigth;
+  }
+
+  static set weigth(String weigth) {
+    _weigth = weigth;
+    _prefs.setString('weigth', weigth);
   }
 
   //Age

@@ -4,6 +4,7 @@ import 'package:pet_society/providers/switch_provider.dart';
 import 'package:pet_society/routes/routes.dart';
 import 'package:pet_society/src/preferences/formadoptation_preferences.dart';
 import 'package:pet_society/src/providers/especie_provider.dart';
+import 'package:pet_society/src/providers/publicacion_provider.dart';
 import 'package:pet_society/src/providers/raza_provider.dart';
 import 'package:pet_society/src/providers/storage_list_images_provider.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
@@ -27,6 +28,10 @@ class AppState extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
+          create: (context) => PublicacionProvider(),
+          lazy: false,
+        ),
+        ChangeNotifierProvider(
           create: (context) => EspecieProvider(),
           lazy: false,
         ),
@@ -36,6 +41,15 @@ class AppState extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => StorageListImagesProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => FavoriteProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CambioProviderAdopcion(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CambioProviderHelp(),
         ),
       ],
       child: const MyApp(),
@@ -52,8 +66,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: App.name,
       onGenerateRoute: MyRoutes.generateRoute,
-      /* initialRoute: MyRoutes.rHOME, */
-      home: FormAdoptationPage(),
+      initialRoute: MyRoutes.rHOME,
+      //home: FormAdoptationPage(),
       // scaffoldMessengerKey: CustomSnackbar.msgkey, // SnackBar
       // theme: Provider.of<ThemeProvider>(context).currentTheme, // Modo oscuro
       color: CustomColor.primary,

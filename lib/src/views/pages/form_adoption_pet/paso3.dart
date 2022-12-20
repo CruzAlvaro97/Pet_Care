@@ -211,7 +211,7 @@ class Step3 extends StatelessWidget {
               ),
               onPressed: () {
                 //storageListImageProvider.insertListImageStorage();
-                storageListImageProvider.saveListImageInDB();
+                //storageListImageProvider.saveListImageInDB();
 
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                     content: Text('Se guardó correctamente las imágenes')));

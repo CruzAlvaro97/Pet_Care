@@ -33,6 +33,18 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
       ['vacunado', 'desparasitado', 'sano', 'esterilizado', 'otras'],
       value: (item) => false);
 
+  List<String> selectedCaracteristicas = [];
+
+  List<String> caracteristicas = [
+    'Obediente',
+    'Juega con otras mascotas',
+    'Bueno con niños',
+    'Cariñoso',
+    'Bueno con gatos',
+    'Amigable con extraños'
+  ];
+  List<bool> values = [false, false, false, false, false, false];
+
   bool statusVacunado = false;
   bool statusDesparasitado = false;
   bool statusSano = false;
@@ -111,6 +123,17 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
           "Crear publicación - Adopción",
           style: CustomTextStyle.text2.copyWith(color: Colors.black),
         ),
+        actions: [
+          // IconButton(
+          //   onPressed: () {
+          //     storageListImageProvider.insertListImageStorage();
+          //   },
+          //   icon: Icon(
+          //     Icons.abc,
+          //     color: Colors.black,
+          //   ),
+          // ),
+        ],
         centerTitle: true,
         backgroundColor: Colors.white,
       ),
@@ -230,6 +253,7 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                                     in especieService.listaEspecies) {
                                   if (especie.nombre == especieSele) {
                                     idEspecie = especie.id;
+
                                     print(idEspecie);
                                   }
                                 }
@@ -293,11 +317,11 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                                     context,
                                     listen: false);
                                 List<String> listaVacia = [
-                                  'Por favor selecciona una especie'
+                                  'Por favor selecciona una raza'
                                 ];
                                 String? razaSele = await showPickerDialog(
                                   context: context,
-                                  label: "Especies",
+                                  label: "Razas",
                                   items: razaService.listaRazasFiltradas.isEmpty
                                       ? listaVacia
                                       : razaService.listaRazasFiltradas
@@ -308,6 +332,17 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                                   razaService.cambiarSeleccion =
                                       razaSele! == null ? 'No hay' : razaSele;
                                 } catch (e) {}
+
+                                int idBreed = 0;
+
+                                for (Raza raza in razaProvider2.listaRazas) {
+                                  if (raza.nombre == razaSele) {
+                                    idBreed = raza.id;
+                                    Preferences.breed = idBreed;
+
+                                    print(Preferences.breed);
+                                  }
+                                }
                               },
                               child: Icon(
                                 Icons.search,
@@ -337,20 +372,23 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                                 height: 30,
                                 child: Row(
                                   children: [
-                                    Checkbox(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      value: isCheckedMale,
-                                      activeColor: CustomColor.primary,
-                                      checkColor: CustomColor.primary,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          isCheckedMale = !isCheckedMale;
-                                          isCheckedFemale = false;
-                                          Preferences.gender = 1;
-                                        });
-                                      },
+                                    Transform.scale(
+                                      scale: 0.9,
+                                      child: Checkbox(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        value: isCheckedMale,
+                                        activeColor: CustomColor.primary,
+                                        checkColor: CustomColor.primary,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            isCheckedMale = !isCheckedMale;
+                                            isCheckedFemale = false;
+                                            Preferences.gender = 1;
+                                          });
+                                        },
+                                      ),
                                     ),
                                     Text(
                                       'Macho',
@@ -364,20 +402,23 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                                 height: 30,
                                 child: Row(
                                   children: [
-                                    Checkbox(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      value: isCheckedFemale,
-                                      activeColor: CustomColor.primary,
-                                      checkColor: CustomColor.primary,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          isCheckedFemale = !isCheckedFemale;
-                                          isCheckedMale = false;
-                                          Preferences.gender = 2;
-                                        });
-                                      },
+                                    Transform.scale(
+                                      scale: 0.9,
+                                      child: Checkbox(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        value: isCheckedFemale,
+                                        activeColor: CustomColor.primary,
+                                        checkColor: CustomColor.primary,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            isCheckedFemale = !isCheckedFemale;
+                                            isCheckedMale = false;
+                                            Preferences.gender = 2;
+                                          });
+                                        },
+                                      ),
                                     ),
                                     Text(
                                       'Hembra',
@@ -413,6 +454,60 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                             Preferences.age = value;
                             setState(() {
                               print(Preferences.age);
+                            });
+                          },
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'Tamaño',
+                          style: CustomTextStyle.text2
+                              .copyWith(color: CustomColor.grey, fontSize: 18),
+                          textAlign: TextAlign.start,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          initialValue: Preferences.size,
+                          style: GoogleFonts.poppins(color: Colors.black),
+                          autocorrect: false,
+                          keyboardType: TextInputType.number,
+                          decoration: formDecorationWidget(
+                            hintText: 'Ejm: Mediano',
+                          ),
+                          onChanged: (value) {
+                            Preferences.size = value;
+                            setState(() {
+                              print(Preferences.age);
+                            });
+                          },
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'Peso',
+                          style: CustomTextStyle.text2
+                              .copyWith(color: CustomColor.grey, fontSize: 18),
+                          textAlign: TextAlign.start,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          initialValue: Preferences.weigth,
+                          style: GoogleFonts.poppins(color: Colors.black),
+                          autocorrect: false,
+                          keyboardType: TextInputType.number,
+                          decoration: formDecorationWidget(
+                            hintText: 'Ingrese peso',
+                          ),
+                          onChanged: (value) {
+                            Preferences.weigth = value;
+                            setState(() {
+                              print(Preferences.weigth);
                             });
                           },
                         ),
@@ -591,6 +686,58 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                                 });
                               },
                             ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              'Características de la mascota',
+                              style: CustomTextStyle.text2.copyWith(
+                                  color: CustomColor.grey, fontSize: 18),
+                              textAlign: TextAlign.start,
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            ListView.builder(
+                              itemCount: caracteristicas.length,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return CheckboxListTile(
+                                  contentPadding:
+                                      EdgeInsets.symmetric(horizontal: 0),
+                                  activeColor: CustomColor.primary,
+                                  title: Text(
+                                    caracteristicas[index],
+                                    style: GoogleFonts.poppins(
+                                      color: values[index]
+                                          ? CustomColor.primary
+                                          : Colors.black,
+                                      fontWeight: values[index]
+                                          ? FontWeight.bold
+                                          : FontWeight.normal,
+                                    ),
+                                  ),
+                                  value: values[index],
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      values[index] = newValue!;
+                                      if (newValue) {
+                                        selectedCaracteristicas
+                                            .add(caracteristicas[index]);
+
+                                        print(selectedCaracteristicas);
+                                      } else {
+                                        selectedCaracteristicas
+                                            .remove(caracteristicas[index]);
+
+                                        print(selectedCaracteristicas);
+                                      }
+                                    });
+                                  },
+                                );
+                              },
+                            )
                           ],
                         ))
                     : Container(
@@ -798,8 +945,8 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                                   ),
                                   onPressed: () {
                                     //storageListImageProvider.insertListImageStorage();
-                                    storageListImageProvider
-                                        .saveListImageInDB();
+                                    // storageListImageProvider
+                                    //     .saveListImageInDB();
 
                                     ScaffoldMessenger.of(context).showSnackBar(
                                         const SnackBar(
@@ -885,8 +1032,11 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                               sexo:
                                   Preferences.gender == 1 ? 'Macho' : 'Hembra',
                               edad: Preferences.age,
-                              peso: '3',
-                              tamano: 'Mediano',
+                              peso: Preferences.weigth,
+                              tamano: Preferences.size,
+                              estado: estado_mascota_map,
+                              caracteristicas: selectedCaracteristicas,
+                              idRaza: Preferences.breed.toString(),
                             ),
                           ));
                     }
