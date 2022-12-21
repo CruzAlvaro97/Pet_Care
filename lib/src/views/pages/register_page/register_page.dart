@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_society/providers/login_provider.dart';
 import 'package:pet_society/providers/subabase_login_provider.dart';
+import 'package:pet_society/providers/usuario_provider.dart';
 import 'package:pet_society/routes/routes.dart';
 import 'package:pet_society/services/auth_service.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
@@ -354,6 +355,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         loginProvider.email, loginProvider.pasword);
 
                     if (errorMesage == null) {
+                      // ignore: use_build_context_synchronously
                       Navigator.pushReplacementNamed(context, MyRoutes.rHOME);
                       userProvider.guardarDB();
                     } else {

@@ -3,14 +3,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_society/providers/login_provider.dart';
+import 'package:pet_society/providers/login_provider.dart';
+import 'package:pet_society/providers/usuario_provider.dart';
+import 'package:pet_society/routes/routes.dart';
+import 'package:pet_society/services/auth_service.dart';
+import 'package:pet_society/src/preferences/formadoptation_preferences.dart';
+import 'package:pet_society/src/preferences/user_preferences.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
 import 'package:pet_society/src/views/pages/help_page/help_page.dart';
+import 'package:provider/provider.dart';
 
 class ProfileSubPage extends StatelessWidget {
   const ProfileSubPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final usuarioProvider = Provider.of<UsuarioProvider>(context);
+    final authService = Provider.of<AuthService>(context);
+    final loginProvider = Provider.of<LoginProvider>(context);
+
     return Scaffold(
       backgroundColor: CustomColor.white2,
       body: SingleChildScrollView(
@@ -55,7 +67,8 @@ class ProfileSubPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Jorge Moreno',
+                            // 'Jorgito',
+                            '${PreferencesUser.nombreUsuario} ${PreferencesUser.apellidoUsuario}',
                             style: CustomTextStyle.text.copyWith(fontSize: 16),
                           ),
                           SizedBox(
@@ -68,7 +81,7 @@ class ProfileSubPage extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        '@jormg_',
+                        '@${PreferencesUser.usernameUsuario}',
                         style: CustomTextStyle.text
                             .copyWith(fontSize: 14, color: CustomColor.grey),
                       ),
@@ -252,7 +265,16 @@ class ProfileSubPage extends StatelessWidget {
                         fontSize: 16,
                         color: CustomColor.error,
                       )),
-                  onPressed: () {},
+                  onPressed: () {
+                    authService.cerrarSesion();
+                    loginProvider.isLoading = false;
+                    PreferencesUser.id = 0;
+                    PreferencesUser.nombreUsuario = '';
+                    PreferencesUser.apellidoUsuario = '';
+                    PreferencesUser.usernameUsuario = '';
+                    PreferencesUser.correoUsuario = '';
+                    Navigator.pushReplacementNamed(context, MyRoutes.rWELCOME);
+                  },
                 ),
               ),
               SizedBox(

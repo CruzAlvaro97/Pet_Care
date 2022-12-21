@@ -3,9 +3,11 @@ import 'package:pet_society/providers/favorite_provider.dart';
 import 'package:pet_society/providers/login_provider.dart';
 import 'package:pet_society/providers/subabase_login_provider.dart';
 import 'package:pet_society/providers/switch_provider.dart';
+import 'package:pet_society/providers/usuario_provider.dart';
 import 'package:pet_society/routes/routes.dart';
 import 'package:pet_society/services/auth_service.dart';
 import 'package:pet_society/src/preferences/formadoptation_preferences.dart';
+import 'package:pet_society/src/preferences/user_preferences.dart';
 import 'package:pet_society/src/providers/especie_provider.dart';
 import 'package:pet_society/src/providers/publicacion_provider.dart';
 import 'package:pet_society/src/providers/raza_provider.dart';
@@ -17,6 +19,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Preferences.init();
+
+  await PreferencesUser.init();
   runApp(const AppState());
 }
 
@@ -59,6 +63,9 @@ class AppState extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => AuthService(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => UsuarioProvider(),
         ),
       ],
       child: const MyApp(),

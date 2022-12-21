@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_society/providers/login_provider.dart';
+import 'package:pet_society/providers/usuario_provider.dart';
 import 'package:pet_society/routes/routes.dart';
 import 'package:pet_society/services/auth_service.dart';
+import 'package:pet_society/src/preferences/user_preferences.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
 import 'package:pet_society/src/views/widget/index_widgets.dart';
 import 'package:provider/provider.dart';
@@ -134,6 +136,8 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<LoginProvider>(context);
+    final usuarioProvider = Provider.of<UsuarioProvider>(context);
+    final _controller = TextEditingController();
 
     return Form(
       child: Column(
@@ -161,8 +165,9 @@ class _LoginFormState extends State<LoginForm> {
               hintStyle:
                   CustomTextStyle.seeMoreText.copyWith(color: CustomColor.grey),
             ),
+            controller: _controller,
             onChanged: ((value) => loginProvider.email = value),
-            validator: (value) {
+            validator: ((value) {
               String pattern =
                   r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
@@ -171,7 +176,7 @@ class _LoginFormState extends State<LoginForm> {
               return regExp.hasMatch(value ?? '')
                   ? null
                   : 'Por favor ingresar su correo correctamente';
-            },
+            }),
           ),
           //
 
@@ -256,6 +261,7 @@ class _LoginFormState extends State<LoginForm> {
                     );
 
                     if (errorMessage == null) {
+                      usuarioProvider.getDatauser(_controller.text);
                       // ignore: use_build_context_synchronously
                       Navigator.pushReplacementNamed(context, MyRoutes.rHOME);
                     } else {
