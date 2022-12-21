@@ -6,6 +6,7 @@ class MyRoutes {
   static const String rWELCOME = '/welcome';
   static const String rLOGIN = '/login';
   static const String rRESGISTER = '/register';
+  static const String rVERIFY = '/verify';
   static const String rONBOARDING = '/onboarding';
   static const String rHOME = '/home';
 
@@ -31,6 +32,9 @@ class MyRoutes {
       case ('/register'):
         return CupertinoPageRoute(builder: (_) => const RegisterPage());
       //
+
+      case ('/verify'):
+        return MaterialPageRoute(builder: (_) => const AuthPage());
 
       // Home route
       case ('/home'):

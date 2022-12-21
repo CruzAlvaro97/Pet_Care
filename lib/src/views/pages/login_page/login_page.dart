@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_society/providers/login_provider.dart';
 import 'package:pet_society/routes/routes.dart';
+import 'package:pet_society/services/auth_service.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
 import 'package:pet_society/src/views/widget/index_widgets.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -107,13 +111,30 @@ class LoginPage extends StatelessWidget {
 //
 
 // Login form
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   const LoginForm({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  bool _ispassword = true;
+
+  //  Funcionalidad de ocultar contraseña
+  void _viewPassword() {
+    setState(() {
+      _ispassword = !_ispassword;
+    });
+  }
+  //
+
+  @override
   Widget build(BuildContext context) {
+    final loginProvider = Provider.of<LoginProvider>(context);
+
     return Form(
       child: Column(
         children: [
@@ -132,7 +153,7 @@ class LoginForm extends StatelessWidget {
 
           // Login email form
           TextFormField(
-            style: TextStyle(color: CustomColor.black),
+            style: GoogleFonts.poppins(color: Colors.black),
             autocorrect: false,
             keyboardType: TextInputType.emailAddress,
             decoration: formDecorationWidget(
@@ -140,6 +161,17 @@ class LoginForm extends StatelessWidget {
               hintStyle:
                   CustomTextStyle.seeMoreText.copyWith(color: CustomColor.grey),
             ),
+            onChanged: ((value) => loginProvider.email = value),
+            validator: (value) {
+              String pattern =
+                  r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+
+              RegExp regExp = RegExp(pattern);
+
+              return regExp.hasMatch(value ?? '')
+                  ? null
+                  : 'Por favor ingresar su correo correctamente';
+            },
           ),
           //
 
@@ -160,15 +192,30 @@ class LoginForm extends StatelessWidget {
 
           // Login password form
           TextFormField(
-            style: TextStyle(color: CustomColor.black),
+            style: GoogleFonts.poppins(color: Colors.black),
             autocorrect: false,
-            obscureText: true,
+            obscureText: _ispassword,
             keyboardType: TextInputType.text,
             decoration: formDecorationWidget(
               hintText: 'Ingrese su contraseña',
               hintStyle:
                   CustomTextStyle.seeMoreText.copyWith(color: CustomColor.grey),
+              suffixIcon: InkWell(
+                onTap: _viewPassword,
+                child: Icon(
+                  _ispassword
+                      ? Icons.visibility_rounded
+                      : Icons.visibility_off_rounded,
+                  color: CustomColor.secondary,
+                ),
+              ),
             ),
+            onChanged: (value) => loginProvider.pasword = value,
+            validator: (value) {
+              return (value != null && value.length >= 6)
+                  ? null
+                  : 'La contraseña debe ser mayor a 6 caracteres.';
+            },
           ),
           //
 
@@ -188,13 +235,40 @@ class LoginForm extends StatelessWidget {
           SizedBox(height: MediaQuery.of(context).size.height * 0.05),
 
           // Login Button
-          CustomButtonWidget(
-            text: 'Iniciar Sesión',
-            textStyle: CustomTextStyle.text2.copyWith(color: CustomColor.white),
+          CustomButtonAuthWidget(
             colorButton: CustomColor.primary,
-            onPressed: () {
-              Navigator.pushNamed(context, MyRoutes.rHOME);
-            },
+            onPressed: (loginProvider.isLoading)
+                ? null
+                : () async {
+                    FocusScope.of(context).unfocus();
+
+                    final authService =
+                        Provider.of<AuthService>(context, listen: false);
+
+                    // print('error 401');
+                    // if (!loginProvider.isValidForm()) return;
+                    // print('error 402');
+                    loginProvider.isLoading = true;
+
+                    final String? errorMessage = await authService.login(
+                      loginProvider.email,
+                      loginProvider.pasword,
+                    );
+
+                    if (errorMessage == null) {
+                      // ignore: use_build_context_synchronously
+                      Navigator.pushReplacementNamed(context, MyRoutes.rHOME);
+                    } else {
+                      loginProvider.isLoading = false;
+                    }
+                  },
+            //
+            child: (loginProvider.isLoading)
+                ? CircularProgressIndicator(color: CustomColor.primary)
+                : Text(
+                    'Iniciar Sesión',
+                    style: CustomTextStyle.text2.copyWith(color: Colors.white),
+                  ),
           ),
           //
         ],

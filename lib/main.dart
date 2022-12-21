@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pet_society/providers/favorite_provider.dart';
+import 'package:pet_society/providers/login_provider.dart';
+import 'package:pet_society/providers/subabase_login_provider.dart';
 import 'package:pet_society/providers/switch_provider.dart';
 import 'package:pet_society/routes/routes.dart';
+import 'package:pet_society/services/auth_service.dart';
 import 'package:pet_society/src/preferences/formadoptation_preferences.dart';
 import 'package:pet_society/src/providers/especie_provider.dart';
 import 'package:pet_society/src/providers/publicacion_provider.dart';
 import 'package:pet_society/src/providers/raza_provider.dart';
 import 'package:pet_society/src/providers/storage_list_images_provider.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
-import 'package:pet_society/src/views/pages/form_adoption_pet/paso3.dart';
 import 'package:provider/provider.dart';
-
-import 'src/views/pages/form_adoption_pet/form_adoptation_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,6 +51,15 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => CambioProviderHelp(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => LoginProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => UserProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AuthService(),
+        ),
       ],
       child: const MyApp(),
     );
@@ -66,7 +75,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: App.name,
       onGenerateRoute: MyRoutes.generateRoute,
-      initialRoute: MyRoutes.rHOME,
+      initialRoute: MyRoutes.rVERIFY,
       //home: FormAdoptationPage(),
       // scaffoldMessengerKey: CustomSnackbar.msgkey, // SnackBar
       // theme: Provider.of<ThemeProvider>(context).currentTheme, // Modo oscuro

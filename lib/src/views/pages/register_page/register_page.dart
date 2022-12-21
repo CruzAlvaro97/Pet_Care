@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_society/providers/login_provider.dart';
+import 'package:pet_society/providers/subabase_login_provider.dart';
 import 'package:pet_society/routes/routes.dart';
+import 'package:pet_society/services/auth_service.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
 import 'package:pet_society/src/views/widget/index_widgets.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
@@ -114,13 +119,31 @@ class RegisterPage extends StatelessWidget {
 //
 
 // Register form
-class RegisterForm extends StatelessWidget {
+class RegisterForm extends StatefulWidget {
   const RegisterForm({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<RegisterForm> createState() => _RegisterFormState();
+}
+
+class _RegisterFormState extends State<RegisterForm> {
+  bool _ispassword = true;
+
+  //  Funcionalidad de ocultar contraseña
+  void _viewPassword() {
+    setState(() {
+      _ispassword = !_ispassword;
+    });
+  }
+  //
+
+  @override
   Widget build(BuildContext context) {
+    final loginProvider = Provider.of<LoginProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
+
     return Form(
       child: Column(
         children: [
@@ -140,14 +163,84 @@ class RegisterForm extends StatelessWidget {
 
           // Register name form
           TextFormField(
-            style: TextStyle(color: CustomColor.black),
+            style: GoogleFonts.poppins(color: Colors.black),
             autocorrect: false,
             keyboardType: TextInputType.text,
             decoration: formDecorationWidget(
-              hintText: 'Ingrese su nombre',
+              hintText: 'Ingrese su(s) nombre(s)',
               hintStyle:
                   CustomTextStyle.seeMoreText.copyWith(color: CustomColor.grey),
             ),
+            onChanged: ((value) => {
+                  userProvider.nombre = value,
+                }),
+          ),
+          //
+
+          const SizedBox(height: 25),
+          // LastName header form
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "Apellido",
+                style: CustomTextStyle.text2.copyWith(color: CustomColor.grey),
+              ),
+            ],
+          ),
+          //
+
+          const SizedBox(height: 5),
+
+          // Register lastname form
+          TextFormField(
+            style: GoogleFonts.poppins(color: Colors.black),
+            autocorrect: false,
+            keyboardType: TextInputType.text,
+            decoration: formDecorationWidget(
+              hintText: 'Ingrese su(s) apellido(s)',
+              hintStyle:
+                  CustomTextStyle.seeMoreText.copyWith(color: CustomColor.grey),
+            ),
+            onChanged: ((value) => {
+                  userProvider.apellidos = value,
+                }),
+          ),
+          //
+
+          const SizedBox(height: 25),
+
+          // User header form
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "Usuario",
+                style: CustomTextStyle.text2.copyWith(color: CustomColor.grey),
+              ),
+            ],
+          ),
+          //
+
+          const SizedBox(height: 5),
+
+          // Register user form
+          TextFormField(
+            style: GoogleFonts.poppins(color: Colors.black),
+            autocorrect: false,
+            keyboardType: TextInputType.text,
+            decoration: formDecorationWidget(
+              hintText: (userProvider.nombre == null ||
+                      userProvider.apellidos == null)
+                  ? 'Ingrese un nombre de usuario'
+                  : 'Cree un usuario: ',
+              // '${userProvider.nombre}${userProvider.apellidos}'
+              hintStyle:
+                  CustomTextStyle.seeMoreText.copyWith(color: CustomColor.grey),
+            ),
+            onChanged: ((value) => {
+                  userProvider.usuario = value,
+                }),
           ),
           //
 
@@ -169,7 +262,7 @@ class RegisterForm extends StatelessWidget {
 
           // Register email form
           TextFormField(
-            style: TextStyle(color: CustomColor.black),
+            style: GoogleFonts.poppins(color: Colors.black),
             autocorrect: false,
             keyboardType: TextInputType.emailAddress,
             decoration: formDecorationWidget(
@@ -177,6 +270,20 @@ class RegisterForm extends StatelessWidget {
               hintStyle:
                   CustomTextStyle.seeMoreText.copyWith(color: CustomColor.grey),
             ),
+            onChanged: ((value) => {
+                  loginProvider.email = value,
+                  userProvider.email = value,
+                }),
+            validator: (value) {
+              String pattern =
+                  r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+
+              RegExp regExp = RegExp(pattern);
+
+              return regExp.hasMatch(value ?? '')
+                  ? null
+                  : 'Por favor ingresar un correo válido';
+            },
           ),
           //
 
@@ -187,7 +294,7 @@ class RegisterForm extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Text(
-                "Contraseña",
+                "Contraseña (mín. 6 caract.)",
                 style: CustomTextStyle.text2.copyWith(color: CustomColor.grey),
               ),
             ],
@@ -198,27 +305,68 @@ class RegisterForm extends StatelessWidget {
 
           // Register password form
           TextFormField(
-            style: TextStyle(color: CustomColor.black),
+            style: GoogleFonts.poppins(color: Colors.black),
             autocorrect: false,
             keyboardType: TextInputType.text,
+            obscureText: _ispassword,
             decoration: formDecorationWidget(
               hintText: 'Ingrese una contraseña',
               hintStyle:
                   CustomTextStyle.seeMoreText.copyWith(color: CustomColor.grey),
+              suffixIcon: InkWell(
+                onTap: _viewPassword,
+                child: Icon(
+                  _ispassword
+                      ? Icons.visibility_rounded
+                      : Icons.visibility_off_rounded,
+                  color: CustomColor.secondary,
+                ),
+              ),
             ),
+            onChanged: ((value) => {
+                  loginProvider.pasword = value,
+                }),
+            validator: (value) {
+              return (value != null && value.length >= 6)
+                  ? null
+                  : 'La contraseña debe ser mayor a 6 caracteres.';
+            },
           ),
           //
 
           const SizedBox(height: 64),
 
           // Register Button
-          CustomButtonWidget(
-            text: 'Crear cuenta',
-            textStyle: CustomTextStyle.text2.copyWith(color: Colors.white),
+          CustomButtonAuthWidget(
             colorButton: CustomColor.primary,
-            onPressed: () {
-              Navigator.pushNamed(context, MyRoutes.rHOME);
-            },
+            onPressed: loginProvider.isLoading
+                ? null
+                : () async {
+                    FocusScope.of(context).unfocus();
+
+                    final authService =
+                        Provider.of<AuthService>(context, listen: false);
+
+                    if (!loginProvider.isValidForm()) return;
+                    loginProvider.isLoading = true;
+
+                    final String? errorMesage = await authService.createUser(
+                        loginProvider.email, loginProvider.pasword);
+
+                    if (errorMesage == null) {
+                      Navigator.pushReplacementNamed(context, MyRoutes.rHOME);
+                      userProvider.guardarDB();
+                    } else {
+                      loginProvider.isLoading = false;
+                    }
+                    //
+                  },
+            child: (loginProvider.isLoading)
+                ? CircularProgressIndicator(color: CustomColor.white)
+                : Text(
+                    'Crear Cuenta',
+                    style: CustomTextStyle.text2.copyWith(color: Colors.white),
+                  ),
           ),
           //
         ],
