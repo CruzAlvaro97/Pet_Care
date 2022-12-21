@@ -264,7 +264,7 @@ class _LoginFormState extends State<LoginForm> {
                   },
             //
             child: (loginProvider.isLoading)
-                ? CircularProgressIndicator(color: CustomColor.primary)
+                ? CircularProgressIndicator(color: CustomColor.white)
                 : Text(
                     'Iniciar Sesión',
                     style: CustomTextStyle.text2.copyWith(color: Colors.white),

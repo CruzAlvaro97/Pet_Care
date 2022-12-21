@@ -347,7 +347,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     final authService =
                         Provider.of<AuthService>(context, listen: false);
 
-                    if (!loginProvider.isValidForm()) return;
+                    // if (!loginProvider.isValidForm()) return;
                     loginProvider.isLoading = true;
 
                     final String? errorMesage = await authService.createUser(
