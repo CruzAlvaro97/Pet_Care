@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_society/providers/favorite_provider.dart';
+import 'package:pet_society/providers/launcher_provider.dart';
 import 'package:pet_society/providers/login_provider.dart';
 import 'package:pet_society/providers/subabase_login_provider.dart';
 import 'package:pet_society/providers/switch_provider.dart';
@@ -66,6 +67,9 @@ class AppState extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => UsuarioProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LauncherProvider(),
         ),
       ],
       child: const MyApp(),

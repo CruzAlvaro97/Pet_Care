@@ -2,14 +2,18 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pet_society/providers/launcher_provider.dart';
 import 'package:pet_society/src/views/pages/help_page/preguntas_frecuentes/preguntas_frecuentes.dart';
 import 'package:pet_society/src/views/pages/help_page/sugestion_page.dart/suggestion_page.dart';
+import 'package:provider/provider.dart';
 
 class HelpPage extends StatelessWidget {
   const HelpPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final launcherProvider = Provider.of<LauncherProvider>(context);
+
     return Scaffold(
       backgroundColor: const Color(0xFFF9F9F9),
       appBar: AppBar(
@@ -68,7 +72,7 @@ class HelpPage extends StatelessWidget {
                 text:
                     'Contáctanos vía WhatsApp,\npara una atención más\npersonalizada.',
                 onTap: () {
-                  print('WhatsApp');
+                  launcherProvider.goWhatsappLauncher();
                 },
               ),
               _CardTypePublication(

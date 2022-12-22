@@ -74,7 +74,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   visible: currentIndex == 2 ? false : true,
                   child: TextButton(
                       onPressed: () {
-                        controller.jumpToPage(2);
+                        Navigator.pushReplacementNamed(
+                            context, MyRoutes.rWELCOME);
                       },
                       child: Text(
                         'Saltar',
