@@ -20,9 +20,13 @@ class AuthPage extends StatelessWidget {
           ) {
             if (!snapshot.hasData) {
               // puede cambiarse
-              return const Text(
-                'Cargando...',
-                style: TextStyle(fontSize: 30),
+              return SizedBox(
+                width: double.infinity,
+                height: 150,
+                child: Image.asset(
+                  'assets/images/picture-loading2.gif',
+                  fit: BoxFit.fitHeight,
+                ),
               );
             }
 
