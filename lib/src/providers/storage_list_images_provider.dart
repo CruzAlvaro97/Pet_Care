@@ -89,6 +89,9 @@ class StorageListImagesProvider with ChangeNotifier {
     List featuresPet,
     //List imgsPet,
     String breedPet,
+    String speciePet,
+    int idUser,
+    String tipoPost,
   ) async {
     final url = Uri.parse(urlBase);
     String msg;
@@ -114,6 +117,9 @@ class StorageListImagesProvider with ChangeNotifier {
       "features_pet": featuresPet,
       "images_pet": listNameImages,
       "breed_pet": breedPet,
+      "specie_pet": speciePet,
+      "id_user": idUser,
+      "tipo": tipoPost,
     });
 
     final response = await http.post(url, headers: headers, body: body);

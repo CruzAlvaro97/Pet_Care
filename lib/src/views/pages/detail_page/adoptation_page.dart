@@ -138,8 +138,9 @@ class _AdoptationPageState extends State<AdoptationPage> {
                 ),
               ),
               _Autor(
-                  //publication2: widget.publication2,
-                  ),
+                //publication2: widget.publication2,
+                publication3: widget.publication3,
+              ),
               _DescripcionMascota(publication3: widget.publication3),
               _CaracteriscaSlider(publication3: widget.publication3),
               Padding(
@@ -551,8 +552,9 @@ class _DescripcionMascota extends StatelessWidget {
 
 class _Autor extends StatelessWidget {
   //final Publication2 publication2;
+  final Publication3 publication3;
 
-  const _Autor({super.key});
+  const _Autor({super.key, required this.publication3});
 
   @override
   Widget build(BuildContext context) {
@@ -563,13 +565,13 @@ class _Autor extends StatelessWidget {
         children: [
           Text(
             //'Publicado por: ${publication2.nameUser} ${publication2.lastnameUser}',
-            'No tiene',
+            '${publication3.usuario.nombreUsuario} ${publication3.usuario.apellidoUsuario}',
             style: CustomTextStyle.paragraph.copyWith(color: Colors.grey),
           ),
           Row(
             children: [
               Text(
-                'No tiene',
+                '@${publication3.usuario.usernameUsuario}',
                 style: CustomTextStyle.paragraph.copyWith(color: Colors.grey),
               ),
               const SizedBox(width: 5),

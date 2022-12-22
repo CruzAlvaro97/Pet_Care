@@ -13,6 +13,7 @@ import 'package:lottie/lottie.dart';
 import 'package:pet_society/src/models/especie_model.dart';
 import 'package:pet_society/src/models/raza_model.dart';
 import 'package:pet_society/src/preferences/formadoptation_preferences.dart';
+import 'package:pet_society/src/preferences/user_preferences.dart';
 import 'package:pet_society/src/providers/especie_provider.dart';
 import 'package:pet_society/src/providers/raza_provider.dart';
 import 'package:pet_society/src/providers/storage_list_images_provider.dart';
@@ -22,7 +23,9 @@ import 'package:pet_society/src/views/widget/index_widgets.dart';
 import 'package:provider/provider.dart';
 
 class FormAdoptationPage extends StatefulWidget {
-  const FormAdoptationPage({super.key});
+  final String tipoPost;
+
+  const FormAdoptationPage({super.key, required this.tipoPost});
 
   @override
   State<FormAdoptationPage> createState() => _FormAdoptationPageState();
@@ -110,6 +113,8 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.tipoPost);
+
     final storageListImageProvider =
         Provider.of<StorageListImagesProvider>(context);
     final controller = GroupButtonController();
@@ -1037,6 +1042,8 @@ class _FormAdoptationPageState extends State<FormAdoptationPage> {
                               estado: estado_mascota_map,
                               caracteristicas: selectedCaracteristicas,
                               idRaza: Preferences.breed.toString(),
+                              tipoPost: widget.tipoPost,
+                              idUser: PreferencesUser.id,
                             ),
                           ));
                     }

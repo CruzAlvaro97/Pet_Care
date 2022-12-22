@@ -8,6 +8,8 @@ import 'package:pet_society/providers/favorite_provider.dart';
 import 'package:pet_society/src/models/pets_adoption_model.dart';
 import 'package:pet_society/src/models/publication2_model.dart';
 import 'package:pet_society/src/models/publication_model.dart';
+import 'package:pet_society/src/preferences/formadoptation_preferences.dart';
+import 'package:pet_society/src/preferences/user_preferences.dart';
 import 'package:pet_society/src/providers/publicacion_provider.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
 import 'package:pet_society/src/views/pages/create_publication_page/create_publication_page.dart';
@@ -16,9 +18,29 @@ import 'package:pet_society/src/views/pages/home_page/home_subpages/en_adopcion_
 import 'package:pet_society/src/views/widget/decoration_widget/container_decoration_widget.dart';
 import 'package:pet_society/src/views/widget/skeleton/card_post_skeleton_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class HomeSubPage extends StatelessWidget {
+class HomeSubPage extends StatefulWidget {
   const HomeSubPage({Key? key}) : super(key: key);
+
+  @override
+  State<HomeSubPage> createState() => _HomeSubPageState();
+}
+
+class _HomeSubPageState extends State<HomeSubPage> {
+  @override
+  void initState() {
+    super.initState();
+    final publicacionProvider =
+        Provider.of<PublicacionProvider>(context, listen: false);
+
+    publicacionProvider.refreshList();
+
+    Future<String?> getImageUrlFromPreferences() async {
+      final _noPrefs = await SharedPreferences.getInstance();
+      return _noPrefs.getString("fotoUsuario");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,35 +82,38 @@ class HomeSubPage extends StatelessWidget {
         ],
         centerTitle: false,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const _PhotoAndSearchInput(),
-            const Divider(
-              thickness: 0.8,
-            ),
-            const _AdContainer(),
-            const _TitleCarrouselCards(
-              titleCarrousel: 'Publicaciones recientes',
-            ),
-            SizedBox(
-              child: publicacionProvider.isLoading
-                  ? const CardPostSkeletonWidget()
-                  : Column(
-                      children: const [
-                        _CarrouselPublication(itemCount: 3),
-                        _TitleCarrouselCards(
-                          titleCarrousel: 'Adopciones recientes',
-                          isMoreText: false, //<- is true
-                        ),
-                        _CarrouselAdoptPets(),
-                        SizedBox(height: 30.0),
-                      ],
-                    ),
-            )
-            //_CarrouselPublication2(),
-          ],
+      body: RefreshIndicator(
+        onRefresh: () => publicacionProvider.refreshList(),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const _PhotoAndSearchInput(),
+              const Divider(
+                thickness: 0.8,
+              ),
+              const _AdContainer(),
+              const _TitleCarrouselCards(
+                titleCarrousel: 'Publicaciones recientes',
+              ),
+              SizedBox(
+                child: publicacionProvider.isLoading
+                    ? const CardPostSkeletonWidget()
+                    : Column(
+                        children: const [
+                          _CarrouselPublication(itemCount: 3),
+                          _TitleCarrouselCards(
+                            titleCarrousel: 'Adopciones recientes',
+                            isMoreText: false, //<- is true
+                          ),
+                          _CarrouselAdoptPets(),
+                          SizedBox(height: 30.0),
+                        ],
+                      ),
+              )
+              //_CarrouselPublication2(),
+            ],
+          ),
         ),
       ),
     );
@@ -182,8 +207,10 @@ class _CarrouselPublication extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 55 / 2,
-                    backgroundImage: NetworkImage(
-                        'https://gmlqcelelvidskpttktm.supabase.co/storage/v1/object/public/imgs/IMG/${dataPublicacion.imagesPet[0]}'),
+                    backgroundImage:
+                        NetworkImage(dataPublicacion.usuario.fotoUsuario),
+
+                    //'https://gmlqcelelvidskpttktm.supabase.co/storage/v1/object/public/imgs/IMG/${dataPublicacion.imagesPet[0]}'
                   ),
                   const SizedBox(width: 10.0),
                   Expanded(
@@ -194,16 +221,16 @@ class _CarrouselPublication extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'No tiene',
+                              '${dataPublicacion.usuario.nombreUsuario} ${dataPublicacion.usuario.apellidoUsuario}',
                               style: CustomTextStyle.text,
                             ),
                             Text(
-                              'No tiene',
+                              '@${dataPublicacion.usuario.usernameUsuario}',
                               style: CustomTextStyle.helperText2
                                   .copyWith(color: CustomColor.grey),
                             ),
                             Text(
-                              dataPublicacion.createdAt.hour.toString(),
+                              '${dataPublicacion.createdAt.hour.toString()}:${dataPublicacion.createdAt.minute.toString()}',
                               style: CustomTextStyle.helperText2
                                   .copyWith(color: CustomColor.grey),
                             ),
@@ -268,71 +295,72 @@ class _CarrouselPublication extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10.0,
-                      vertical: 10.0,
-                    ),
-                    child: Column(
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            if (fav.selectedItem.contains(index)) {
-                              fav.removeItem(index);
-                              publications2
-                                  .where((x) => x.id == index + 1)
-                                  .first
-                                  .likes = publications2[index].likes - 1;
-                            } else {
-                              fav.addItem(index);
-                              publications2
-                                  .where((x) => x.id == index + 1)
-                                  .first
-                                  .likes = publications2[index].likes + 1;
-                            }
-                          },
-                          icon: Icon(
-                            fav.selectedItem.contains(index)
-                                ? Icons.favorite_rounded
-                                : Icons.favorite_border_rounded,
-                            color: fav.selectedItem.contains(index)
-                                ? Colors.red
-                                : Colors.white,
-                            size: 30,
-                          ),
-                          padding: EdgeInsets.zero,
-                        ),
-                        Text(
-                          '00',
-                          style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
-                            height: 1,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 5.0,
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.messenger_outline_rounded,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                          padding: EdgeInsets.zero,
-                        ),
-                        Text(
-                          '00',
-                          style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
-                            height: 1,
-                          ),
-                        )
-                      ],
-                    ),
-                  )
+                  //===likes y comentar
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(
+                  //     horizontal: 10.0,
+                  //     vertical: 10.0,
+                  //   ),
+                  //   child: Column(
+                  //     children: [
+                  //       IconButton(
+                  //         onPressed: () {
+                  //           if (fav.selectedItem.contains(index)) {
+                  //             fav.removeItem(index);
+                  //             publications2
+                  //                 .where((x) => x.id == index + 1)
+                  //                 .first
+                  //                 .likes = publications2[index].likes - 1;
+                  //           } else {
+                  //             fav.addItem(index);
+                  //             publications2
+                  //                 .where((x) => x.id == index + 1)
+                  //                 .first
+                  //                 .likes = publications2[index].likes + 1;
+                  //           }
+                  //         },
+                  //         icon: Icon(
+                  //           fav.selectedItem.contains(index)
+                  //               ? Icons.favorite_rounded
+                  //               : Icons.favorite_border_rounded,
+                  //           color: fav.selectedItem.contains(index)
+                  //               ? Colors.red
+                  //               : Colors.white,
+                  //           size: 30,
+                  //         ),
+                  //         padding: EdgeInsets.zero,
+                  //       ),
+                  //       Text(
+                  //         '00',
+                  //         style: GoogleFonts.poppins(
+                  //           fontWeight: FontWeight.w500,
+                  //           color: Colors.white,
+                  //           height: 1,
+                  //         ),
+                  //       ),
+                  //       const SizedBox(
+                  //         height: 5.0,
+                  //       ),
+                  //       IconButton(
+                  //         onPressed: () {},
+                  //         icon: const Icon(
+                  //           Icons.messenger_outline_rounded,
+                  //           color: Colors.white,
+                  //           size: 30,
+                  //         ),
+                  //         padding: EdgeInsets.zero,
+                  //       ),
+                  //       Text(
+                  //         '00',
+                  //         style: GoogleFonts.poppins(
+                  //           fontWeight: FontWeight.w500,
+                  //           color: Colors.white,
+                  //           height: 1,
+                  //         ),
+                  //       )
+                  //     ],
+                  //   ),
+                  // )
                 ],
               ),
               GestureDetector(
@@ -725,10 +753,17 @@ class _PhotoAndSearchInput extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const CircleAvatar(
+          CircleAvatar(
             radius: 60 / 2,
-            backgroundImage: NetworkImage(
-                'https://images.unsplash.com/photo-1566753323558-f4e0952af115?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1021&q=80'),
+            foregroundColor: const Color(0xFF6e42ec),
+            backgroundColor: const Color(0xFF6e42ec),
+            backgroundImage: PreferencesUser.fotoUsuario.isEmpty
+                ? const NetworkImage(
+                    'https://i.ibb.co/1djwyMD/icono-petcare-background-purple.png',
+                  )
+                : NetworkImage(
+                    PreferencesUser.fotoUsuario,
+                  ),
           ),
           const SizedBox(width: 10.0),
           Expanded(

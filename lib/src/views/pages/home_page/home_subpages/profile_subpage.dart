@@ -50,7 +50,7 @@ class ProfileSubPage extends StatelessWidget {
                           child: CircleAvatar(
                             radius: 47,
                             backgroundImage: NetworkImage(
-                              'https://cdn.pixabay.com/photo/2022/01/17/06/52/nature-6944000__340.jpg',
+                              PreferencesUser.fotoUsuario,
                             ),
                           ),
                         ),
@@ -273,6 +273,8 @@ class ProfileSubPage extends StatelessWidget {
                     PreferencesUser.apellidoUsuario = '';
                     PreferencesUser.usernameUsuario = '';
                     PreferencesUser.correoUsuario = '';
+                    PreferencesUser.fotoUsuario =
+                        'https://i.ibb.co/1djwyMD/icono-petcare-background-purple.png';
                     Navigator.pushReplacementNamed(context, MyRoutes.rWELCOME);
                   },
                 ),

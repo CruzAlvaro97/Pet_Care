@@ -8,6 +8,7 @@ class PreferencesUser {
   static String _apellidoUsuario = '';
   static String _usernameUsuario = '';
   static String _correoUsuario = '';
+  static String _fotoUsuario = '';
 
   static Future init() async {
     _noprefs = await SharedPreferences.getInstance();
@@ -69,4 +70,14 @@ class PreferencesUser {
   }
   //
 
+  //Foto
+  static String get fotoUsuario {
+    return _noprefs.getString('fotoUsuario') ?? _fotoUsuario;
+  }
+
+  static set fotoUsuario(String fotoUsuario) {
+    _fotoUsuario = fotoUsuario;
+    _noprefs.setString('fotoUsuario', fotoUsuario);
+  }
+  //
 }

@@ -40,8 +40,9 @@ class UsuarioProvider with ChangeNotifier {
     PreferencesUser.apellidoUsuario = usuarioDatos[0].apellidoUsuario;
     PreferencesUser.usernameUsuario = usuarioDatos[0].usernameUsuario;
     PreferencesUser.correoUsuario = usuarioDatos[0].correoUsuario;
+    PreferencesUser.fotoUsuario = usuarioDatos[0].fotoUsuario;
 
     return print(
-        'NOMBRE => ${usuarioDatos[0].nombreUsuario} \nAPELLIDO => ${usuarioDatos[0].apellidoUsuario} \nUSERNAME => ${usuarioDatos[0].usernameUsuario}  \nCORREO => ${usuarioDatos[0].correoUsuario}');
+        'NOMBRE => ${usuarioDatos[0].nombreUsuario} \nAPELLIDO => ${usuarioDatos[0].apellidoUsuario} \nUSERNAME => ${usuarioDatos[0].usernameUsuario}  \nCORREO => ${usuarioDatos[0].correoUsuario} \nFOTO => ${usuarioDatos[0].fotoUsuario}');
   }
 }

@@ -28,7 +28,7 @@ class PublicacionProvider with ChangeNotifier {
       _baseUrl,
       endpoint,
       {
-        'select': '*',
+        'select': '*,usuario(*)',
       },
     );
 
@@ -54,6 +54,29 @@ class PublicacionProvider with ChangeNotifier {
 
     print('Petición HTTP Publicaciones');
     isLoading = false;
+
+    notifyListeners();
+  }
+
+  Future<void> refreshList() async {
+    // isLoading = true;
+    // notifyListeners();
+
+    final jsonData = await _getJsonData('rest/v1/publicacion');
+
+    List<dynamic> listaDinamica = jsonDecode(jsonData);
+
+    listaPublicacion3.clear();
+
+    listaDinamica.forEach((element) {
+      Publication3 publicacion = Publication3.fromMap(element);
+      listaPublicacion3.add(publicacion);
+    });
+
+    print(listaPublicacion3);
+
+    print('Petición HTTP Publicaciones');
+    //isLoading = false;
 
     notifyListeners();
   }

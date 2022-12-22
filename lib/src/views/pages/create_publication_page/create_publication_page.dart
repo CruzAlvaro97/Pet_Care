@@ -2,7 +2,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
+import 'package:pet_society/src/views/pages/form_adoption_pet/form_adoptation_page.dart';
 import 'package:pet_society/src/views/widget/index_widgets.dart';
 
 class CreatePublicationPage extends StatelessWidget {
@@ -15,9 +17,9 @@ class CreatePublicationPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        title: const Text(
+        title: Text(
           'Crear publicacion',
-          style: TextStyle(
+          style: GoogleFonts.poppins(
             color: Colors.black,
             fontSize: 16.0,
           ),
@@ -39,7 +41,7 @@ class CreatePublicationPage extends StatelessWidget {
             SizedBox(height: 30.0),
             Text(
               '¿De qué trata\nsu publicación?',
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                 fontWeight: FontWeight.bold,
                 fontSize: 24.0,
               ),
@@ -48,7 +50,7 @@ class CreatePublicationPage extends StatelessWidget {
             Text(
               'Selecciona el tipo publicación que\ndesea crear',
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                 fontWeight: FontWeight.bold,
                 fontSize: 16.0,
                 color: Colors.grey,
@@ -59,6 +61,16 @@ class CreatePublicationPage extends StatelessWidget {
               category: 'ADOPCIÓN',
               imgPath: 'assets/icons/casaperroIcon_createPubli.png',
               text: 'Desea dar en adopción\na una mascota',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => const FormAdoptationPage(
+                      tipoPost: 'Adopcion',
+                    ),
+                  ),
+                );
+              },
             ),
             _CardTypePublication(
               category: 'APOYO',
@@ -71,16 +83,16 @@ class CreatePublicationPage extends StatelessWidget {
               text: 'Está buscando una\nmascota',
             ),
             SizedBox(height: 30.0),
-            Padding(
-              padding: const EdgeInsets.all(0.0),
-              child: CustomButtonWidget(
-                onPressed: () {},
-                colorButton: CustomColor.primary,
-                text: 'Continuar',
-                textStyle:
-                    CustomTextStyle.text2.copyWith(color: CustomColor.white),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(0.0),
+            //   child: CustomButtonWidget(
+            //     onPressed: () {},
+            //     colorButton: CustomColor.primary,
+            //     text: 'Continuar',
+            //     textStyle:
+            //         CustomTextStyle.text2.copyWith(color: CustomColor.white),
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -92,64 +104,69 @@ class _CardTypePublication extends StatelessWidget {
   final String category;
   final String text;
   final String imgPath;
+  final Function()? onTap;
 
   const _CardTypePublication({
     required this.category,
     required this.text,
     required this.imgPath,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 120,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 30.0,
-        vertical: 20.0,
-      ),
-      margin: const EdgeInsets.only(bottom: 10.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            offset: const Offset(0.0, 4.0),
-            blurRadius: 20.0,
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                category,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        height: 120,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 30.0,
+          vertical: 20.0,
+        ),
+        margin: const EdgeInsets.only(bottom: 10.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              offset: const Offset(0.0, 4.0),
+              blurRadius: 20.0,
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  category,
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.0,
+                  ),
                 ),
-              ),
-              Text(
-                text,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0,
-                  color: Colors.grey,
+                Text(
+                  text,
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.0,
+                    color: Colors.grey,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Image.asset(
-            imgPath,
-            width: 60,
-            height: 60,
-          ),
-        ],
+              ],
+            ),
+            Image.asset(
+              imgPath,
+              width: 60,
+              height: 60,
+            ),
+          ],
+        ),
       ),
     );
   }

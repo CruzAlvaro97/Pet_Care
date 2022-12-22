@@ -25,6 +25,8 @@ class PrevisualizacionPostPage extends StatefulWidget {
   final String tamano;
   final Map estado;
   final List caracteristicas;
+  final String tipoPost;
+  final int idUser;
 
   const PrevisualizacionPostPage({
     super.key,
@@ -40,6 +42,8 @@ class PrevisualizacionPostPage extends StatefulWidget {
     required this.estado,
     required this.caracteristicas,
     required this.idRaza,
+    required this.tipoPost,
+    required this.idUser,
   });
 
   @override
@@ -55,32 +59,32 @@ class _PrevisualizacionPostPageState extends State<PrevisualizacionPostPage> {
     final storageListImageProvider =
         Provider.of<StorageListImagesProvider>(context);
 
-    Future.delayed(
-      Duration.zero,
-      () => showDialog(
-        context: context,
-        builder: (ctx) => ModalAlertWidget(
-          icon: const Icon(
-            Icons.warning_rounded,
-            color: Colors.yellow,
-            size: 80.0,
-          ),
-          title: 'ADVERTENCIA',
-          message:
-              'Esta sólo es una presentación de como se reflejará tu post dentro de la aplicación. Si deseas cambiar algunos datos retrocede y culmina.',
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(ctx).pop(),
-              child: Text(
-                '¡ENTENDIDO!',
-                style: GoogleFonts.poppins(
-                    fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+    // Future.delayed(
+    //   Duration.zero,
+    //   () => showDialog(
+    //     context: context,
+    //     builder: (ctx) => ModalAlertWidget(
+    //       icon: const Icon(
+    //         Icons.warning_rounded,
+    //         color: Colors.yellow,
+    //         size: 80.0,
+    //       ),
+    //       title: 'ADVERTENCIA',
+    //       message:
+    //           'Esta sólo es una presentación de como se reflejará tu post dentro de la aplicación. Si deseas cambiar algunos datos retrocede y culmina.',
+    //       actions: [
+    //         TextButton(
+    //           onPressed: () => Navigator.of(ctx).pop(),
+    //           child: Text(
+    //             '¡ENTENDIDO!',
+    //             style: GoogleFonts.poppins(
+    //                 fontSize: 18, fontWeight: FontWeight.bold),
+    //           ),
+    //         ),
+    //       ],
+    //     ),
+    //   ),
+    // );
 
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -229,6 +233,9 @@ class _PrevisualizacionPostPageState extends State<PrevisualizacionPostPage> {
               widget.estado, //estado map
               widget.caracteristicas, //caracteristicas lista
               widget.raza, //raza
+              widget.especie, //especie
+              widget.idUser,
+              widget.tipoPost,
             );
 
             Navigator.push(

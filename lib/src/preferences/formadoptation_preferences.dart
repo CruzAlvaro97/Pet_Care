@@ -17,6 +17,7 @@ class Preferences {
   static int _breed = 0;
   static String _description = '';
   static bool _theme = false;
+  static String _typePost = '';
 
   static Future init() async {
     _prefs = await SharedPreferences.getInstance();
@@ -32,6 +33,16 @@ class Preferences {
   static set img(String img) {
     _img = img;
     _prefs.setString('img', img);
+  }
+
+  //Image
+  static String get typePost {
+    return _prefs.getString('_typePost') ?? _typePost;
+  }
+
+  static set typePost(String typePost) {
+    _typePost = _typePost;
+    _prefs.setString('_typePost', _typePost);
   }
 
   //Name
