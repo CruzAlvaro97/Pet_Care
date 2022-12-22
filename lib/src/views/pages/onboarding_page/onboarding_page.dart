@@ -36,17 +36,22 @@ class _OnboardingPageState extends State<OnboardingPage> {
               controller: controller,
               children: const <Widget>[
                 OnboardingModal(
-                    titulo: 'Ayudanos a ayudar',
-                    descrip:
-                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'),
+                  titulo: 'Ayudanos a ayudar',
+                  descrip:
+                      '¡Conseguiremos que su mascota reciba la ayuda que necesita mediante nuestra comunidad!',
+                  url: 'assets/images/ob1.png',
+                ),
                 OnboardingModal(
-                    titulo: 'Encuentra un compañero',
-                    descrip:
-                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'),
+                  titulo: 'Encuentra un compañero',
+                  descrip:
+                      'En esta comunidad podrás encontrar a tu fiel amig@.',
+                  url: 'assets/images/ob2.png',
+                ),
                 OnboardingModal(
-                    titulo: 'Lorem limpsun',
-                    descrip:
-                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'),
+                  titulo: 'Lorem limpsun',
+                  descrip: 'Aquí te ayudamos a encontrar a tu mascota perdida.',
+                  url: 'assets/images/ob3.png',
+                ),
               ],
             ),
           ),
@@ -120,17 +125,19 @@ class OnboardingModal extends StatelessWidget {
     Key? key,
     required this.titulo,
     required this.descrip,
+    required this.url,
   }) : super(key: key);
 
   final String titulo;
   final String descrip;
+  final String url;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Image.asset(
-          'assets/images/fondoonboarding.jpeg',
+          url,
           width: double.infinity,
           height: MediaQuery.of(context).size.height * 0.6,
           fit: BoxFit.fill,

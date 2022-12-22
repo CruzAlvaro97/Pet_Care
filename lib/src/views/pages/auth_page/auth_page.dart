@@ -31,7 +31,7 @@ class AuthPage extends StatelessWidget {
                 Navigator.pushReplacement(
                     context,
                     PageRouteBuilder(
-                      pageBuilder: (_, __, ___) => const WelcomePage(),
+                      pageBuilder: (_, __, ___) => const OnboardingPage(),
                       transitionDuration: const Duration(seconds: 0),
                     ));
               });

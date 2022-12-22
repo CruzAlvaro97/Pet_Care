@@ -14,6 +14,8 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String correo = '';
+
     return Scaffold(
       //AppBar
       appBar: AppBar(
@@ -165,7 +167,7 @@ class _LoginFormState extends State<LoginForm> {
               hintStyle:
                   CustomTextStyle.seeMoreText.copyWith(color: CustomColor.grey),
             ),
-            controller: _controller,
+            //controller: _controller,
             onChanged: ((value) => loginProvider.email = value),
             validator: ((value) {
               String pattern =
@@ -261,7 +263,7 @@ class _LoginFormState extends State<LoginForm> {
                     );
 
                     if (errorMessage == null) {
-                      usuarioProvider.getDatauser(_controller.text);
+                      usuarioProvider.getDatauser(loginProvider.email);
                       // ignore: use_build_context_synchronously
                       Navigator.pushReplacementNamed(context, MyRoutes.rHOME);
                     } else {

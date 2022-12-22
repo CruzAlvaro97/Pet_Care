@@ -3,7 +3,9 @@ import 'package:lottie/lottie.dart';
 import 'package:pet_society/providers/switch_provider.dart';
 import 'package:pet_society/src/models/pets_adoption_model.dart';
 import 'package:pet_society/src/models/pets_filter_model.dart';
+import 'package:pet_society/src/models/publication3_model.dart';
 import 'package:pet_society/src/models/publication_model.dart';
+import 'package:pet_society/src/providers/publicacion_provider.dart';
 import 'package:pet_society/src/utils/color/custom_color.dart';
 import 'package:pet_society/src/utils/style/custom_text_style.dart';
 import 'package:pet_society/src/views/widget/index_widgets.dart';
@@ -16,6 +18,9 @@ class EnAdopcionSubPage extends StatelessWidget {
   Widget build(BuildContext context) {
     //final cambio = Provider.of<CambioProvider>(context);
     final cambio = Provider.of<CambioProviderAdopcion>(context);
+    final publicacionProvider =
+        Provider.of<PublicacionProvider>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
@@ -23,128 +28,131 @@ class EnAdopcionSubPage extends StatelessWidget {
         backgroundColor: CustomColor.white2,
         elevation: 0,
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0, right: 20, top: 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Parte superior izquierda
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Encabezado
-                    Text(
-                      'Encuentra a tu',
-                      style: CustomTextStyle.headline,
-                    ),
-                    Text(
-                      'compañer@',
-                      style: CustomTextStyle.headline.copyWith(
-                        color: CustomColor.primary,
-                        height: 1,
+      body: RefreshIndicator(
+        onRefresh: () => publicacionProvider.refreshList(),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 20, top: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Parte superior izquierda
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Encabezado
+                      Text(
+                        'Encuentra a tu',
+                        style: CustomTextStyle.headline,
                       ),
-                    ),
-                    //
-
-                    const SizedBox(height: 5),
-
-                    Row(
-                      children: [
-                        // Ubicación - ícono
-                        const SizedBox(
-                          width: 11,
-                          height: 13,
-                          child: Image(
-                            image: AssetImage(
-                                'assets/icons/ubicacionIcon_enAdopcion.png'),
-                          ),
+                      Text(
+                        'compañer@',
+                        style: CustomTextStyle.headline.copyWith(
+                          color: CustomColor.primary,
+                          height: 1,
                         ),
-                        //
+                      ),
+                      //
 
-                        const SizedBox(width: 4),
+                      const SizedBox(height: 5),
 
-                        // Ubicación - texto
-                        Text(
-                          'Ubicación, Perú',
-                          style: CustomTextStyle.helperText.copyWith(
-                            color: CustomColor.grey,
+                      Row(
+                        children: [
+                          // Ubicación - ícono
+                          const SizedBox(
+                            width: 11,
+                            height: 13,
+                            child: Image(
+                              image: AssetImage(
+                                  'assets/icons/ubicacionIcon_enAdopcion.png'),
+                            ),
                           ),
-                        ),
-                        //
-                      ],
-                    ),
-                  ],
-                ),
-                //
+                          //
 
-                // Parte superior derecha - gif
-                Container(
-                  height: 121,
-                  width: 121,
-                  color: CustomColor.white2,
-                  child: Lottie.asset(
-                      'assets/images/enAdopcion2.json'), //doble de velocidad de movimiento
-                ),
-                //
-              ],
+                          const SizedBox(width: 4),
+
+                          // Ubicación - texto
+                          Text(
+                            'Ubicación, Perú',
+                            style: CustomTextStyle.helperText.copyWith(
+                              color: CustomColor.grey,
+                            ),
+                          ),
+                          //
+                        ],
+                      ),
+                    ],
+                  ),
+                  //
+
+                  // Parte superior derecha - gif
+                  Container(
+                    height: 121,
+                    width: 121,
+                    color: CustomColor.white2,
+                    child: Lottie.asset(
+                        'assets/images/enAdopcion2.json'), //doble de velocidad de movimiento
+                  ),
+                  //
+                ],
+              ),
             ),
-          ),
 
-          const SizedBox(height: 8),
+            const SizedBox(height: 8),
 
-          // Search form
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: TextFormField(
-              style: CustomTextStyle.text,
-              autocorrect: true,
-              keyboardType: TextInputType.text,
-              decoration: formDecorationWidget(
-                hintText: 'Buscar',
-                hintStyle: CustomTextStyle.helperText
-                    .copyWith(color: CustomColor.grey),
-                prefixIcon: Icon(
-                  Icons.search_rounded,
-                  size: 20,
-                  color: CustomColor.grey,
-                ),
-              ).copyWith(fillColor: CustomColor.white),
-            ),
-          ),
-          //
+            // Search form
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            //   child: TextFormField(
+            //     style: CustomTextStyle.text,
+            //     autocorrect: true,
+            //     keyboardType: TextInputType.text,
+            //     decoration: formDecorationWidget(
+            //       hintText: 'Buscar',
+            //       hintStyle: CustomTextStyle.helperText
+            //           .copyWith(color: CustomColor.grey),
+            //       prefixIcon: Icon(
+            //         Icons.search_rounded,
+            //         size: 20,
+            //         color: CustomColor.grey,
+            //       ),
+            //     ).copyWith(fillColor: CustomColor.white),
+            //   ),
+            // ),
+            //
 
-          const SizedBox(height: 25),
+            const SizedBox(height: 20),
 
-          // Filtro Animales
-          const _CarrouselPetsFilter(),
-          //
+            // Filtro Animales
+            const _CarrouselPetsFilter(),
+            //
 
-          const SizedBox(height: 15),
+            const SizedBox(height: 15),
 
-          // Texto: resultados
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  "Resultados encontrados ${cambio.resultado}",
-                  style: CustomTextStyle.helperText2
-                      .copyWith(color: CustomColor.grey),
-                ),
-              ],
-            ),
-          ),
-          //
+            // Texto: resultados
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.start,
+            //     children: [
+            //       Text(
+            //         "Resultados encontrados ${cambio.resultado}",
+            //         style: CustomTextStyle.helperText2
+            //             .copyWith(color: CustomColor.grey),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            //
 
-          const SizedBox(height: 2.5),
+            const SizedBox(height: 2.5),
 
-          // Resultados de filtros
-          const _CarrouselResultsAdoption(),
-          //
-        ],
+            // Resultados de filtros
+            const _CarrouselResultsAdoption(),
+            //
+          ],
+        ),
       ),
     );
   }
@@ -230,21 +238,53 @@ class _CarrouselResultsAdoption extends StatelessWidget {
   Widget build(BuildContext context) {
     //final cambio = Provider.of<CambioProvider>(context);
     final cambio = Provider.of<CambioProviderAdopcion>(context);
-    List<PetsAdoption> petsAdoption2 = petsAdoption;
+    final publicacionProvider = Provider.of<PublicacionProvider>(context);
+
+    List<Publication3> petsAdoption2 = publicacionProvider.listaPublicacion3;
+
+    //List<PetsAdoption> petsAdoption2 = petsAdoption;
 
     List<dynamic> filtrados = [];
     for (int i = 0; i < (petsAdoption.length); i++) {
-      if (petsAdoption[i].typefilterPet == cambio.especie ||
+      if (publicacionProvider.listaPublicacion3[i].speciePet ==
+              cambio.especie ||
           cambio.especie == 'Todos') {
         filtrados.add(i);
       } else {}
     }
 
+    // List<dynamic> filtrados = [];
+    // for (int i = 0; i < (petsAdoption.length); i++) {
+    //   if (petsAdoption[i].typefilterPet == cambio.especie ||
+    //       cambio.especie == 'Todos') {
+    //     filtrados.add(i);
+    //   } else {}
+    // }
     //print(filtrados.length);
 
     // {
     // cambio.totalAdopcion(filtrados.length);
     // }
+
+    if (filtrados.length == 0) {
+      return Container(
+        width: double.infinity,
+        height: 100,
+        margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        decoration: containerDecoration(),
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'UPSSSS!!!\nNo hay ${cambio.especie}(s) en de adopción',
+              style: CustomTextStyle.text,
+              textAlign: TextAlign.center,
+            )
+          ],
+        ),
+      );
+    }
 
     return Expanded(
       child: Container(
@@ -273,7 +313,8 @@ class _CarrouselResultsAdoption extends StatelessWidget {
                       child: SizedBox(
                         width: double.infinity,
                         child: Image(
-                          image: NetworkImage(dataPets.photoPet),
+                          image: NetworkImage(
+                              'https://gmlqcelelvidskpttktm.supabase.co/storage/v1/object/public/imgs/IMG/${dataPets.imagesPet[0]}'),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -323,7 +364,7 @@ class _CarrouselResultsAdoption extends StatelessWidget {
                               ],
                             ),
                             Text(
-                              dataPets.typePet,
+                              dataPets.speciePet,
                               style: CustomTextStyle.helperText,
                             ),
                           ],

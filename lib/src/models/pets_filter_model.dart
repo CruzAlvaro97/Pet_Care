@@ -17,28 +17,28 @@ List<PetsFilter> petsFilter = [
     selectedIconPet: 'assets/icons/todosIcon2_enAdopcion.png',
   ),
   PetsFilter(
-    typePet: 'Perros',
+    typePet: 'Perro',
     iconPet: 'assets/icons/perrosIcon_enAdopcion.png',
     selectedIconPet: 'assets/icons/perrosIcon2_enAdopcion.png',
   ),
   PetsFilter(
-    typePet: 'Gatos',
+    typePet: 'Gato',
     iconPet: 'assets/icons/gatosIcon_enAdopcion.png',
     selectedIconPet: 'assets/icons/gatosIcon2_enAdopcion.png',
   ),
   PetsFilter(
-    typePet: 'Conejos',
+    typePet: 'Conejo',
     iconPet: 'assets/icons/conejosIcon_enAdopcion.png',
     selectedIconPet: 'assets/icons/conejosIcon2_enAdopcion.png',
   ),
   PetsFilter(
-    typePet: 'Aves',
+    typePet: 'Ave',
     iconPet: 'assets/icons/avesIcon_enAdopcion.png',
     selectedIconPet: 'assets/icons/avesIcon2_enAdopcion.png',
   ),
   PetsFilter(
-    typePet: 'Otros',
-    iconPet: 'assets/icons/otrosIcon_enAdopcion.png',
-    selectedIconPet: 'assets/icons/otrosIcon2_enAdopcion.png',
+    typePet: 'Roedor',
+    iconPet: 'assets/icons/roedorIcon_enAdopcion.png',
+    selectedIconPet: 'assets/icons/roedorIcon2_enAdopcion.png',
   ),
 ];
