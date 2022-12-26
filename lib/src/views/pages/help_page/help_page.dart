@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_society/src/views/pages/help_page/preguntas_frecuentes/preguntas_frecuentes.dart';
 import 'package:pet_society/src/views/pages/help_page/sugestion_page.dart/suggestion_page.dart';
 
@@ -42,9 +43,9 @@ class HelpPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
+              Text(
                 '¿En qué podemos\nayudarle?',
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   fontWeight: FontWeight.bold,
                   fontSize: 24.0,
                 ),
@@ -135,18 +136,18 @@ class _CardTypePublication extends StatelessWidget {
               children: [
                 Text(
                   category,
-                  style: const TextStyle(
+                  style: GoogleFonts.poppins(
                     fontWeight: FontWeight.bold,
                     fontSize: 16.0,
-                    color: Color(0xFF6444E7),
+                    color: const Color(0xFF6444E7),
                   ),
                 ),
                 const SizedBox(height: 2.0),
                 Text(
                   text,
-                  style: const TextStyle(
+                  style: GoogleFonts.poppins(
                     fontWeight: FontWeight.bold,
-                    fontSize: 16.0,
+                    fontSize: 14.0,
                     color: Colors.grey,
                   ),
                 ),

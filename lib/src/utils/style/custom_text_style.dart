@@ -54,5 +54,10 @@ class CustomTextStyle {
     fontWeight: FontWeight.w500,
   );
 
+  static TextStyle questionText = GoogleFonts.poppins(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+  );
+
   // Aquí se definirán los estilos de fuente
 }

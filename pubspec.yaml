@@ -52,6 +52,7 @@ dependencies:
   lottie: ^2.0.0
   skeletons: ^0.0.3
   flutter_secure_storage: ^7.0.1
+  card_swiper: ^2.0.4
 
 dev_dependencies:
   flutter_test:

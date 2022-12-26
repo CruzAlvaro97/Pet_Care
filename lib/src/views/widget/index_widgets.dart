@@ -1,6 +1,7 @@
 // INDEX WIDGETS
 
 // Custom Button
+
 export 'package:pet_society/src/views/widget/button_widget/custom_button_widget.dart';
 //
 
@@ -18,4 +19,6 @@ export 'package:pet_society/src/views/widget/decoration_widget/text_button_decor
 
 // Container Decoration
 export 'package:pet_society/src/views/widget/decoration_widget/container_decoration_widget.dart';
-//
+
+//Help page widgets
+export 'package:pet_society/src/views/widget/help_page_widget/question_item_widget.dart';

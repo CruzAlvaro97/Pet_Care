@@ -1,4 +1,5 @@
 // ignore_for_file: avoid_print
+import 'package:card_swiper/card_swiper.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -285,8 +286,8 @@ class _CarrouselPublication extends StatelessWidget {
                           topRight: Radius.circular(20.0),
                         ),
                         child: FadeInImage(
-                          placeholder:
-                              AssetImage('assets/images/picture-loading2.gif'),
+                          placeholder: const AssetImage(
+                              'assets/images/picture-loading2.gif'),
                           image: NetworkImage(
                             'https://gmlqcelelvidskpttktm.supabase.co/storage/v1/object/public/imgs/IMG/${dataPublicacion.imagesPet[0]}',
                           ),
@@ -692,48 +693,86 @@ class _AdContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Container(
-          width: double.infinity,
-          height: 119,
-          margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-          padding: const EdgeInsets.only(left: 20.0),
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-            color: const Color(0xFFE8CC68),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'ANUNCIO',
-                style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.w800,
-                  fontSize: 32,
-                  color: Colors.white,
-                ),
-              ),
-              Text(
-                'AQUÍ!!!',
-                style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.w800,
-                  fontSize: 32,
-                  color: CustomColor.primary,
-                  height: 1,
-                ),
-              ),
-            ],
-          ),
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.20,
+      //color: Colors.red,
+      child: Swiper(
+        itemCount: 5,
+        viewportFraction: 1,
+        itemHeight: 70,
+        //scale: 0.9,
+        // pagination: const SwiperPagination(
+        //   margin: EdgeInsets.only(top: 50),
+        //   //alignment: Alignment.bottomCenter,
+        //   builder: DotSwiperPaginationBuilder(
+        //     color: Colors.grey,
+        //     activeColor: Colors.amber,
+        //   ),
+        // ),
+        control: const SwiperControl(
+          color: Colors.grey,
+          padding: EdgeInsets.symmetric(horizontal: 30.0),
         ),
-        Positioned(
-          right: 0,
-          child: Image.asset('assets/images/dog_ad.png'),
-        ),
-      ],
+        itemBuilder: (BuildContext context, int index) {
+          if (index == 0) {
+            return Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 119,
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 10.0),
+                  padding: const EdgeInsets.only(left: 30.0),
+                  alignment: Alignment.centerLeft,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                    color: const Color(0xFFE8CC68),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'ANUNCIO',
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 32,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Text(
+                        'AQUÍ!!!',
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 32,
+                          color: CustomColor.primary,
+                          height: 1,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  right: 0,
+                  child: Image.asset('assets/images/dog_ad.png'),
+                ),
+              ],
+            );
+          }
+          return Container(
+            height: MediaQuery.of(context).size.height * 0.20,
+            margin:
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            decoration: containerDecoration().copyWith(
+              image: const DecorationImage(
+                image: NetworkImage("https://via.placeholder.com/288x188"),
+                fit: BoxFit.cover,
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

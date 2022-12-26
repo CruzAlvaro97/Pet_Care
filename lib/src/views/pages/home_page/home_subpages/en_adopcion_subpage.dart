@@ -249,9 +249,6 @@ class _CarrouselResultsAdoption extends StatelessWidget {
       if (publicacionProvider.listaPublicacion3[i].speciePet ==
               cambio.especie ||
           cambio.especie == 'Todos') {
-        print(publicacionProvider.listaPublicacion3[6].speciePet);
-        print(publicacionProvider.listaPublicacion3[7].speciePet);
-
         filtrados.add(i);
       } else {}
     }
