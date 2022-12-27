@@ -15,11 +15,16 @@ class UsuarioProvider with ChangeNotifier {
 
   List<Usuario> usuarioDatos = [];
 
+  bool isLoading = true;
+
   UsuarioProvider() {
     print('Inicializacion UsuarioProvider');
   }
 
   getDatauser(String correo) async {
+    isLoading = true;
+    notifyListeners();
+
     var url =
         'https://gmlqcelelvidskpttktm.supabase.co/rest/v1/usuario?correo_usuario=eq.$correo';
 
@@ -41,6 +46,9 @@ class UsuarioProvider with ChangeNotifier {
     PreferencesUser.usernameUsuario = usuarioDatos[0].usernameUsuario;
     PreferencesUser.correoUsuario = usuarioDatos[0].correoUsuario;
     PreferencesUser.fotoUsuario = usuarioDatos[0].fotoUsuario;
+
+    isLoading = false;
+    notifyListeners();
 
     return print(
         'NOMBRE => ${usuarioDatos[0].nombreUsuario} \nAPELLIDO => ${usuarioDatos[0].apellidoUsuario} \nUSERNAME => ${usuarioDatos[0].usernameUsuario}  \nCORREO => ${usuarioDatos[0].correoUsuario} \nFOTO => ${usuarioDatos[0].fotoUsuario}');

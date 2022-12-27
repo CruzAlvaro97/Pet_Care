@@ -15,6 +15,9 @@ class PublicacionProvider with ChangeNotifier {
 
   List<Publication3> listaPublicacion3 = [];
 
+  List<Publication3> listaPublicacionesPendientes = [];
+  List<Publication3> listaPublicacionesAprobadas = [];
+
   bool isLoading = true;
 
   PublicacionProvider() {
@@ -45,12 +48,22 @@ class PublicacionProvider with ChangeNotifier {
 
     List<dynamic> listaDinamica = jsonDecode(jsonData);
 
+    listaPublicacion3.clear();
+    listaPublicacionesAprobadas.clear();
+    listaPublicacionesPendientes.clear();
+
     listaDinamica.forEach((element) {
       Publication3 publicacion = Publication3.fromMap(element);
       listaPublicacion3.add(publicacion);
     });
 
+    listaPublicacionesPendientes =
+        listaPublicacion3.where((o) => o.statusPub == 'pendiente').toList();
+    listaPublicacionesAprobadas =
+        listaPublicacion3.where((o) => o.statusPub == 'aprobado').toList();
+
     print(listaPublicacion3);
+    //print(jsonData);
 
     print('Petición HTTP Publicaciones');
     isLoading = false;
@@ -59,25 +72,51 @@ class PublicacionProvider with ChangeNotifier {
   }
 
   Future<void> refreshList() async {
-    // isLoading = true;
-    // notifyListeners();
-
     final jsonData = await _getJsonData('rest/v1/publicacion');
 
     List<dynamic> listaDinamica = jsonDecode(jsonData);
 
     listaPublicacion3.clear();
+    listaPublicacionesAprobadas.clear();
+    listaPublicacionesPendientes.clear();
 
     listaDinamica.forEach((element) {
       Publication3 publicacion = Publication3.fromMap(element);
       listaPublicacion3.add(publicacion);
     });
 
+    listaPublicacionesPendientes =
+        listaPublicacion3.where((o) => o.statusPub == 'pendiente').toList();
+    listaPublicacionesAprobadas =
+        listaPublicacion3.where((o) => o.statusPub == 'aprobado').toList();
+
     print(listaPublicacion3);
 
     print('Petición HTTP Publicaciones');
     //isLoading = false;
 
+    notifyListeners();
+  }
+
+  eliminarItemPendiente(int idPost) {
+    listaPublicacionesPendientes
+        .removeWhere((element) => (element.id == idPost));
+    notifyListeners();
+  }
+
+  agregarItemAprobado(Publication3 publication3) {
+    listaPublicacionesAprobadas.add(publication3);
+    notifyListeners();
+  }
+
+  eliminarItemAprobado(int idPost) {
+    listaPublicacionesAprobadas
+        .removeWhere((element) => (element.id == idPost));
+    notifyListeners();
+  }
+
+  agregarItemPendiente(Publication3 publication3) {
+    listaPublicacionesPendientes.add(publication3);
     notifyListeners();
   }
 }

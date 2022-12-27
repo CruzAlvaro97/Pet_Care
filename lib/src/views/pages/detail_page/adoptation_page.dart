@@ -1,11 +1,17 @@
 import 'package:expandable_text/expandable_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:group_button/group_button.dart';
+import 'package:pet_society/providers/detalle_adopcion_provider.dart';
 import 'package:pet_society/src/models/publication2_model.dart';
 import 'package:pet_society/src/models/publication3_model.dart';
 import 'package:pet_society/src/models/publication_model.dart';
+import 'package:pet_society/src/preferences/user_preferences.dart';
+import 'package:pet_society/src/providers/publicacion_provider.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
 import 'package:pet_society/src/views/widget/button_widget/custom_button_widget.dart';
+import 'package:provider/provider.dart';
 
 class AdoptationPage extends StatefulWidget {
   final Publication3 publication3;
@@ -19,6 +25,8 @@ class _AdoptationPageState extends State<AdoptationPage> {
   bool favorite = false;
   @override
   Widget build(BuildContext context) {
+    final detalleAdopcionProvider =
+        Provider.of<DetalleAdopcionProvider>(context);
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       backgroundColor: CustomColor.white2,
@@ -32,17 +40,6 @@ class _AdoptationPageState extends State<AdoptationPage> {
             fontSize: 16.0,
           ),
         ),
-        // Text(
-        //   widget.publication3.isPublicationAdoption == true
-        //       ? 'En adopción'
-        //       : widget.publication3.isPublicationSupport == true
-        //           ? 'Apoyo'
-        //           : 'Se busca',
-        //   style: const TextStyle(
-        //     color: Colors.black,
-        //     fontSize: 16.0,
-        //   ),
-        // ),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -70,8 +67,73 @@ class _AdoptationPageState extends State<AdoptationPage> {
         child: Padding(
           padding: const EdgeInsets.only(bottom: 82),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //_FotoSlider(),
+              Visibility(
+                visible: PreferencesUser.id == 5 ? true : false,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 5.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Visualización',
+                            style: CustomTextStyle.headline2.copyWith(
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text(
+                            detalleAdopcionProvider.message,
+                            style: GoogleFonts.poppins(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.grey,
+                              height: 1,
+                            ),
+                          ),
+                        ],
+                      ),
+                      CupertinoSwitch(
+                        value: widget.publication3.statusPub == 'pendiente'
+                            ? false
+                            : true,
+                        onChanged: (value) {
+                          final publicationProvider =
+                              Provider.of<PublicacionProvider>(context,
+                                  listen: false);
+                          String estadoPubli = '';
+                          detalleAdopcionProvider.isVisibleSwitch();
+                          if (value) {
+                            widget.publication3.statusPub = 'aprobado';
+                            estadoPubli = 'aprobado';
+                            publicationProvider
+                                .eliminarItemPendiente(widget.publication3.id);
+                            publicationProvider
+                                .agregarItemAprobado(widget.publication3);
+                          } else {
+                            widget.publication3.statusPub = 'pendiente';
+                            estadoPubli = 'pendiente';
+                            publicationProvider
+                                .eliminarItemAprobado(widget.publication3.id);
+                            publicationProvider
+                                .agregarItemPendiente(widget.publication3);
+                          }
+                          print('value => $value');
+
+                          detalleAdopcionProvider.updateStatusPublication(
+                            widget.publication3.id,
+                            estadoPubli,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               const SizedBox(height: 10.0),
               Container(
                 height: 280,
@@ -87,17 +149,12 @@ class _AdoptationPageState extends State<AdoptationPage> {
                       margin: const EdgeInsets.only(right: 10.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.0),
-                        // image: DecorationImage(
-                        //   image: NetworkImage(
-                        //       'https://gmlqcelelvidskpttktm.supabase.co/storage/v1/object/public/imgs/IMG/${widget.publication3.imagesPet[index]}'),
-                        //   fit: BoxFit.cover,
-                        // ),
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20.0),
                         child: FadeInImage(
-                          placeholder:
-                              AssetImage('assets/images/picture-loading2.gif'),
+                          placeholder: const AssetImage(
+                              'assets/images/picture-loading2.gif'),
                           image: NetworkImage(
                               'https://gmlqcelelvidskpttktm.supabase.co/storage/v1/object/public/imgs/IMG/${widget.publication3.imagesPet[index]}'),
                           fit: BoxFit.cover,
@@ -108,32 +165,33 @@ class _AdoptationPageState extends State<AdoptationPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      widget.publication3.namePet,
+                      '${widget.publication3.namePet[0].toUpperCase()}${widget.publication3.namePet.substring(1)}',
                       style: CustomTextStyle.headline,
                     ),
-                    IconButton(
-                      padding: EdgeInsets.all(0),
-                      onPressed: () {
-                        setState(() {
-                          favorite = !favorite;
-                        });
-                      },
-                      icon: (favorite)
-                          ? Icon(
-                              Icons.favorite,
-                              color: Colors.red,
-                              size: 28,
-                            )
-                          : Icon(
-                              Icons.favorite_border_outlined,
-                              size: 28,
-                            ),
-                    )
+                    // IconButton(
+                    //   padding: EdgeInsets.all(0),
+                    //   onPressed: () {
+                    //     setState(() {
+                    //       favorite = !favorite;
+                    //     });
+                    //   },
+                    //   icon: (favorite)
+                    //       ? Icon(
+                    //           Icons.favorite,
+                    //           color: Colors.red,
+                    //           size: 28,
+                    //         )
+                    //       : Icon(
+                    //           Icons.favorite_border_outlined,
+                    //           size: 28,
+                    //         ),
+                    // )
                   ],
                 ),
               ),
@@ -144,7 +202,8 @@ class _AdoptationPageState extends State<AdoptationPage> {
               _DescripcionMascota(publication3: widget.publication3),
               _CaracteriscaSlider(publication3: widget.publication3),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Column(
                   children: [
                     _ExpansionDatos(
@@ -172,7 +231,7 @@ class _AdoptationPageState extends State<AdoptationPage> {
         ),
       ),
       floatingActionButton: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
         child: CustomButtonWidget(
           colorButton: CustomColor.primary,
           onPressed: () {},
@@ -207,9 +266,7 @@ class _ExpansionEntregaron extends StatelessWidget {
           title: Row(
             children: [
               Image.asset('assets/images/IconleadTile.png'),
-              SizedBox(
-                width: 17,
-              ),
+              const SizedBox(width: 17),
               Text('Me entregan',
                   style: CustomTextStyle.text2.copyWith(
                     color: CustomColor.primary,
@@ -535,7 +592,7 @@ class _DescripcionMascota extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: ExpandableText(
         publication3.descriptionPost,
         style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w500),

@@ -184,11 +184,12 @@ class _CarrouselPublication extends StatelessWidget {
     final publicacionProvider = Provider.of<PublicacionProvider>(context);
 
     return ListView.builder(
-      itemCount: publicacionProvider.listaPublicacion3.length,
+      itemCount: publicacionProvider.listaPublicacionesAprobadas.length,
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        final dataPublicacion = publicacionProvider.listaPublicacion3[index];
+        final dataPublicacion =
+            publicacionProvider.listaPublicacionesAprobadas[index];
 
         return Container(
           width: double.infinity,
@@ -203,6 +204,7 @@ class _CarrouselPublication extends StatelessWidget {
           ),
           decoration: containerDecoration(),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
@@ -709,6 +711,7 @@ class _AdContainer extends StatelessWidget {
         //     activeColor: Colors.amber,
         //   ),
         // ),
+        autoplay: true,
         control: const SwiperControl(
           color: Colors.grey,
           padding: EdgeInsets.symmetric(horizontal: 30.0),
@@ -766,7 +769,8 @@ class _AdContainer extends StatelessWidget {
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             decoration: containerDecoration().copyWith(
               image: const DecorationImage(
-                image: NetworkImage("https://via.placeholder.com/288x188"),
+                image: NetworkImage(
+                    "https://img.freepik.com/vector-gratis/diseno-plantilla-veterinario-dibujado-mano_23-2149703612.jpg?w=2000"),
                 fit: BoxFit.cover,
               ),
             ),

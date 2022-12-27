@@ -30,6 +30,7 @@ class Publication3 {
     required this.tipo,
     required this.idUser,
     required this.usuario,
+    required this.statusPub,
   });
 
   int id;
@@ -48,6 +49,7 @@ class Publication3 {
   String tipo;
   int idUser;
   Usuario usuario;
+  String statusPub;
 
   factory Publication3.fromJson(String str) =>
       Publication3.fromMap(json.decode(str));
@@ -71,6 +73,7 @@ class Publication3 {
         tipo: json["tipo"],
         idUser: json["id_user"],
         usuario: Usuario.fromMap(json["usuario"]),
+        statusPub: json["status_pub"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -90,6 +93,7 @@ class Publication3 {
         "tipo": tipo,
         "id_user": idUser,
         "usuario": usuario.toMap(),
+        "status_pub": statusPub,
       };
 }
 
