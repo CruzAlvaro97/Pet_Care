@@ -40,7 +40,7 @@ class _OtrosDatosPageState extends State<OtrosDatosPage> {
         elevation: 0,
         backgroundColor: CustomColor.primary,
         title: Text(
-          'Información',
+          'Mis publicaciones',
           style: GoogleFonts.poppins(
             color: Colors.white,
             fontSize: 16.0,
@@ -65,7 +65,7 @@ class _OtrosDatosPageState extends State<OtrosDatosPage> {
               ),
               tabs: [
                 Text(
-                  'Mis publicaciones',
+                  '*',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
@@ -174,15 +174,16 @@ class _OtrosDatosPageState extends State<OtrosDatosPage> {
                                           Container(
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 10, vertical: 5),
-                                            decoration: containerDecoration()
-                                                .copyWith(
-                                                    color: dataPublicacion
-                                                                .statusPub ==
-                                                            'pendiente'
-                                                        ? Colors.amber
-                                                            .withOpacity(0.5)
-                                                        : Colors.green
-                                                            .withOpacity(0.5)),
+                                            decoration:
+                                                containerDecoration().copyWith(
+                                              color:
+                                                  dataPublicacion.statusPub ==
+                                                          'pendiente'
+                                                      ? Colors.amber
+                                                          .withOpacity(0.5)
+                                                      : Colors.green
+                                                          .withOpacity(0.5),
+                                            ),
                                             child: Text(
                                               '${dataPublicacion.statusPub[0].toUpperCase()}${dataPublicacion.statusPub.substring(1)}',
                                               style: CustomTextStyle.helperText
@@ -203,18 +204,16 @@ class _OtrosDatosPageState extends State<OtrosDatosPage> {
                                                     text: 'Mascota: ',
                                                     style: GoogleFonts.poppins(
                                                         fontWeight:
-                                                            FontWeight.w400)),
+                                                            FontWeight.w700)),
                                                 TextSpan(
-                                                  text:
-                                                      '${dataPublicacion.namePet[0].toUpperCase()}${dataPublicacion.namePet.substring(1)}',
-                                                  style: CustomTextStyle.text,
-                                                ),
+                                                    text:
+                                                        '${dataPublicacion.namePet[0].toUpperCase()}${dataPublicacion.namePet.substring(1)}',
+                                                    style: CustomTextStyle
+                                                        .seeMoreText),
                                               ],
                                             ),
                                           ),
                                           RichText(
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
                                             text: TextSpan(
                                               style: const TextStyle(
                                                 fontSize: 14.0,
@@ -222,14 +221,15 @@ class _OtrosDatosPageState extends State<OtrosDatosPage> {
                                               ),
                                               children: <TextSpan>[
                                                 TextSpan(
-                                                    text: 'De: ',
+                                                    text: 'Especie: ',
                                                     style: GoogleFonts.poppins(
                                                         fontWeight:
-                                                            FontWeight.w400)),
+                                                            FontWeight.w700)),
                                                 TextSpan(
-                                                  text: dataPublicacion
-                                                      .usuario.usernameUsuario,
-                                                  style: CustomTextStyle.text,
+                                                  text:
+                                                      dataPublicacion.speciePet,
+                                                  style: CustomTextStyle
+                                                      .seeMoreText,
                                                 ),
                                               ],
                                             ),
@@ -247,11 +247,12 @@ class _OtrosDatosPageState extends State<OtrosDatosPage> {
                                                     text: 'Hace: ',
                                                     style: GoogleFonts.poppins(
                                                         fontWeight:
-                                                            FontWeight.w400)),
+                                                            FontWeight.w700)),
                                                 TextSpan(
                                                   text:
                                                       '${DateTime.now().difference(dataPublicacion.createdAt).inHours} horas',
-                                                  style: CustomTextStyle.text,
+                                                  style: CustomTextStyle
+                                                      .seeMoreText,
                                                 ),
                                               ],
                                             ),

@@ -695,26 +695,23 @@ class _AdContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final List banners = [
+      "https://scontent.ftru2-3.fna.fbcdn.net/v/t39.30808-6/309680181_779460783449097_2181774989167006016_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=e3f864&_nc_ohc=0UUhlS3hlyMAX_9jpiH&_nc_ht=scontent.ftru2-3.fna&oh=00_AfALjMk7DWIeV4aWaZoTb8XFpslPYUv0mYPKLcgvoqhdUw&oe=63B21EDA",
+      "https://ricocan.com/wp-content/uploads/2022/07/Banner-web.jpg",
+      "https://thetopchoice.com.mx/Content/img/carrusel/mas_proteina_de_calidad.jpg",
+    ];
+
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 0.20,
       //color: Colors.red,
       child: Swiper(
-        itemCount: 5,
+        itemCount: banners.length + 1,
         viewportFraction: 1,
         itemHeight: 70,
-        //scale: 0.9,
-        // pagination: const SwiperPagination(
-        //   margin: EdgeInsets.only(top: 50),
-        //   //alignment: Alignment.bottomCenter,
-        //   builder: DotSwiperPaginationBuilder(
-        //     color: Colors.grey,
-        //     activeColor: Colors.amber,
-        //   ),
-        // ),
         autoplay: true,
-        control: const SwiperControl(
-          color: Colors.grey,
-          padding: EdgeInsets.symmetric(horizontal: 30.0),
+        control: SwiperControl(
+          color: CustomColor.primary,
+          padding: const EdgeInsets.symmetric(horizontal: 30.0),
         ),
         itemBuilder: (BuildContext context, int index) {
           if (index == 0) {
@@ -768,9 +765,8 @@ class _AdContainer extends StatelessWidget {
             margin:
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             decoration: containerDecoration().copyWith(
-              image: const DecorationImage(
-                image: NetworkImage(
-                    "https://img.freepik.com/vector-gratis/diseno-plantilla-veterinario-dibujado-mano_23-2149703612.jpg?w=2000"),
+              image: DecorationImage(
+                image: NetworkImage(banners[index - 1]),
                 fit: BoxFit.cover,
               ),
             ),

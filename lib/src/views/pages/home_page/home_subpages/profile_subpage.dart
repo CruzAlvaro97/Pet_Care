@@ -13,6 +13,7 @@ import 'package:pet_society/src/preferences/user_preferences.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
 import 'package:pet_society/src/views/pages/help_page/help_page.dart';
 import 'package:pet_society/src/views/pages/home_page/home_subpages/otros_datos_page.dart';
+import 'package:pet_society/src/views/pages/privacy_policies/privacy_policies_page.dart';
 import 'package:provider/provider.dart';
 
 class ProfileSubPage extends StatelessWidget {
@@ -256,6 +257,13 @@ class ProfileSubPage extends StatelessWidget {
                         },
                       ),
                       _CustomListTile(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (context) =>
+                                      const PrivacyPoliciesPage()));
+                        },
                         tile: 'Politicas de privacidad',
                         prefix: Icon(
                           Icons.file_copy_outlined,
