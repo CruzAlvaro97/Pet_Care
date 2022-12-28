@@ -75,7 +75,7 @@ class HelpPage extends StatelessWidget {
               _CardTypePublication(
                 category: 'Preguntas frecuentes',
                 imgPath: 'assets/images/preguntas.png',
-                text: 'Lorem Ipsum is simply\ntext of the printing.',
+                text: 'Resuelve tus interrogantes\nde forma rápida.',
                 onTap: () {
                   Navigator.push(
                       context,

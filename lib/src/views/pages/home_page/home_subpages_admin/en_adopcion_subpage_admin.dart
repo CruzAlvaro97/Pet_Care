@@ -126,20 +126,20 @@ class CardsPublicationStatus extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 5),
-                          decoration: containerDecoration().copyWith(
-                              color: dataPublicacion.statusPub == 'pendiente'
-                                  ? Colors.amber
-                                  : Colors.green),
-                          child: Text(
-                            '${dataPublicacion.statusPub[0].toUpperCase()}${dataPublicacion.statusPub.substring(1)}',
-                            style: CustomTextStyle.helperText.copyWith(
-                              fontSize: 10,
-                            ),
-                          ),
-                        ),
+                        // Container(
+                        //   padding: const EdgeInsets.symmetric(
+                        //       horizontal: 10, vertical: 5),
+                        //   decoration: containerDecoration().copyWith(
+                        //       color: dataPublicacion.statusPub == 'pendiente'
+                        //           ? Colors.amber.withOpacity(0.5)
+                        //           : Colors.green.withOpacity(0.5)),
+                        //   child: Text(
+                        //     '${dataPublicacion.statusPub[0].toUpperCase()}${dataPublicacion.statusPub.substring(1)}',
+                        //     style: CustomTextStyle.helperText.copyWith(
+                        //       fontSize: 10,
+                        //     ),
+                        //   ),
+                        // ),
                         const SizedBox(height: 5.0),
                         RichText(
                           text: TextSpan(

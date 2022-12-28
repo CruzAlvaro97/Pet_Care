@@ -5,6 +5,7 @@ import 'package:pet_society/src/utils/index_utils.dart';
 import 'package:pet_society/src/views/pages/home_page/home_subpages/ayuda_subpage.dart';
 import 'package:pet_society/src/views/pages/home_page/home_subpages/en_adopcion_subpage.dart';
 import 'package:pet_society/src/views/pages/home_page/home_subpages/home_subpage.dart';
+import 'package:pet_society/src/views/pages/home_page/home_subpages/otros_datos_page.dart';
 import 'package:pet_society/src/views/pages/home_page/home_subpages/profile_subpage.dart';
 import 'package:pet_society/src/views/pages/home_page/home_subpages_admin/ayuda_subpage_admin.dart';
 import 'package:pet_society/src/views/pages/home_page/home_subpages_admin/busqueda_subpage_admi.dart';
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
     HomeSubPage(),
     EnAdopcionSubPage(),
     AyudaSubPage(),
+    //OtrosDatosPage(),
     ProfileSubPage(),
   ];
 
@@ -135,53 +137,64 @@ class _HomePageState extends State<HomePage> {
             ),
             color: Colors.white,
           ),
-          child: SalomonBottomBar(
-            selectedColorOpacity: 0.3,
-            selectedItemColor: CustomColor.primary,
-            unselectedItemColor: CustomColor.grey,
-            currentIndex: _selectIndex,
-            onTap: _seletedOption,
-            items: [
-              /// Inicio
-              SalomonBottomBarItem(
-                icon: const Icon(Icons.home),
-                title: Text(
-                  "Inicio",
-                  style: CustomTextStyle.text,
+          child: Container(
+            child: SalomonBottomBar(
+              selectedColorOpacity: 0.3,
+              selectedItemColor: CustomColor.primary,
+              unselectedItemColor: CustomColor.grey,
+              currentIndex: _selectIndex,
+              onTap: _seletedOption,
+              items: [
+                /// Inicio
+                SalomonBottomBarItem(
+                  icon: const Icon(Icons.home),
+                  title: Text(
+                    "Inicio",
+                    style: CustomTextStyle.text,
+                  ),
+                  selectedColor: CustomColor.primary,
                 ),
-                selectedColor: CustomColor.primary,
-              ),
 
-              /// En Adopción
-              SalomonBottomBarItem(
-                icon: const Icon(Icons.pets),
-                title: Text(
-                  "En Adopción",
-                  style: CustomTextStyle.text,
+                /// En Adopción
+                SalomonBottomBarItem(
+                  icon: const Icon(Icons.pets),
+                  title: Text(
+                    "Adopción",
+                    style: CustomTextStyle.text,
+                  ),
+                  selectedColor: CustomColor.primary,
                 ),
-                selectedColor: CustomColor.primary,
-              ),
 
-              /// Apoyo
-              SalomonBottomBarItem(
-                icon: const Icon(Icons.medical_services),
-                title: Text(
-                  "Apoyo",
-                  style: CustomTextStyle.text,
+                // Apoyo
+                SalomonBottomBarItem(
+                  icon: const Icon(Icons.medical_services),
+                  title: Text(
+                    "Apoyo",
+                    style: CustomTextStyle.text,
+                  ),
+                  selectedColor: CustomColor.primary,
                 ),
-                selectedColor: CustomColor.primary,
-              ),
 
-              /// Perfil
-              SalomonBottomBarItem(
-                icon: const Icon(Icons.person),
-                title: Text(
-                  "Perfil",
-                  style: CustomTextStyle.text,
+                // SalomonBottomBarItem(
+                //   icon: const Icon(Icons.book),
+                //   title: Text(
+                //     "Información",
+                //     style: CustomTextStyle.text,
+                //   ),
+                //   selectedColor: CustomColor.primary,
+                // ),
+
+                /// Perfil
+                SalomonBottomBarItem(
+                  icon: const Icon(Icons.person),
+                  title: Text(
+                    "Perfil",
+                    style: CustomTextStyle.text,
+                  ),
+                  selectedColor: CustomColor.primary,
                 ),
-                selectedColor: CustomColor.primary,
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );

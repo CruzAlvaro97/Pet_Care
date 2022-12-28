@@ -17,6 +17,7 @@ class PublicacionProvider with ChangeNotifier {
 
   List<Publication3> listaPublicacionesPendientes = [];
   List<Publication3> listaPublicacionesAprobadas = [];
+  List<Publication3> listaMisPublicaciones = [];
 
   bool isLoading = true;
 
@@ -117,6 +118,19 @@ class PublicacionProvider with ChangeNotifier {
 
   agregarItemPendiente(Publication3 publication3) {
     listaPublicacionesPendientes.add(publication3);
+    notifyListeners();
+  }
+
+  filtrarListaPorUsuario(int idUser) {
+    listaMisPublicaciones =
+        listaPublicacion3.where((o) => o.idUser == idUser).toList();
+  }
+
+  filtrarListaPorEspecie(String especie) {
+    List<Publication3> listaParaFiltrar = listaMisPublicaciones;
+
+    listaMisPublicaciones =
+        listaParaFiltrar.where((o) => o.speciePet == especie).toList();
     notifyListeners();
   }
 }

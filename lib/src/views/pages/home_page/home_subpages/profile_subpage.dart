@@ -12,6 +12,7 @@ import 'package:pet_society/src/preferences/formadoptation_preferences.dart';
 import 'package:pet_society/src/preferences/user_preferences.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
 import 'package:pet_society/src/views/pages/help_page/help_page.dart';
+import 'package:pet_society/src/views/pages/home_page/home_subpages/otros_datos_page.dart';
 import 'package:provider/provider.dart';
 
 class ProfileSubPage extends StatelessWidget {
@@ -135,6 +136,26 @@ class ProfileSubPage extends StatelessWidget {
                           size: 20,
                         ),
                       ),
+                      _CustomListTile(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (context) =>
+                                      const OtrosDatosPage()));
+                        },
+                        tile: 'Mis publicaciones',
+                        prefix: Icon(
+                          Icons.book_outlined,
+                          color: Colors.black,
+                          size: 20,
+                        ),
+                        suffix: Icon(
+                          Icons.arrow_forward_ios_outlined,
+                          color: Colors.black,
+                          size: 20,
+                        ),
+                      ),
                       const SizedBox(height: 5.0),
                     ],
                   ),
@@ -216,7 +237,7 @@ class ProfileSubPage extends StatelessWidget {
                       _CustomListTile(
                         tile: 'Ayuda',
                         prefix: Icon(
-                          Icons.messenger_outline_sharp,
+                          Icons.help_outline_outlined,
                           color: Colors.black,
                           size: 20,
                         ),
@@ -237,7 +258,7 @@ class ProfileSubPage extends StatelessWidget {
                       _CustomListTile(
                         tile: 'Politicas de privacidad',
                         prefix: Icon(
-                          Icons.dark_mode_outlined,
+                          Icons.file_copy_outlined,
                           color: Colors.black,
                           size: 20,
                         ),

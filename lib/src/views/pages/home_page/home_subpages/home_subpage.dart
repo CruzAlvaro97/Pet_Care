@@ -250,7 +250,7 @@ class _CarrouselPublication extends StatelessWidget {
               ),
               const SizedBox(height: 10.0),
               ExpandableText(
-                dataPublicacion.descriptionPost,
+                '${dataPublicacion.descriptionPost[0].toUpperCase()}${dataPublicacion.descriptionPost.substring(1)}',
                 textAlign: TextAlign.left,
                 style: CustomTextStyle.paragraph,
                 expandText: 'Ver más',
@@ -372,8 +372,8 @@ class _CarrouselPublication extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => AdoptationPage(
-                        publication3:
-                            publicacionProvider.listaPublicacion3[index],
+                        publication3: publicacionProvider
+                            .listaPublicacionesAprobadas[index],
                       ),
                     ),
                   );

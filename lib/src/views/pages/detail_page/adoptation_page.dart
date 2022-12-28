@@ -71,67 +71,76 @@ class _AdoptationPageState extends State<AdoptationPage> {
             children: [
               Visibility(
                 visible: PreferencesUser.id == 5 ? true : false,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 20.0, vertical: 5.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 5.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            'Visualización',
-                            style: CustomTextStyle.headline2.copyWith(
-                              fontSize: 16,
-                            ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Visualización',
+                                style: CustomTextStyle.headline2.copyWith(
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Text(
+                                detalleAdopcionProvider.message,
+                                style: GoogleFonts.poppins(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.grey,
+                                  height: 1,
+                                ),
+                              ),
+                            ],
                           ),
-                          Text(
-                            detalleAdopcionProvider.message,
-                            style: GoogleFonts.poppins(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey,
-                              height: 1,
-                            ),
+                          CupertinoSwitch(
+                            value: widget.publication3.statusPub == 'pendiente'
+                                ? false
+                                : true,
+                            onChanged: (value) {
+                              final publicationProvider =
+                                  Provider.of<PublicacionProvider>(context,
+                                      listen: false);
+                              String estadoPubli = '';
+                              detalleAdopcionProvider.isVisibleSwitch();
+                              if (value) {
+                                widget.publication3.statusPub = 'aprobado';
+                                estadoPubli = 'aprobado';
+                                publicationProvider.eliminarItemPendiente(
+                                    widget.publication3.id);
+                                publicationProvider
+                                    .agregarItemAprobado(widget.publication3);
+                              } else {
+                                widget.publication3.statusPub = 'pendiente';
+                                estadoPubli = 'pendiente';
+                                publicationProvider.eliminarItemAprobado(
+                                    widget.publication3.id);
+                                publicationProvider
+                                    .agregarItemPendiente(widget.publication3);
+                              }
+                              print('value => $value');
+
+                              detalleAdopcionProvider.updateStatusPublication(
+                                widget.publication3.id,
+                                estadoPubli,
+                              );
+                            },
                           ),
                         ],
                       ),
-                      CupertinoSwitch(
-                        value: widget.publication3.statusPub == 'pendiente'
-                            ? false
-                            : true,
-                        onChanged: (value) {
-                          final publicationProvider =
-                              Provider.of<PublicacionProvider>(context,
-                                  listen: false);
-                          String estadoPubli = '';
-                          detalleAdopcionProvider.isVisibleSwitch();
-                          if (value) {
-                            widget.publication3.statusPub = 'aprobado';
-                            estadoPubli = 'aprobado';
-                            publicationProvider
-                                .eliminarItemPendiente(widget.publication3.id);
-                            publicationProvider
-                                .agregarItemAprobado(widget.publication3);
-                          } else {
-                            widget.publication3.statusPub = 'pendiente';
-                            estadoPubli = 'pendiente';
-                            publicationProvider
-                                .eliminarItemAprobado(widget.publication3.id);
-                            publicationProvider
-                                .agregarItemPendiente(widget.publication3);
-                          }
-                          print('value => $value');
-
-                          detalleAdopcionProvider.updateStatusPublication(
-                            widget.publication3.id,
-                            estadoPubli,
-                          );
-                        },
-                      ),
-                    ],
-                  ),
+                    ),
+                    const Divider(
+                      thickness: 0.0,
+                      color: Color.fromARGB(255, 197, 197, 197),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(height: 10.0),
@@ -230,13 +239,16 @@ class _AdoptationPageState extends State<AdoptationPage> {
           ),
         ),
       ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-        child: CustomButtonWidget(
-          colorButton: CustomColor.primary,
-          onPressed: () {},
-          text: 'Solicitar adopción',
-          textStyle: CustomTextStyle.text2.copyWith(color: Colors.white),
+      floatingActionButton: Visibility(
+        visible: PreferencesUser.id == 5 ? false : true,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+          child: CustomButtonWidget(
+            colorButton: CustomColor.primary,
+            onPressed: () {},
+            text: 'Solicitar adopción',
+            textStyle: CustomTextStyle.text2.copyWith(color: Colors.white),
+          ),
         ),
       ),
     );
@@ -594,7 +606,7 @@ class _DescripcionMascota extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: ExpandableText(
-        publication3.descriptionPost,
+        '${publication3.descriptionPost[0].toUpperCase()}${publication3.descriptionPost.substring(1)}',
         style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w500),
         expandText: 'Ver más',
         collapseText: 'Ocultar',

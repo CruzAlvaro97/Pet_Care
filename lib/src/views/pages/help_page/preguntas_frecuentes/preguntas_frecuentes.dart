@@ -183,145 +183,54 @@ class Seccion2Preguntas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Map<String, String>> questions2 = [
+      {
+        'question': '¿Como puedo adoptar una mascota?',
+        'answer':
+            'Eliges a la que quieres que sea tu mascota, clicas en el botón de adoptar y ya puedes conversar con su protectora. Le responderá con la mayor brevedad posible. Debes ser  paciente y ten en cuenta que son voluntarios que dedican su tiempo libre a la protección animal.'
+      },
+      {
+        'question': '¿Hay algún filtro para poder adoptar?',
+        'answer':
+            'Dependerá exclusivamente de la Protectora que realiza la gestion, Te podrá realizar unas preguntas para saber si eres apto, cada protector(a) tiene su política de adopción y condiciones diferentes..'
+      },
+      {
+        'question':
+            'He realizado los pasos para la adopción y no tengo respuesta',
+        'answer':
+            'Si ha pasado mas de un día, escríbenos e intentaremos averiguar que sucede, recuerda que son voluntarios, por favor comunicate a consultas@petcare.org.'
+      },
+      {
+        'question':
+            'La mascota que quería adoptar ya no me aparece en la lista de adopción',
+        'answer':
+            'Todas las mascotas a adoptar se encuentran publicados en la app.'
+      },
+      {
+        'question': '¿Quiénes somos?',
+        'answer':
+            'Si ya no encuentras a la mascota que habias deseado, ya ha logrado ser adoptado.'
+      },
+    ];
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(children: [
-        /// ADOPCIONES
-        Container(
-          decoration: BoxDecoration(
-              color: CustomColor.white,
-              borderRadius: const BorderRadius.all(Radius.circular(20))),
-          child: Column(
-            children: <Widget>[
-              ExpansionTile(
-                childrenPadding: const EdgeInsets.all(10),
-                textColor: CustomColor.primary,
-                iconColor: CustomColor.primary,
-                title: Text(
-                  '¿Cómo puedo adoptar una mascota?',
-                  style: CustomTextStyle.text2,
-                ),
-                children: <Widget>[
-                  ListTile(
-                    title: Text(
-                      'Eliges a la que quieres que sea tu mascota, clicas en el botón de adoptar y ya puedes conversar con su protectora. Le responderá con la mayor brevedad posible. Debes ser  paciente y ten en cuenta que son voluntarios que dedican su tiempo libre a la protección animal.',
-                      style: CustomTextStyle.questionText,
-                    ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            for (Map<String, String> question in questions2)
+              Column(
+                children: [
+                  QuestionItemWidget(
+                    question: question['question'].toString(),
+                    answer: question['answer'].toString(),
                   ),
+                  const SizedBox(height: 10.0),
                 ],
               ),
-            ],
-          ),
+          ],
         ),
-        const SizedBox(height: 10),
-        Container(
-          decoration: BoxDecoration(
-              color: CustomColor.white,
-              borderRadius: const BorderRadius.all(Radius.circular(20))),
-          child: Column(
-            children: <Widget>[
-              ExpansionTile(
-                childrenPadding: const EdgeInsets.all(10),
-                textColor: CustomColor.primary,
-                iconColor: CustomColor.primary,
-                title: Text(
-                  '¿Hay algún filtro para poder adoptar?',
-                  style: CustomTextStyle.text2,
-                ),
-                children: <Widget>[
-                  ListTile(
-                    title: Text(
-                      'Dependera exclusivamente de la Protectora que realiza la gestion, Te podra realizar unas preguntas para saber si eres apto, cada protector(a) tiene su política de adopción y condiciones diferentes.',
-                      style: CustomTextStyle.questionText,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 10),
-        Container(
-          decoration: BoxDecoration(
-              color: CustomColor.white,
-              borderRadius: const BorderRadius.all(Radius.circular(20))),
-          child: Column(
-            children: <Widget>[
-              ExpansionTile(
-                childrenPadding: const EdgeInsets.all(10),
-                textColor: CustomColor.primary,
-                iconColor: CustomColor.primary,
-                title: Text(
-                  'He realizado los pasos para la adopcion y no tengo respuesta',
-                  style: CustomTextStyle.text2,
-                ),
-                children: <Widget>[
-                  ListTile(
-                    title: Text(
-                      'Si ha pasado mas de un dia, escríbenos e intentaremos averiguar que sucede, recuerda que son voluntarios, porfavor comunicate a consultas@petcare.org',
-                      style: CustomTextStyle.questionText,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 10),
-        Container(
-          decoration: BoxDecoration(
-              color: CustomColor.white,
-              borderRadius: const BorderRadius.all(Radius.circular(20))),
-          child: Column(
-            children: <Widget>[
-              ExpansionTile(
-                childrenPadding: const EdgeInsets.all(10),
-                textColor: CustomColor.primary,
-                iconColor: CustomColor.primary,
-                title: Text(
-                  '¿Cómo saber si una mascota sigue en adopción?',
-                  style: CustomTextStyle.text2,
-                ),
-                children: <Widget>[
-                  ListTile(
-                    title: Text(
-                      'Todas las mascotas a adoptar se encuentran publicados en la app',
-                      style: CustomTextStyle.questionText,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 10),
-        Container(
-          decoration: BoxDecoration(
-              color: CustomColor.white,
-              borderRadius: const BorderRadius.all(Radius.circular(20))),
-          child: Column(
-            children: <Widget>[
-              ExpansionTile(
-                childrenPadding: const EdgeInsets.all(10),
-                textColor: CustomColor.primary,
-                iconColor: CustomColor.primary,
-                title: Text(
-                  'La mascota que queria adoptar ya no me aparece en la lista de adopción',
-                  style: CustomTextStyle.text2,
-                ),
-                children: <Widget>[
-                  ListTile(
-                    title: Text(
-                      'Si ya no encuentras a la mascota que habias deseado, ya ha logrado ser adoptado',
-                      style: CustomTextStyle.questionText,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ]),
+      ),
     );
   }
 }
@@ -331,120 +240,45 @@ class Seccion3Preguntas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Map<String, String>> questions3 = [
+      {
+        'question': '¿Como puedo ayudar?',
+        'answer':
+            'Nos ayudas compartiendo la app, para que todos esten informados de que tienen un lugar donde podemos conseguir un hogar a la mascota.'
+      },
+      {
+        'question': '¿Ya tengo mascotas, ¿puedo ayudar de otra manera?',
+        'answer':
+            'Con cuidarlas y considerar en esterilizarlas o castrar a su mascota ayudas a evitar animales no deseados.'
+      },
+      {
+        'question': '¿Puedo ayudar como voluntario?',
+        'answer':
+            'Si, por supuesto, comunicate a este correo voluntario@petcare.org.'
+      },
+      {
+        'question': '¿Puedo apoyar económicamente?',
+        'answer':
+            'Toda ayuda es bienvenida, tenemos transparencia en lo que se done, mantenemos un registro.'
+      },
+    ];
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
-        children: [
-          /// DONACIONES
-          Container(
-            decoration: BoxDecoration(
-                color: CustomColor.white,
-                borderRadius: const BorderRadius.all(Radius.circular(20))),
-            child: Column(
-              children: <Widget>[
-                ExpansionTile(
-                  childrenPadding: const EdgeInsets.all(10),
-                  textColor: CustomColor.primary,
-                  iconColor: CustomColor.primary,
-                  title: Text(
-                    '¿Cómo puedo ayudar?',
-                    style: CustomTextStyle.text2,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            for (Map<String, String> question in questions3)
+              Column(
+                children: [
+                  QuestionItemWidget(
+                    question: question['question'].toString(),
+                    answer: question['answer'].toString(),
                   ),
-                  children: <Widget>[
-                    ListTile(
-                      title: Text(
-                        'Nos ayudas compartiendo la app, para que todos esten informados de que tienen un lugar donde podemos conseguir un hogar a la mascota',
-                        style: CustomTextStyle.questionText,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
-          Container(
-            decoration: BoxDecoration(
-                color: CustomColor.white,
-                borderRadius: const BorderRadius.all(Radius.circular(20))),
-            child: Column(
-              children: <Widget>[
-                ExpansionTile(
-                  childrenPadding: const EdgeInsets.all(10),
-                  textColor: CustomColor.primary,
-                  iconColor: CustomColor.primary,
-                  title: Text(
-                    'Ya tengo mascotas, ¿puedo ayudar de otra manera?',
-                    style: CustomTextStyle.text2,
-                  ),
-                  children: <Widget>[
-                    ListTile(
-                      title: Text(
-                        'Con cuidarlas y considerar en esterilizarlas o castrar a su mascota ayudas a evitar animales no deseados',
-                        style: CustomTextStyle.questionText,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
-          Container(
-            decoration: BoxDecoration(
-                color: CustomColor.white,
-                borderRadius: const BorderRadius.all(Radius.circular(20))),
-            child: Column(
-              children: <Widget>[
-                ExpansionTile(
-                  childrenPadding: const EdgeInsets.all(10),
-                  textColor: CustomColor.primary,
-                  iconColor: CustomColor.primary,
-                  title: Text(
-                    '¿Puedo ayudar como voluntario?',
-                    style: CustomTextStyle.text2,
-                  ),
-                  children: <Widget>[
-                    ListTile(
-                      title: Text(
-                        'Si, por supuesto, comunicate a este correo voluntario@petcare.org',
-                        style: CustomTextStyle.questionText,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
-          Container(
-            decoration: BoxDecoration(
-                color: CustomColor.white,
-                borderRadius: const BorderRadius.all(Radius.circular(20))),
-            child: Column(
-              children: <Widget>[
-                ExpansionTile(
-                  childrenPadding: const EdgeInsets.all(10),
-                  textColor: CustomColor.primary,
-                  iconColor: CustomColor.primary,
-                  title: Text(
-                    '¿Puedo apoyar económicamente?',
-                    style: CustomTextStyle.text2,
-                  ),
-                  children: <Widget>[
-                    ListTile(
-                      title: Text(
-                        'Toda ayuda es bienvenida, tenemos transparencia en lo que se done, mantenemos un registro',
-                        style: CustomTextStyle.questionText,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
-        ],
+                  const SizedBox(height: 10.0),
+                ],
+              ),
+          ],
+        ),
       ),
     );
   }
@@ -455,67 +289,35 @@ class Seccion4Preguntas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Map<String, String>> questions4 = [
+      {
+        'question': '¿Ya lei todo esto ¿Ahora que sigue?',
+        'answer':
+            'Ahora ya sabes, si decides adoptar una mascota, nuestro aplicativo cuenta con voluntarios que quieren encontrarle un hogar a los animales refugiados y darle una mejor calidad de vida.'
+      },
+      {
+        'question': '¿Alguna reflexión final?',
+        'answer':
+            'My CarePet esta orgulloso de los logros que hemos obtenido con la ayuda de la comunidad y por supuesto de nuestros compañeros amantes de los animales que cada dia estan comprometidos en buscarle un hogar a los animales refugiados.'
+      },
+    ];
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
-        children: [
-          /// DONACIONES
-          Container(
-            decoration: BoxDecoration(
-                color: CustomColor.white,
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-                border: Border.all(color: Colors.transparent)),
-            child: Column(
-              children: <Widget>[
-                ExpansionTile(
-                  childrenPadding: const EdgeInsets.all(10),
-                  textColor: CustomColor.primary,
-                  iconColor: CustomColor.primary,
-                  title: Text(
-                    '¿Ahora qué sigue?',
-                    style: CustomTextStyle.text2,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            for (Map<String, String> question in questions4)
+              Column(
+                children: [
+                  QuestionItemWidget(
+                    question: question['question'].toString(),
+                    answer: question['answer'].toString(),
                   ),
-                  children: <Widget>[
-                    ListTile(
-                      title: Text(
-                        'Ahora ya sabes, si decides adoptar una mascota, nuestro aplicativo cuenta con voluntarios que quieren encontrarle un hogar a los animales refugiados y darle una mejor calidad de vida.',
-                        style: CustomTextStyle.questionText,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
-          Container(
-            decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(20))),
-            child: Column(
-              children: <Widget>[
-                ExpansionTile(
-                  childrenPadding: const EdgeInsets.all(10),
-                  textColor: CustomColor.primary,
-                  iconColor: CustomColor.primary,
-                  title: Text(
-                    '¿Alguna reflexión final?',
-                    style: CustomTextStyle.text2,
-                  ),
-                  children: <Widget>[
-                    ListTile(
-                      title: Text(
-                        'My CarePet esta orgulloso de los logros que hemos obtenido con la ayuda de la comunidad y por supuesto de nuestros compañeros amantes de los animales que cada dia estan comprometidos en buscarle un hogas a los animales refugiados',
-                        style: CustomTextStyle.questionText,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
-        ],
+                  const SizedBox(height: 10.0),
+                ],
+              ),
+          ],
+        ),
       ),
     );
   }
