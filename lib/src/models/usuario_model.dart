@@ -8,6 +8,7 @@ class Usuario {
   String usernameUsuario;
   String correoUsuario;
   String fotoUsuario;
+  String token;
 
   Usuario({
     required this.id,
@@ -17,6 +18,7 @@ class Usuario {
     required this.usernameUsuario,
     required this.correoUsuario,
     required this.fotoUsuario,
+    required this.token,
   });
 
   factory Usuario.fromJson(String str) => Usuario.fromMap(json.decode(str));
@@ -31,6 +33,7 @@ class Usuario {
         usernameUsuario: json["username_usuario"],
         correoUsuario: json["correo_usuario"],
         fotoUsuario: json["foto"],
+        token: json["token_id"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -41,5 +44,6 @@ class Usuario {
         "username_usuario": usernameUsuario,
         "correo_usuario": correoUsuario,
         "foto": fotoUsuario,
+        "token_id": token,
       };
 }

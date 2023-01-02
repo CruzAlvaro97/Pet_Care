@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "593119351285",
+    "firebase_url": "https://api-flutter-3a397-default-rtdb.firebaseio.com",
+    "project_id": "api-flutter-3a397",
+    "storage_bucket": "api-flutter-3a397.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593119351285:android:4f01216122b9f56df110bc",
+        "android_client_info": {
+          "package_name": "com.example.notification_push_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "593119351285-trmdqkd8j8jeju0mg078p248qgh3cbca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2o3UFKFP4MZslY_JEeplAqL1ZVXqnctk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "593119351285-trmdqkd8j8jeju0mg078p248qgh3cbca.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "593119351285-f2c4fg0lqu02q436un6pdv6a6pju447i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.notificationPushFlutter"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593119351285:android:919fd1dd67db9717f110bc",
+        "android_client_info": {
+          "package_name": "com.example.pet_society"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "593119351285-trmdqkd8j8jeju0mg078p248qgh3cbca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2o3UFKFP4MZslY_JEeplAqL1ZVXqnctk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "593119351285-trmdqkd8j8jeju0mg078p248qgh3cbca.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "593119351285-f2c4fg0lqu02q436un6pdv6a6pju447i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.notificationPushFlutter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

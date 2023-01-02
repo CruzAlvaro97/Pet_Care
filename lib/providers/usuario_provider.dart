@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:pet_society/src/models/usuario_model.dart';
 import 'package:pet_society/src/preferences/formadoptation_preferences.dart';
 import 'package:pet_society/src/preferences/user_preferences.dart';
+import 'package:pet_society/src/providers/token_provider.dart';
+import 'package:provider/provider.dart';
 
 class UsuarioProvider with ChangeNotifier {
   final Map<String, String> _headers = {
@@ -46,11 +48,13 @@ class UsuarioProvider with ChangeNotifier {
     PreferencesUser.usernameUsuario = usuarioDatos[0].usernameUsuario;
     PreferencesUser.correoUsuario = usuarioDatos[0].correoUsuario;
     PreferencesUser.fotoUsuario = usuarioDatos[0].fotoUsuario;
+    PreferencesUser.token = usuarioDatos[0].token;
 
     isLoading = false;
     notifyListeners();
 
     return print(
-        'NOMBRE => ${usuarioDatos[0].nombreUsuario} \nAPELLIDO => ${usuarioDatos[0].apellidoUsuario} \nUSERNAME => ${usuarioDatos[0].usernameUsuario}  \nCORREO => ${usuarioDatos[0].correoUsuario} \nFOTO => ${usuarioDatos[0].fotoUsuario}');
+      'NOMBRE => ${usuarioDatos[0].nombreUsuario} \nAPELLIDO => ${usuarioDatos[0].apellidoUsuario} \nUSERNAME => ${usuarioDatos[0].usernameUsuario}  \nCORREO => ${usuarioDatos[0].correoUsuario} \nFOTO => ${usuarioDatos[0].fotoUsuario} \nTOKEN => ${usuarioDatos[0].token}',
+    );
   }
 }

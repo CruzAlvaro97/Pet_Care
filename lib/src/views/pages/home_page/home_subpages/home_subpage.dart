@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 import 'package:card_swiper/card_swiper.dart';
 import 'package:expandable_text/expandable_text.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -74,7 +75,14 @@ class _HomeSubPageState extends State<HomeSubPage> {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              Future<String> token() async {
+                return await FirebaseMessaging.instance.getToken() ?? "";
+              }
+
+              String token2 = await token();
+              print(token2);
+            },
             icon: const Icon(
               Icons.notification_important_outlined,
               color: Colors.black,
@@ -94,6 +102,7 @@ class _HomeSubPageState extends State<HomeSubPage> {
                 thickness: 0.8,
               ),
               const _AdContainer(),
+
               const _TitleCarrouselCards(
                 titleCarrousel: 'Publicaciones recientes',
               ),
@@ -697,7 +706,7 @@ class _AdContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final List banners = [
       "https://scontent.ftru2-3.fna.fbcdn.net/v/t39.30808-6/309680181_779460783449097_2181774989167006016_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=e3f864&_nc_ohc=0UUhlS3hlyMAX_9jpiH&_nc_ht=scontent.ftru2-3.fna&oh=00_AfALjMk7DWIeV4aWaZoTb8XFpslPYUv0mYPKLcgvoqhdUw&oe=63B21EDA",
-      "https://ricocan.com/wp-content/uploads/2022/07/Banner-web.jpg",
+      "https://gmlqcelelvidskpttktm.supabase.co/storage/v1/object/public/imgs/IMG/ricocan.jpg?t=2022-12-29T21%3A01%3A40.622Z",
       "https://thetopchoice.com.mx/Content/img/carrusel/mas_proteina_de_calidad.jpg",
     ];
 

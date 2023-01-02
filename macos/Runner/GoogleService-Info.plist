@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>593119351285-c99lrmib4pgrn3dj15s8bpseqph2ujtt.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.593119351285-c99lrmib4pgrn3dj15s8bpseqph2ujtt</string>
+	<key>API_KEY</key>
+	<string>AIzaSyATLjUlSS5AKSCZ53vL_0pQJZt4DSWjCjM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>593119351285</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.petSociety</string>
+	<key>PROJECT_ID</key>
+	<string>api-flutter-3a397</string>
+	<key>STORAGE_BUCKET</key>
+	<string>api-flutter-3a397.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:593119351285:ios:c18be4d4cf351beaf110bc</string>
+	<key>DATABASE_URL</key>
+	<string>https://api-flutter-3a397-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

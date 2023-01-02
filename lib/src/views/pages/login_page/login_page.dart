@@ -1,10 +1,13 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_society/providers/login_provider.dart';
 import 'package:pet_society/providers/usuario_provider.dart';
 import 'package:pet_society/routes/routes.dart';
 import 'package:pet_society/services/auth_service.dart';
+import 'package:pet_society/src/preferences/formadoptation_preferences.dart';
 import 'package:pet_society/src/preferences/user_preferences.dart';
+import 'package:pet_society/src/providers/token_provider.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
 import 'package:pet_society/src/views/widget/index_widgets.dart';
 import 'package:provider/provider.dart';
@@ -252,6 +255,9 @@ class _LoginFormState extends State<LoginForm> {
                     final authService =
                         Provider.of<AuthService>(context, listen: false);
 
+                    final tokenProvider =
+                        Provider.of<TokenProvider>(context, listen: false);
+
                     // print('error 401');
                     // if (!loginProvider.isValidForm()) return;
                     // print('error 402');
@@ -265,6 +271,20 @@ class _LoginFormState extends State<LoginForm> {
                     if (errorMessage == null) {
                       usuarioProvider.getDatauser(loginProvider.email);
                       // ignore: use_build_context_synchronously
+
+                      Future<String> token() async {
+                        return await FirebaseMessaging.instance.getToken() ??
+                            "";
+                      }
+
+                      String token2 = await token();
+                      print('Token nuevo => $token2');
+
+                      //loginProvider.email
+
+                      tokenProvider.updateTokenUser(
+                          loginProvider.email, token2);
+
                       Navigator.pushReplacementNamed(context, MyRoutes.rHOME);
                     } else {
                       loginProvider.isLoading = false;
@@ -285,3 +305,4 @@ class _LoginFormState extends State<LoginForm> {
   }
 }
 //
+

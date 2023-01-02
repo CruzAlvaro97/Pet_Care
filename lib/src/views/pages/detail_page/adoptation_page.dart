@@ -9,6 +9,7 @@ import 'package:pet_society/src/models/publication3_model.dart';
 import 'package:pet_society/src/models/publication_model.dart';
 import 'package:pet_society/src/preferences/user_preferences.dart';
 import 'package:pet_society/src/providers/publicacion_provider.dart';
+import 'package:pet_society/src/providers/token_provider.dart';
 import 'package:pet_society/src/utils/index_utils.dart';
 import 'package:pet_society/src/views/widget/button_widget/custom_button_widget.dart';
 import 'package:provider/provider.dart';
@@ -245,7 +246,17 @@ class _AdoptationPageState extends State<AdoptationPage> {
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
           child: CustomButtonWidget(
             colorButton: CustomColor.primary,
-            onPressed: () {},
+            onPressed: () {
+              final tokenProvider =
+                  Provider.of<TokenProvider>(context, listen: false);
+
+              tokenProvider.pushNotificationsSpecificDevice(
+                token: widget.publication3.usuario.token,
+                title: '¡ATENCIÓN!',
+                body:
+                    '${PreferencesUser.nombreUsuario} está interesado en adoptar a ${widget.publication3.namePet[0].toUpperCase()}${widget.publication3.namePet.substring(1)}.',
+              );
+            },
             text: 'Solicitar adopción',
             textStyle: CustomTextStyle.text2.copyWith(color: Colors.white),
           ),
@@ -632,6 +643,7 @@ class _Autor extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          //Text('Token => ${publication3.usuario.token} '),
           Text(
             //'Publicado por: ${publication2.nameUser} ${publication2.lastnameUser}',
             '${publication3.usuario.nombreUsuario} ${publication3.usuario.apellidoUsuario}',
